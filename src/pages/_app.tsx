@@ -1,9 +1,7 @@
 import { ThemeProvider } from "@emotion/react";
 import type { AppProps } from "next/app";
 import { theme } from "../styles/theme";
-import { NextComponentType } from "next";
-import { useEffect, useState } from "react";
-import Router from "next/router";
+import React from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
