@@ -5,16 +5,10 @@ import { NextComponentType } from "next";
 import { useEffect, useState } from "react";
 import Router from "next/router";
 
-interface CustomAppProps extends AppProps {
-  Component: NextComponentType & { showNavbar?: boolean };
-}
-
-function MyApp({ Component, pageProps }: CustomAppProps) {
-  //const showNavbar = Component.showNavbar ?? true;
-
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
-      <head></head>
+      <Component {...pageProps} />
     </ThemeProvider>
   );
 }
