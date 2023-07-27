@@ -1,9 +1,15 @@
-import styled from "@emotion/styled";
 import Image from "next/image";
+import styled from "@emotion/styled";
 
-function ImageInputItem() {
+interface Props {
+  file: File;
+}
+
+function ImageInputItem({ file }: Props) {
+  const localImageUrl = URL.createObjectURL(file);
+
   return (
-    <EmotionWrapper>
+    <EmotionWrapper imageUrl={localImageUrl}>
       <Image
         width={16}
         height={16}
@@ -17,7 +23,7 @@ function ImageInputItem() {
 
 export default ImageInputItem;
 
-const EmotionWrapper = styled.div`
+const EmotionWrapper = styled.div<{ imageUrl: string }>`
   width: 80px;
   height: 80px;
   position: relative;
@@ -25,10 +31,16 @@ const EmotionWrapper = styled.div`
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
   border: 0.5px solid ${({ theme }) => theme.color.gray300};
+  background-image: url(${({ imageUrl }) => imageUrl});
+  background-size: cover;
 
   .delete-icon {
     position: absolute;
     top: 0px;
     right: 0px;
+  }
+
+  .preview-image {
+    border-radius: 25px;
   }
 `;

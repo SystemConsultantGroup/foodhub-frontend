@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
+import { ButtonHTMLAttributes } from "react";
 
-function ImageInputItemAdd() {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+function ImageInputItemAdd(props: Props) {
   return (
-    <EmotionWrapper>
+    <EmotionWrapper {...props}>
       <Image
         width={20}
         height={20}
