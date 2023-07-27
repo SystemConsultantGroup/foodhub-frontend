@@ -17,6 +17,7 @@ export default Divider;
 const EmotionWrapper = styled.div<Props>`
   hr {
     height: 1px;
+    margin: 0 10px;
     width: ${({ width }) => `${width}px` ?? "100%"};
     box-shadow: ${({ theme }) => theme.shadow.default};
     background: ${({ theme }) => theme.color.primary400};
