@@ -43,6 +43,8 @@ declare module "@emotion/react" {
       gray100: string;
     };
     shadow: {
+      hover: string;
+      active: string;
       default: string;
     };
   }
