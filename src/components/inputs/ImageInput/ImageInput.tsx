@@ -1,25 +1,29 @@
 import styled from "@emotion/styled";
+import { useEffect, useRef, useState } from "react";
 import ImageInputItem from "components/inputs/ImageInput/items/ImageInputItem";
 import ImageInputItemAdd from "components/inputs/ImageInput/items/ImageInputItemAdd";
+import { MOCKUP_IMAGE_URL_LIST } from "components/inputs/ImageInput/mockups/mockupImageUrlList";
 import { TFileWithUniqueIndex } from "components/inputs/ImageInput/types/TFileWithUniqueIndex";
-import { useEffect, useRef, useState } from "react";
-
-const MOCKUP_IMAGE_URL_LIST = [
-  "https://unblast.com/wp-content/uploads/2018/07/Paper-Pressed-Logo-Mockup.jpg",
-  "https://www.mockupworld.co/wp-content/uploads/dynamic/2023/07/open-shoe-box-free-mockup-690x455-c-default.jpg",
-];
 
 function ImageInput() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const imageUrlRef = useRef<HTMLInputElement>(null); // 이미 서버에 존재하던 이미지 URL 리스트
+  const fileInputRef = useRef<HTMLInputElement>(null); // 로컬에서 업로드한 이미지 리스트
+  const fileInputUniqueIndexCount = useRef(0); // 로컬 이미지 리스트의 uniqueIndex를 위한 카운트
+
   const [imageUrlListState, setImageUrlListState] = useState<string[]>(MOCKUP_IMAGE_URL_LIST);
-  const imageUrlRef = useRef<HTMLInputElement>(null);
-  const fileInputUniqueIndexCount = useRef(0);
   const [fileInputListState, setFileInputListState] = useState<TFileWithUniqueIndex[] | null>(null);
 
   const handleClickImageAddButton = () => {
     fileInputRef.current?.click();
   };
 
+  // 서버 이미지 (임시로) 삭제 시
+  const handleDeleteImageUrl = (imageUrl: string) => {
+    const newImageUrlListState = imageUrlListState?.filter((url) => url !== imageUrl);
+    setImageUrlListState(newImageUrlListState);
+  };
+
+  // 파일 추가 업로드 시
   const handleChangeFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
     if (!fileList) return;
@@ -40,6 +44,7 @@ function ImageInput() {
     ]);
   };
 
+  // 파일 삭제 시 (로컬 파일 삭제)
   const handleClickDeleteImage = (uniqueIndex: number) => {
     const newFileInputListState = fileInputListState?.filter(
       (file) => file.uniqueIndex !== uniqueIndex
@@ -55,14 +60,13 @@ function ImageInput() {
     fileInputRef.current.files = dt.files;
   };
 
-  const handleDeleteImageUrl = (imageUrl: string) => {
-    const newImageUrlListState = imageUrlListState?.filter((url) => url !== imageUrl);
-    setImageUrlListState(newImageUrlListState);
-  };
-
   useEffect(() => {
     if (!imageUrlRef?.current) return;
 
+    /**
+     * props 없이 바로 <form> 객체에서 imageUrl 들도 접근 가능하게 하기 위해 JSON.stringify() 사용
+     * 단, 사용처에서 JSON.parse()를 통해 다시 배열로 변환해야 함
+     */
     imageUrlRef.current.value = JSON.stringify(imageUrlListState);
   }, [imageUrlListState]);
 
