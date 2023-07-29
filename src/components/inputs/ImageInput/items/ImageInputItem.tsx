@@ -3,15 +3,16 @@ import styled from "@emotion/styled";
 import { TFileWithUniqueIndex } from "components/inputs/ImageInput/types/TFileWithUniqueIndex";
 
 interface Props {
-  file: TFileWithUniqueIndex;
-  onDelete: (uniqueIndex: number) => void;
+  file?: TFileWithUniqueIndex; // 직접 업로드한 이미지를 받아올 때 사용
+  imageUrl?: string; // 서버에서 이미지를 받아올 때 사용
+  onDelete: () => void;
 }
 
-function ImageInputItem({ file, onDelete }: Props) {
-  const localImageUrl = URL.createObjectURL(file.file);
+function ImageInputItem({ file, imageUrl, onDelete }: Props) {
+  const localImageUrl = file ? URL.createObjectURL(file.file) : imageUrl ?? "";
 
   const handleClickDeleteButton = () => {
-    onDelete(file.uniqueIndex);
+    onDelete();
   };
 
   return (
