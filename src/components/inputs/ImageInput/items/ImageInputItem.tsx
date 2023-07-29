@@ -1,22 +1,29 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
+import { TFileWithUniqueIndex } from "components/inputs/ImageInput/types/TFileWithUniqueIndex";
 
 interface Props {
-  file: File;
+  file: TFileWithUniqueIndex;
+  onDelete: (uniqueIndex: number) => void;
 }
 
-function ImageInputItem({ file }: Props) {
-  const localImageUrl = URL.createObjectURL(file);
+function ImageInputItem({ file, onDelete }: Props) {
+  const localImageUrl = URL.createObjectURL(file.file);
+
+  const handleClickDeleteButton = () => {
+    onDelete(file.uniqueIndex);
+  };
 
   return (
     <EmotionWrapper imageUrl={localImageUrl}>
-      <Image
-        width={16}
-        height={16}
-        alt="이미지 삭제 아이콘"
-        className="delete-icon"
-        src="/images/icons/x-button-filled.svg"
-      />
+      <button onClick={handleClickDeleteButton} className="delete-icon">
+        <Image
+          width={16}
+          height={16}
+          alt="이미지 삭제 아이콘"
+          src="/images/icons/x-button-filled.svg"
+        />
+      </button>
     </EmotionWrapper>
   );
 }

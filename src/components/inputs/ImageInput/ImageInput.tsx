@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
 import ImageInputItem from "components/inputs/ImageInput/items/ImageInputItem";
 import ImageInputItemAdd from "components/inputs/ImageInput/items/ImageInputItemAdd";
+import { TFileWithUniqueIndex } from "components/inputs/ImageInput/types/TFileWithUniqueIndex";
 import { useRef, useState } from "react";
 
 function ImageInput() {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [fileInputListState, setFileInputListState] = useState<File[] | null>(null);
+  const fileInputUniqueIndexCount = useRef(0);
+  const [fileInputListState, setFileInputListState] = useState<TFileWithUniqueIndex[] | null>(null);
 
   const handleClickImageAddButton = () => {
     fileInputRef.current?.click();
@@ -14,8 +16,28 @@ function ImageInput() {
   const handleChangeFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
     if (!fileList) return;
+
     const fileArray = Array.from(fileList);
-    setFileInputListState(fileArray);
+    const fileListWithUniqueIndex = fileArray.map((file) => {
+      return {
+        file,
+        uniqueIndex: fileInputUniqueIndexCount.current++,
+      };
+    });
+
+    const existingFiles =
+      fileInputListState?.length === 0 || fileInputListState === null ? [] : fileInputListState;
+    setFileInputListState([
+      ...existingFiles,
+      ...(fileListWithUniqueIndex as TFileWithUniqueIndex[]),
+    ]);
+  };
+
+  const handleClickDeleteImage = (uniqueIndex: number) => {
+    const newFileInputListState = fileInputListState?.filter(
+      (file) => file.uniqueIndex !== uniqueIndex
+    );
+    setFileInputListState(newFileInputListState as TFileWithUniqueIndex[]);
   };
 
   return (
@@ -24,7 +46,7 @@ function ImageInput() {
       <p className="description">최대 4장 선택</p>
       <div className="image-input-item-wrapper">
         {fileInputListState?.map((file, index) => {
-          return <ImageInputItem key={index} file={file} />;
+          return <ImageInputItem key={index} file={file} onDelete={handleClickDeleteImage} />;
         })}
         <ImageInputItemAdd onClick={handleClickImageAddButton} />
       </div>
