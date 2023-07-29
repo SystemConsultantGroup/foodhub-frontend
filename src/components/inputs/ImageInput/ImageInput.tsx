@@ -45,6 +45,14 @@ function ImageInput() {
       (file) => file.uniqueIndex !== uniqueIndex
     );
     setFileInputListState(newFileInputListState as TFileWithUniqueIndex[]);
+    const newFileListStateWithoutUniqueKey = newFileInputListState?.map((file) => file.file);
+
+    if (!newFileListStateWithoutUniqueKey) return;
+    if (!fileInputRef.current) return;
+
+    const dt = new DataTransfer();
+    newFileListStateWithoutUniqueKey.forEach((file) => dt.items.add(file));
+    fileInputRef.current.files = dt.files;
   };
 
   const handleDeleteImageUrl = (imageUrl: string) => {
