@@ -93,7 +93,7 @@ const ImageInput: React.FC<Props> = ({ maxImageCount = 1 }) => {
       <label className="label">맛집 관련 사진</label>
       <p className="description">최대 {maxImageCount}장 선택</p>
       <div className="image-input-item-wrapper">
-        {imageUrlListState.map((url, index) => {
+        {imageUrlListState.map((url) => {
           return (
             <ImageInputItem
               key={url}
@@ -119,11 +119,12 @@ const ImageInput: React.FC<Props> = ({ maxImageCount = 1 }) => {
       </div>
       {errorText && <p className="error-text">{errorText}</p>}
       <input
-        ref={fileInputRef}
-        name="imageInput"
-        type="file"
         hidden
         multiple
+        type="file"
+        accept="image/*"
+        name="imageInput"
+        ref={fileInputRef}
         onChange={handleChangeFileInput}
       />
       <input ref={imageUrlRef} name="imageUrlInput" hidden />
