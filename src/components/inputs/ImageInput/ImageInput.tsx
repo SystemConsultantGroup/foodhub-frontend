@@ -27,6 +27,15 @@ function ImageInput() {
   const handleChangeFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
     if (!fileList) return;
+    if (!fileInputRef?.current) return;
+
+    const existingFileRefList = fileInputListState?.map((file) => file.file);
+    const newFileList = Array.from(fileList).filter((file) => !existingFileRefList?.includes(file));
+
+    const dt = new DataTransfer();
+    existingFileRefList?.forEach((file) => dt.items.add(file));
+    newFileList.forEach((file) => dt.items.add(file));
+    fileInputRef.current.files = dt.files;
 
     const fileArray = Array.from(fileList);
     const fileListWithUniqueIndex = fileArray.map((file) => {
