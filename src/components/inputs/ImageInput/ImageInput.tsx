@@ -10,7 +10,8 @@ function ImageInput() {
   const fileInputRef = useRef<HTMLInputElement>(null); // 로컬에서 업로드한 이미지 리스트
   const fileInputUniqueIndexCount = useRef(0); // 로컬 이미지 리스트의 uniqueIndex를 위한 카운트
 
-  const [imageUrlListState, setImageUrlListState] = useState<string[]>(MOCKUP_IMAGE_URL_LIST);
+  const existingImageUrlList = MOCKUP_IMAGE_URL_LIST; // 이미 서버에 존재하던 이미지 URL 리스트
+  const [imageUrlListState, setImageUrlListState] = useState<string[]>(existingImageUrlList ?? []);
   const [fileInputListState, setFileInputListState] = useState<TFileWithUniqueIndex[] | null>(null);
 
   const handleClickImageAddButton = () => {
@@ -26,12 +27,12 @@ function ImageInput() {
   // 파일 추가 업로드 시
   const handleChangeFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
-    if (!fileList) return;
-    if (!fileInputRef?.current) return;
+    if (!fileList || !fileInputRef?.current) return;
 
     const existingFileRefList = fileInputListState?.map((file) => file.file);
     const newFileList = Array.from(fileList).filter((file) => !existingFileRefList?.includes(file));
 
+    // HTML Input Element 내부에서 관리하는 파일 형태로 변경
     const dt = new DataTransfer();
     existingFileRefList?.forEach((file) => dt.items.add(file));
     newFileList.forEach((file) => dt.items.add(file));
@@ -41,12 +42,12 @@ function ImageInput() {
     const fileListWithUniqueIndex = fileArray.map((file) => {
       return {
         file,
-        uniqueIndex: fileInputUniqueIndexCount.current++,
+        uniqueIndex: fileInputUniqueIndexCount.current++, // key 값 중복 방지 위해 임의 부여
       };
     });
 
-    const existingFiles =
-      fileInputListState?.length === 0 || fileInputListState === null ? [] : fileInputListState;
+    const isEmpty = !fileInputListState || fileInputListState?.length === 0;
+    const existingFiles = isEmpty ? [] : fileInputListState;
     setFileInputListState([
       ...existingFiles,
       ...(fileListWithUniqueIndex as TFileWithUniqueIndex[]),
