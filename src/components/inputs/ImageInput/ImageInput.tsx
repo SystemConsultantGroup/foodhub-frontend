@@ -5,14 +5,18 @@ import ImageInputItemAdd from "components/inputs/ImageInput/items/ImageInputItem
 import { MOCKUP_IMAGE_URL_LIST } from "components/inputs/ImageInput/mockups/mockupImageUrlList";
 import { TFileWithUniqueIndex } from "components/inputs/ImageInput/types/TFileWithUniqueIndex";
 
-function ImageInput() {
+interface Props {
+  maxImageCount?: number; // 최대 입력할 수 있는 이미지 개수
+}
+
+const ImageInput: React.FC<Props> = ({ maxImageCount = 1 }) => {
   const imageUrlRef = useRef<HTMLInputElement>(null); // 이미 서버에 존재하던 이미지 URL 리스트
   const fileInputRef = useRef<HTMLInputElement>(null); // 로컬에서 업로드한 이미지 리스트
   const fileInputUniqueIndexCount = useRef(0); // 로컬 이미지 리스트의 uniqueIndex를 위한 카운트
 
   const existingImageUrlList = MOCKUP_IMAGE_URL_LIST; // 이미 서버에 존재하던 이미지 URL 리스트
   const [imageUrlListState, setImageUrlListState] = useState<string[]>(existingImageUrlList ?? []);
-  const [fileInputListState, setFileInputListState] = useState<TFileWithUniqueIndex[] | null>(null);
+  const [fileInputListState, setFileInputListState] = useState<TFileWithUniqueIndex[]>([]);
 
   const handleClickImageAddButton = () => {
     fileInputRef.current?.click();
@@ -70,6 +74,10 @@ function ImageInput() {
     fileInputRef.current.files = dt.files;
   };
 
+  const maxImageCountExceeded =
+    imageUrlListState.length + fileInputListState?.length > maxImageCount;
+  const errorText = maxImageCountExceeded ? `최대 ${maxImageCount}장까지 업로드 가능합니다.` : "";
+
   useEffect(() => {
     if (!imageUrlRef?.current) return;
 
@@ -82,8 +90,8 @@ function ImageInput() {
 
   return (
     <EmotionWrapper>
-      <p className="label">맛집 관련 사진</p>
-      <p className="description">최대 4장 선택</p>
+      <label className="label">맛집 관련 사진</label>
+      <p className="description">최대 {maxImageCount}장 선택</p>
       <div className="image-input-item-wrapper">
         {imageUrlListState.map((url, index) => {
           return (
@@ -109,6 +117,7 @@ function ImageInput() {
         })}
         <ImageInputItemAdd onClick={handleClickImageAddButton} />
       </div>
+      {errorText && <p className="error-text">{errorText}</p>}
       <input
         ref={fileInputRef}
         name="imageInput"
@@ -120,7 +129,7 @@ function ImageInput() {
       <input ref={imageUrlRef} name="imageUrlInput" hidden />
     </EmotionWrapper>
   );
-}
+};
 
 export default ImageInput;
 
@@ -146,5 +155,11 @@ const EmotionWrapper = styled.div`
     column-gap: 8px;
     row-gap: 8px;
     flex-wrap: wrap;
+  }
+
+  .error-text {
+    font-size: 12px;
+    font-weight: 300;
+    color: ${({ theme }) => theme.color.danger600};
   }
 `;
