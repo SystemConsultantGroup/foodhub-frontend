@@ -143,5 +143,7 @@ const EmotionWrapper = styled.div`
   .image-input-item-wrapper {
     display: flex;
     column-gap: 8px;
+    row-gap: 8px;
+    flex-wrap: wrap;
   }
 `;
