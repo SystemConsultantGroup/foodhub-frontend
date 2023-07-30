@@ -2,20 +2,19 @@ import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
 import ImageInputItem from "components/inputs/ImageInput/items/ImageInputItem";
 import ImageInputItemAdd from "components/inputs/ImageInput/items/ImageInputItemAdd";
-import { MOCKUP_IMAGE_URL_LIST } from "components/inputs/ImageInput/mockups/mockupImageUrlList";
 import { TFileWithUniqueIndex } from "components/inputs/ImageInput/types/TFileWithUniqueIndex";
 
 interface Props {
   maxImageCount?: number; // 최대 입력할 수 있는 이미지 개수
+  existingImageUrlList?: string[]; // 이미 서버에 존재하던 이미지 URL 리스트
 }
 
-const ImageInput: React.FC<Props> = ({ maxImageCount = 1 }) => {
+const ImageInput: React.FC<Props> = ({ maxImageCount = 1, existingImageUrlList = [] }) => {
   const imageUrlRef = useRef<HTMLInputElement>(null); // 이미 서버에 존재하던 이미지 URL 리스트
   const fileInputRef = useRef<HTMLInputElement>(null); // 로컬에서 업로드한 이미지 리스트
   const fileInputUniqueIndexCount = useRef(0); // 로컬 이미지 리스트의 uniqueIndex를 위한 카운트
 
-  const existingImageUrlList = MOCKUP_IMAGE_URL_LIST; // 이미 서버에 존재하던 이미지 URL 리스트
-  const [imageUrlListState, setImageUrlListState] = useState<string[]>(existingImageUrlList ?? []);
+  const [imageUrlListState, setImageUrlListState] = useState<string[]>(existingImageUrlList);
   const [fileInputListState, setFileInputListState] = useState<TFileWithUniqueIndex[]>([]);
 
   const handleClickImageAddButton = () => {
