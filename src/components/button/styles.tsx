@@ -89,6 +89,7 @@ export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
         }
         &:disabled {
           background-color: ${theme.color.white};
+          box-shadow: none;
           span {
             color: ${theme.color.gray200};
           }
