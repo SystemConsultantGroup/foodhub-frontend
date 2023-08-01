@@ -24,7 +24,6 @@ const Button = ({
 
     try {
       if (onClick) {
-        await new Promise((resolve) => setTimeout(resolve, 3000)); // 임시 코드 (로딩 확인용)
         await onClick(); // 부모 컴포넌트에서 전달받은 함수 호출
       }
     } catch (error) {
