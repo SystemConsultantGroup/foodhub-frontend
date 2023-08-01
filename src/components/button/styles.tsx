@@ -19,9 +19,6 @@ const primaryStyle = (theme: Theme) => {
     &:focus {
       background-color: ${theme.color.primary600};
       box-shadow: 0 0 0 2px ${theme.color.primary300};
-      &:not(:active) {
-        outline: none;
-      }
     }
   `;
 };
@@ -132,4 +129,14 @@ export const getWidthStyles = (theme: Theme, widthType: Props["widthType"]) => {
         align-items: center;
       `;
   }
+};
+
+export const setLoadingStyles = (isLoading: Props["isLoading"]) => {
+  if (isLoading) {
+    return css`
+      padding: 4px 8px;
+      gap: 8px;
+    `;
+  }
+  return css``;
 };

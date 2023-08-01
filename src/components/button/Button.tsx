@@ -1,22 +1,51 @@
 import styled from "@emotion/styled";
-import { ButtonHTMLAttributes } from "react";
-import { getButtonStyles, getWidthStyles } from "components/button/styles";
+import Image from "next/image";
+import { useState, ButtonHTMLAttributes } from "react";
+import { getButtonStyles, getWidthStyles, setLoadingStyles } from "components/button/styles";
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "text" | "icon" | "iconWithText"; // color types
-  loading?: boolean; // loading status
   widthType?: "default" | "fullWidth"; // default : hug
+  isLoading?: boolean;
+  onClick?: () => void;
 }
 
 const Button = ({
   children,
   variant = "primary",
-  loading = false,
   widthType = "default",
+  onClick,
   ...props
 }: Props) => {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+  const handleButtonClick = async () => {
+    setIsButtonLoading(true); // 클릭 시 loading 상태를 true로 변경
+
+    try {
+      if (onClick) {
+        await new Promise((resolve) => setTimeout(resolve, 3000)); // 임시 코드 (로딩 확인용)
+        await onClick(); // 부모 컴포넌트에서 전달받은 함수 호출
+      }
+    } catch (error) {
+      console.error("Error performing async work:", error);
+    }
+
+    setIsButtonLoading(false); // 완료 시 loading 상태를 false로 변경
+  };
+
   return (
-    <EmotionWrapper variant={variant} loading={loading} widthType={widthType} {...props}>
+    <EmotionWrapper
+      variant={variant}
+      widthType={widthType}
+      disabled={isButtonLoading}
+      onClick={handleButtonClick}
+      isLoading={isButtonLoading}
+      {...props}
+    >
+      {isButtonLoading && (
+        <Image src="/images/Spin-1s-100px-gray.svg" alt="Loading Spinner" width={14} height={14} />
+      )}
       {children}
     </EmotionWrapper>
   );
@@ -45,17 +74,19 @@ export const EmotionWrapper = styled.button<Props>`
     align-items: center; 
     text-align: center;
     font-size: 14px;
+    font-weight: 300;
   }
 
   &:disabled {
     pointer-events: none;
-    color: ${({ theme }) => theme.color.primary100}
-    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.color.primary200};
+    background-color: ${({ theme }) => theme.color.gray100};
+    box-shadow: inset 0 0 0 1px ${({ theme }) => theme.color.gray200};
     span {
-        color: ${({ theme }) => theme.color.primary200}
+        color: ${({ theme }) => theme.color.gray200}
     }
   };
   
   ${({ theme, variant }) => getButtonStyles(theme, variant)};
   ${({ theme, widthType }) => getWidthStyles(theme, widthType)};
+  ${({ isLoading }) => setLoadingStyles(isLoading)};
 `;
