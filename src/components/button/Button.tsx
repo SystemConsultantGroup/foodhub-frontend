@@ -16,9 +16,19 @@ const Button = ({
   variant = "primary",
   fullWidth = false,
   loading = false,
+  onClick,
   ...props
 }: Props) => {
   const [padding, setPadding] = useState("4px 15px");
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur(); // 포커스 제거
+    }
+    if (onClick) {
+      onClick(event); // 전달된 onClick 이벤트 실행
+    }
+  };
 
   useEffect(() => {
     if (icon && children) {
@@ -38,6 +48,7 @@ const Button = ({
       disabled={loading}
       icon={icon}
       style={{ ...props.style, ...{ padding: padding } }}
+      onClick={handleClick}
     >
       {loading && (
         <Image src="/images/Spin-1s-100px-gray.svg" alt="Loading Spinner" width={14} height={14} />
