@@ -6,7 +6,7 @@ import { getButtonStyles, getWidthStyles, setLoadingStyles } from "components/bu
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "text"; // color types
   icon?: React.ReactNode;
-  fullWidth: boolean;
+  fullWidth?: boolean;
   loading?: boolean;
 }
 
