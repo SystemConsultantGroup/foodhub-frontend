@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import Image from "next/image";
 import { useState, useEffect, ButtonHTMLAttributes } from "react";
 import { getButtonStyles, getWidthStyles, setLoadingStyles } from "components/button/styles";
+import Loader from "components/loader/Loader";
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "text"; // color types
@@ -50,9 +50,7 @@ const Button = ({
       style={{ ...props.style, ...{ padding: padding } }}
       onClick={handleClick}
     >
-      {loading && (
-        <Image src="/images/Spin-1s-100px-gray.svg" alt="Loading Spinner" width={14} height={14} />
-      )}
+      {loading && <Loader></Loader>}
       {icon}
       {children}
     </EmotionWrapper>
