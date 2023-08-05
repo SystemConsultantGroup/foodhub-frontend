@@ -1,50 +1,48 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import { useState, ButtonHTMLAttributes } from "react";
+import { useState, useEffect, ButtonHTMLAttributes } from "react";
 import { getButtonStyles, getWidthStyles, setLoadingStyles } from "components/button/styles";
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "text" | "icon" | "iconWithText"; // color types
-  widthType?: "default" | "fullWidth"; // default : hug
-  isLoading?: boolean;
-  onClick?: () => void;
+  variant?: "primary" | "secondary" | "text"; // color types
+  icon?: React.ReactNode;
+  fullWidth: boolean;
+  loading?: boolean;
 }
 
 const Button = ({
   children,
+  icon,
   variant = "primary",
-  widthType = "default",
-  onClick,
+  fullWidth = false,
+  loading = false,
   ...props
 }: Props) => {
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [padding, setPadding] = useState("4px 15px");
 
-  const handleButtonClick = async () => {
-    setIsButtonLoading(true); // 클릭 시 loading 상태를 true로 변경
-
-    try {
-      if (onClick) {
-        await onClick(); // 부모 컴포넌트에서 전달받은 함수 호출
-      }
-    } catch (error) {
-      console.error("Error performing async work:", error);
+  useEffect(() => {
+    if (icon && children) {
+      setPadding("4px 8px");
+    } else if (children) {
+      setPadding("4px 15px");
+    } else if (icon) {
+      setPadding("4px 4px");
     }
-
-    setIsButtonLoading(false); // 완료 시 loading 상태를 false로 변경
-  };
+  }, [icon, children]);
 
   return (
     <EmotionWrapper
-      variant={variant}
-      widthType={widthType}
-      disabled={isButtonLoading}
-      onClick={handleButtonClick}
-      isLoading={isButtonLoading}
       {...props}
+      variant={variant}
+      fullWidth={fullWidth}
+      disabled={loading}
+      icon={icon}
+      style={{ ...props.style, ...{ padding: padding } }}
     >
-      {isButtonLoading && (
+      {loading && (
         <Image src="/images/Spin-1s-100px-gray.svg" alt="Loading Spinner" width={14} height={14} />
       )}
+      {icon}
       {children}
     </EmotionWrapper>
   );
@@ -53,39 +51,35 @@ const Button = ({
 export default Button;
 
 export const EmotionWrapper = styled.button<Props>`
-  padding: 4px 15px;
-  gap: 15px;
+  gap: 8px;
   border-radius: 6px;
   height: auto;
+  line-height: 1.5;
 
   > svg {
     width: 14px;
     height: 14px;
-    viewBox="0 0 14 14"
+    viewBox="0 0 14 14";
     preserveAspectRatio= "xMidYMid meet";
   }
 
-  > span {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center; 
-    text-align: center;
-    font-size: 14px;
-    font-weight: 300;
-  }
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center; 
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
 
   &:disabled {
     pointer-events: none;
     background-color: ${({ theme }) => theme.color.gray100};
     box-shadow: inset 0 0 0 1px ${({ theme }) => theme.color.gray200};
-    span {
-        color: ${({ theme }) => theme.color.gray200}
-    }
+    color: ${({ theme }) => theme.color.gray200}
   };
   
   ${({ theme, variant }) => getButtonStyles(theme, variant)};
-  ${({ theme, widthType }) => getWidthStyles(theme, widthType)};
-  ${({ isLoading }) => setLoadingStyles(isLoading)};
+  ${({ theme, fullWidth }) => getWidthStyles(theme, fullWidth)};
+  ${({ loading }) => setLoadingStyles(loading)};
 `;
