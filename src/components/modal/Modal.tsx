@@ -11,24 +11,15 @@ function ScrollPreventer() {
 }
 
 interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+  title: ReactNode;
+  content?: string;
   open: boolean;
   onClose: () => void;
-  title: ReactNode;
   withCloseButton?: boolean;
-  buttons: ReactNode;
-  content?: string;
+  actionButtons: ReactNode;
 }
 
-function Modal({
-  open,
-  onClose,
-  title,
-  withCloseButton = false,
-  buttons,
-  children,
-  content,
-  ...props
-}: Props) {
+function Modal({ open, onClose, title, children, content, actionButtons }: Props) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -52,6 +43,7 @@ function Modal({
                 <p className="content">{content}</p>
               </div>
               {children}
+              <div className="action-button-container">{actionButtons}</div>
             </div>
           </div>
         </>
@@ -103,8 +95,17 @@ const EmotionWrapper = styled.div`
       border-radius: 8px;
       padding: 24px;
       width: 100%;
-      max-width: 400px;
+      /* max-width: 400px; */
+      margin: 0 32px;
       box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+
+      .action-button-container {
+        margin-top: 32px;
+        display: flex;
+        align-self: flex-end;
+      }
     }
   }
 `;
