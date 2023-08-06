@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import PageMarker from "components/pageMarker/PageMarker";
 import { useRouter } from "next/router";
 
-interface Props {}
-
-const PageOrganizationDetail = ({}: Props) => {
+const PageOrganizationDetail = () => {
   const { query } = useRouter();
   const organizationId = query.organizationId ?? 0;
 

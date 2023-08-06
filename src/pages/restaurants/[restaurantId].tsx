@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import PageMarker from "components/pageMarker/PageMarker";
 import { useRouter } from "next/router";
 
-interface Props {}
-
-const PageRestaurantDetail = ({}: Props) => {
+const PageRestaurantDetail = () => {
   const { query } = useRouter();
   const restaurantId = query.restaurantId ?? 0;
 

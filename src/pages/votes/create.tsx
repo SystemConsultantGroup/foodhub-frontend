@@ -3,9 +3,7 @@ import PageMarker from "components/pageMarker/PageMarker";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-interface Props {}
-
-const PageVoteList = ({}: Props) => {
+const PageVoteList = () => {
   const { query } = useRouter();
   const organizationId = query.organizationId ?? 0; // 쿼리 스트링으로 넘김
 

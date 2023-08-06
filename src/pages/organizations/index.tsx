@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import PageMarker from "components/pageMarker/PageMarker";
 
-interface Props {}
-
-const PageOrganizationList = ({}: Props) => {
+const PageOrganizationList = () => {
   return (
     <EmotionWrapper>
       <PageMarker

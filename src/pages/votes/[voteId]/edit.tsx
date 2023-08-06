@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import PageMarker from "components/pageMarker/PageMarker";
 import { useRouter } from "next/router";
 
-interface Props {}
-
-const PageVoteEdit = ({}: Props) => {
+const PageVoteEdit = () => {
   const { query } = useRouter();
   const voteId = query.voteId ?? 0;
 
