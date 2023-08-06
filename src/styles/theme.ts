@@ -1,4 +1,13 @@
-import { Theme } from "@emotion/react";
+import { DeviceMediaTheme, DeviceTheme, Theme } from "@emotion/react";
+
+const size: DeviceTheme = {
+  mobile: 768 + 80,
+};
+
+// 미디어 쿼리의 중복 코드를 줄이기위해 정의된 변수입니다
+const device: DeviceMediaTheme = {
+  mobile: `@media only screen and (max-width: ${size.mobile}px)`,
+};
 
 export const theme: Theme = {
   color: {
@@ -47,4 +56,6 @@ export const theme: Theme = {
     default:
       "0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px 0px rgba(0, 0, 0, 0.08)",
   },
+  device,
+  size,
 };
