@@ -12,7 +12,7 @@ const device: DeviceMediaTheme = {
 
 export const theme: Theme = {
   color: {
-    black: "#000000",
+    black: "#333333",
     white: "#FEFEFE",
     primary900: "#0A5D0B",
     primary800: "#167011",
