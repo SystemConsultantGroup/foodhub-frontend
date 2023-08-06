@@ -1,16 +1,17 @@
 import styled from "@emotion/styled";
-import RadioGroup from "components/radio/items/RadioGroup";
 import { ReactNode, useState } from "react";
+import RadioGroup from "components/radio/items/RadioGroup";
 
 interface Props {
   name: string;
   value: string;
   children: ReactNode;
   disabled?: boolean;
+  initialValue?: boolean; // 첫 렌더링 시 체크 여부, 이후의 state 변화는 감지하지 않음
 }
 
-const Radio = ({ name, value, children, disabled = false }: Props) => {
-  const [checked, setChecked] = useState(false);
+const Radio = ({ name, value, children, disabled = false, initialValue = false }: Props) => {
+  const [checked, setChecked] = useState(initialValue);
 
   const onChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
