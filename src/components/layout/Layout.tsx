@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Header from "components/header/Header";
+import HeaderMobile from "components/header/HeaderMobile";
 import Navbar from "components/navbar/Navbar";
 import { LAYOUT_MARGIN } from "constant/layoutMargin";
 import { NAVBAR_HEIGHT } from "constant/navbarHeight";
@@ -14,6 +15,7 @@ const Layout = ({ children }: Props) => {
   return (
     <EmotionWrapper>
       <Header />
+      <HeaderMobile />
       <main>{children}</main>
       <Navbar />
     </EmotionWrapper>
