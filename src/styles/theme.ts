@@ -7,6 +7,7 @@ const size: DeviceTheme = {
 // 미디어 쿼리의 중복 코드를 줄이기위해 정의된 변수입니다
 const device: DeviceMediaTheme = {
   mobile: `@media only screen and (max-width: ${size.mobile}px)`,
+  pc: `@media only screen and (min-width: ${size.mobile}px)`,
 };
 
 export const theme: Theme = {

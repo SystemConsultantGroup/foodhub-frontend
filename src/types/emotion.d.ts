@@ -6,6 +6,7 @@ declare module "@emotion/react" {
   }
   export interface DeviceMediaTheme {
     mobile: string;
+    pc: string;
   }
 
   export interface Theme {
