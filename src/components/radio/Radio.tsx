@@ -40,8 +40,9 @@ export default Radio;
 
 const EmotionWrapper = styled.div`
   label {
-    min-width: 80px;
-    padding: 3px 8px;
+    width: 80px;
+    padding: 3px 15px;
+    height: 100%;
 
     display: flex;
     align-items: center;
@@ -54,6 +55,9 @@ const EmotionWrapper = styled.div`
     font-size: 12px;
     font-weight: 400;
     color: ${({ theme }) => theme.color.primary700};
+
+    white-space: wrap;
+    word-break: break-all;
 
     &:hover {
       border: 1px solid ${({ theme }) => theme.color.primary500};
