@@ -39,6 +39,8 @@ const EmotionWrapper = styled.div`
   border-radius: 5px;
   margin-bottom: 20px;
 
+  min-width: 300px;
+
   ${interactiveShadow}
 
   p.under-construction {
