@@ -8,15 +8,16 @@ const primaryStyle = (theme: Theme) => {
     border: none;
     box-shadow: none;
 
-    &:active {
-      background-color: ${theme.color.primary700};
-      box-shadow: none;
-    }
     &:hover {
       background-color: ${theme.color.primary500};
       box-shadow: none;
     }
+    &.active {
+      background-color: ${theme.color.primary700};
+      box-shadow: none;
+    }
     &:focus {
+      outline: none;
       background-color: ${theme.color.primary600};
       box-shadow: 0 0 0 2px ${theme.color.primary300};
     }
@@ -32,21 +33,21 @@ export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
         box-shadow: none;
         color: ${theme.color.gray900};
 
-        &:active {
-          border: 1px solid ${theme.color.primary600};
-          box-shadow: none;
-          color: ${theme.color.primary500};
-        }
         &:hover {
           border: 1px solid ${theme.color.primary700};
           box-shadow: none;
           color: ${theme.color.primary700};
         }
+        &.active {
+          border: 1px solid ${theme.color.primary600};
+          box-shadow: none;
+          color: ${theme.color.primary500};
+        }
         &:focus {
           border: none;
           box-shadow: 0 0 0 2px ${theme.color.primary300};
           color: ${theme.color.gray900};
-          &:not(:active) {
+          &:not(.active) {
             outline: none;
           }
         }
@@ -58,13 +59,13 @@ export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
         box-shadow: none;
         color: ${theme.color.gray900};
 
-        &:active {
-          background-color: ${theme.color.primary100};
-          color: ${theme.color.primary500};
-        }
         &:hover {
           background-color: ${theme.color.primary100};
           color: ${theme.color.primary700};
+        }
+        &.active {
+          background-color: ${theme.color.primary100};
+          color: ${theme.color.primary500};
         }
         &:focus {
           background-color: ${theme.color.primary100};

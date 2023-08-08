@@ -20,14 +20,18 @@ const Button = ({
   ...props
 }: Props) => {
   const [padding, setPadding] = useState("4px 15px");
+  const [isActive, setIsActive] = useState(false);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur(); // 포커스 제거
-    }
+  const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    setIsActive(true);
     if (onClick) {
-      onClick(event); // 전달된 onClick 이벤트 실행
+      onClick(event);
     }
+  };
+
+  const handleMouseUp = () => {
+    setIsActive(false);
   };
 
   useEffect(() => {
@@ -48,7 +52,9 @@ const Button = ({
       disabled={loading}
       icon={icon}
       style={{ ...props.style, ...{ padding: padding } }}
-      onClick={handleClick}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      className={isActive ? "active" : ""}
     >
       {loading && <Loader></Loader>}
       {icon}
@@ -91,4 +97,5 @@ export const EmotionWrapper = styled.button<Props>`
   ${({ theme, variant }) => getButtonStyles(theme, variant)};
   ${({ theme, fullWidth }) => getWidthStyles(theme, fullWidth)};
   ${({ loading }) => setLoadingStyles(loading)};
+
 `;
