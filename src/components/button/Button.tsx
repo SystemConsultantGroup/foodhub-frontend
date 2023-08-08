@@ -21,6 +21,7 @@ const Button = ({
 }: Props) => {
   const [padding, setPadding] = useState("4px 15px");
   const [isActive, setIsActive] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -32,6 +33,15 @@ const Button = ({
 
   const handleMouseUp = () => {
     setIsActive(false);
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    console.log(isFocused);
   };
 
   useEffect(() => {
@@ -54,6 +64,8 @@ const Button = ({
       style={{ ...props.style, ...{ padding: padding } }}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       className={isActive ? "active" : ""}
     >
       {loading && <Loader></Loader>}
