@@ -9,6 +9,7 @@ interface Props {
   conditionList?: string[];
   conditionChecks?: ((text: string) => boolean)[];
   multiline?: boolean;
+  errorMessage?: string;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const TextInput: React.FC<Props> = ({
   conditionList,
   conditionChecks,
   multiline = false,
+  errorMessage = "잘못된 입력입니다.",
 }) => {
   const [value, setValue] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -79,6 +81,7 @@ const TextInput: React.FC<Props> = ({
         ></InputComponent>
         {value && isValid && !isFocused && <CheckIcon size={20} />}
       </StyledInputWrapper>
+      {!isValid && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
     </EmotionWrapper>
   );
 };
@@ -105,6 +108,13 @@ const StyledCondition = styled.span`
   font-weight: 300;
   margin-left: 2px;
   color: ${({ theme }) => theme.color.gray400};
+`;
+
+const StyledErrorMessage = styled.span`
+  font-size: 12px;
+  font-weight: 300;
+  margin-left: 2px;
+  color: ${({ theme }) => theme.color.danger600};
 `;
 
 const StyledLabel = styled.span`
