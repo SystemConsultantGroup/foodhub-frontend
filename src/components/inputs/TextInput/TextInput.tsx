@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
+import CheckIcon from "components/inputs/TextInput/CheckIcon";
 
 interface Props {
   label?: string;
@@ -67,17 +68,20 @@ const TextInput: React.FC<Props> = ({
           ))}
         </ConditionListWrapper>
       )}
-      <InputComponent
-        value={value}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        style={{ maxHeight }}
-        isValid={isValid}
-        isFocused={isFocused}
-        borderStyle={borderStyle}
-      />
+      <StyledInputWrapper>
+        <InputComponent
+          value={value}
+          placeholder={placeholder}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          style={{ maxHeight }}
+          isValid={isValid}
+          isFocused={isFocused}
+          borderStyle={borderStyle}
+        ></InputComponent>
+        {value && isValid && !isFocused && <CheckIcon size={20} />}
+      </StyledInputWrapper>
     </EmotionWrapper>
   );
 };
@@ -113,6 +117,13 @@ const StyledLabel = styled.span`
   margin-left: 2px;
 `;
 
+const StyledInputWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
 const commonStyles = (theme: Theme, isValid: boolean, isFocused: boolean, borderStyle: string) => {
   return css`
     width: 100%;
@@ -139,6 +150,8 @@ const StyledInput = styled.input<
 >`
   ${({ theme, isValid, isFocused, borderStyle }) =>
     commonStyles(theme, isValid, isFocused, borderStyle)};
+
+  position: relative;
 `;
 
 const StyledTextarea = styled.textarea<
