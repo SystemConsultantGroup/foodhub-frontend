@@ -49,7 +49,7 @@ const Button = ({
       onMouseUp={handleMouseUp}
       className={isActive ? "active" : ""}
     >
-      {loading && <Loader></Loader>}
+      {loading && <Loader />}
       {icon}
       {children}
     </EmotionWrapper>
