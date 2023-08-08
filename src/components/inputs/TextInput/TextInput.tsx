@@ -9,7 +9,6 @@ interface Props {
   conditionList?: string[];
   conditionChecks?: ((text: string) => boolean)[];
   multiline?: boolean;
-  maxHeight?: number;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -18,7 +17,6 @@ const TextInput: React.FC<Props> = ({
   conditionList,
   conditionChecks,
   multiline = false,
-  maxHeight,
 }) => {
   const [value, setValue] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -75,7 +73,6 @@ const TextInput: React.FC<Props> = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          style={{ maxHeight }}
           isValid={isValid}
           isFocused={isFocused}
           borderStyle={borderStyle}
