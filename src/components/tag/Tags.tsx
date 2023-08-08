@@ -7,7 +7,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   deletable?: boolean;
 }
 
-const TagList: React.FC<Props> = ({ children, deletable = false, ...props }: Props) => {
+const Tags = ({ children, deletable = false, ...props }: Props) => {
   const [tagItems, setTagItems] = useState(children);
 
   const handleTagItemClick = (index: number) => {
@@ -27,7 +27,7 @@ const TagList: React.FC<Props> = ({ children, deletable = false, ...props }: Pro
   return <EmotionWrapper {...props}>{tagItemsWithOnClick}</EmotionWrapper>;
 };
 
-export default TagList;
+export default Tags;
 
 const EmotionWrapper = styled.div<Props>`
   width: 100%;
@@ -37,4 +37,4 @@ const EmotionWrapper = styled.div<Props>`
   align-items: flex-start;
 `;
 
-export { TagItem };
+Tags.Item = TagItem;
