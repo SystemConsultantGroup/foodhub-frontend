@@ -12,14 +12,14 @@ const primaryStyle = (theme: Theme) => {
       background-color: ${theme.color.primary500};
       box-shadow: none;
     }
-    &.active {
-      background-color: ${theme.color.primary700};
-      box-shadow: none;
-    }
     &:focus {
       outline: none;
       background-color: ${theme.color.primary600};
       box-shadow: 0 0 0 2px ${theme.color.primary300};
+    }
+    &.active {
+      background-color: ${theme.color.primary700};
+      box-shadow: none;
     }
   `;
 };
@@ -38,18 +38,15 @@ export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
           box-shadow: none;
           color: ${theme.color.primary700};
         }
-        &.active {
-          border: 1px solid ${theme.color.primary600};
-          box-shadow: none;
-          color: ${theme.color.primary500};
-        }
         &:focus {
           border: none;
           box-shadow: 0 0 0 2px ${theme.color.primary300};
           color: ${theme.color.gray900};
-          &:not(.active) {
-            outline: none;
-          }
+        }
+        &.active {
+          border: 1px solid ${theme.color.primary600};
+          box-shadow: none;
+          color: ${theme.color.primary500};
         }
       `;
     case "text":
@@ -63,14 +60,14 @@ export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
           background-color: ${theme.color.primary100};
           color: ${theme.color.primary700};
         }
-        &.active {
-          background-color: ${theme.color.primary100};
-          color: ${theme.color.primary500};
-        }
         &:focus {
           background-color: ${theme.color.primary100};
           box-shadow: 0 0 0 2px ${theme.color.primary300};
           color: ${theme.color.gray900};
+        }
+        &.active {
+          background-color: ${theme.color.primary100};
+          color: ${theme.color.primary500};
         }
         &:disabled {
           background-color: ${theme.color.white};
