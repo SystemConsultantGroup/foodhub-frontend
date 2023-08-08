@@ -2,10 +2,10 @@ import { FC } from "react";
 import Image from "next/image";
 
 interface Props {
-  size: number;
+  size?: number;
 }
 
-const CheckIcon: FC<Props> = ({ size }) => {
+const CheckIcon: FC<Props> = ({ size = 16 }) => {
   return (
     <Image
       width={size}
