@@ -25,7 +25,6 @@ const Button = ({
   ...props
 }: Props) => {
   const [isActive, setIsActive] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -39,15 +38,6 @@ const Button = ({
     setIsActive(false);
   };
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-    console.log(isFocused);
-  };
-
   return (
     <EmotionWrapper
       {...props}
@@ -57,8 +47,6 @@ const Button = ({
       icon={icon}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
       className={isActive ? "active" : ""}
     >
       {loading && <Loader></Loader>}
