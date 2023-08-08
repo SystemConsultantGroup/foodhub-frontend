@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
-import { useState, useEffect, ButtonHTMLAttributes } from "react";
-import { getButtonStyles, getWidthStyles, setLoadingStyles } from "components/button/styles";
+import { useState, ButtonHTMLAttributes } from "react";
+import {
+  getButtonStyles,
+  getWidthStyles,
+  setLoadingStyles,
+  getPaddingStyles,
+} from "components/button/styles";
 import Loader from "components/loader/Loader";
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,7 +24,6 @@ const Button = ({
   onClick,
   ...props
 }: Props) => {
-  const [padding, setPadding] = useState("4px 15px");
   const [isActive, setIsActive] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -44,16 +48,6 @@ const Button = ({
     console.log(isFocused);
   };
 
-  useEffect(() => {
-    if (icon && children) {
-      setPadding("4px 8px");
-    } else if (children) {
-      setPadding("4px 15px");
-    } else if (icon) {
-      setPadding("4px 4px");
-    }
-  }, [icon, children]);
-
   return (
     <EmotionWrapper
       {...props}
@@ -61,7 +55,6 @@ const Button = ({
       fullWidth={fullWidth}
       disabled={loading}
       icon={icon}
-      style={{ ...props.style, ...{ padding: padding } }}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onFocus={handleFocus}
@@ -82,6 +75,7 @@ export const EmotionWrapper = styled.button<Props>`
   border-radius: 6px;
   height: auto;
   line-height: 1.5;
+  ${({ icon, children }) => getPaddingStyles(icon, children)};
 
   > svg {
     width: 14px;

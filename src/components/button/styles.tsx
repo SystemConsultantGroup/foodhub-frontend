@@ -102,3 +102,19 @@ export const setLoadingStyles = (loading: Props["loading"]) => {
   }
   return css``;
 };
+
+export const getPaddingStyles = (icon: React.ReactNode, children: React.ReactNode) => {
+  if (icon && children) {
+    return css`
+      padding: 4px 8px;
+    `;
+  } else if (children) {
+    return css`
+      padding: 4px 15px;
+    `;
+  } else {
+    return css`
+      padding: 4px 4px;
+    `;
+  }
+};
