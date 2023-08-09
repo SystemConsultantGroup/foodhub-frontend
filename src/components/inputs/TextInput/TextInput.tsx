@@ -7,21 +7,24 @@ interface Props {
   label?: string;
   placeholder?: string;
   conditionList?: string[];
-  conditionChecks?: ((text: string) => boolean)[];
+  conditionCheckList?: ((text: string) => boolean)[];
   multiline?: boolean;
   errorMessage?: string;
+  onTextChange?: (value: string) => void;
 }
 
 const TextInput: React.FC<Props> = ({
   label,
   placeholder = "",
   conditionList,
-  conditionChecks,
+  conditionCheckList,
   multiline = false,
   errorMessage = "잘못된 입력입니다.",
+  onTextChange,
 }) => {
   const [value, setValue] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [isBlurred, setIsBlurred] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [borderStyle, setBorderStyle] = useState("default");
 
@@ -31,16 +34,23 @@ const TextInput: React.FC<Props> = ({
 
   const handleBlur = () => {
     setIsFocused(false);
-    setIsValid(conditionChecks ? conditionChecks.every((check) => check(value)) : true);
+    setIsBlurred(true);
+    setIsValid(conditionCheckList ? conditionCheckList.every((check) => check(value)) : true);
+    if (value == "") setIsValid(true);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue = event.target.value;
     setValue(newValue);
 
-    // 입력된 텍스트의 조건 확인을 수행하여 isValid 상태 업데이트
-    if (isFocused) {
-      setIsValid(conditionChecks ? conditionChecks.every((check) => check(newValue)) : true);
+    // 최초 Blur 발생 후, 입력된 텍스트의 조건 확인을 수행하여 isValid 상태 업데이트
+    if (isFocused && isBlurred && newValue != "") {
+      setIsValid(conditionCheckList ? conditionCheckList.every((check) => check(newValue)) : true);
+    }
+    if (newValue == "") setIsValid(true);
+
+    if (onTextChange) {
+      onTextChange(newValue);
     }
   };
 
@@ -78,7 +88,7 @@ const TextInput: React.FC<Props> = ({
           isValid={isValid}
           isFocused={isFocused}
           borderStyle={borderStyle}
-        ></InputComponent>
+        />
         {value && isValid && !isFocused && <CheckIcon size={20} />}
       </StyledInputWrapper>
       {!isValid && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
@@ -170,6 +180,7 @@ const StyledTextarea = styled.textarea<
 `;
 
 const getBorderStyles = (theme: Theme, variant: string) => {
+  console.log(variant);
   switch (variant) {
     case "focused":
       return css`
@@ -183,6 +194,7 @@ const getBorderStyles = (theme: Theme, variant: string) => {
       `;
     case "invalid":
       return css`
+        outline: none;
         border: 0.5px solid ${theme.color.danger600};
         box-shadow: ${theme.shadow.default};
       `;
