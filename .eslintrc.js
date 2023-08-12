@@ -16,5 +16,6 @@ module.exports = {
   rules: {
     "require-jsdoc": "off",
     quotes: ["error", "double"], // 문자열 들을 쌍따옴표로 감싸도록 강제
+    "react/display-name": "off",
   },
 };
