@@ -24,7 +24,11 @@ const Tags = ({ children, deletable = false, ...props }: Props) => {
     return child;
   });
 
-  return <EmotionWrapper {...props}>{tagItemsWithOnClick}</EmotionWrapper>;
+  return (
+    <EmotionWrapper {...props}>
+      <StyledTagItem deletable={deletable}>{tagItemsWithOnClick}</StyledTagItem>
+    </EmotionWrapper>
+  );
 };
 
 export default Tags;
@@ -35,6 +39,14 @@ const EmotionWrapper = styled.div<Props>`
   flex-wrap: wrap;
   gap: 5px;
   align-items: flex-start;
+`;
+
+const StyledTagItem = styled(TagItem)<{ deletable: boolean }>`
+  cursor: ${(props) => (props.deletable ? "pointer" : "default")};
+
+  &:hover {
+    cursor: ${(props) => (props.deletable ? "pointer" : "default")};
+  }
 `;
 
 Tags.Item = TagItem;
