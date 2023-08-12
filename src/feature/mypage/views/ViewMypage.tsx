@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import MyPageActionButtons from "feature/mypage/components/MyPageActionButtons";
+import MyPageBasicInfo from "feature/mypage/components/MyPageBasicInfo";
+import MyPageOrganizationInfo from "feature/mypage/components/MyPageOrganizationInfo";
 import MyPageProfileInfo from "feature/mypage/components/MyPageProfileInfo";
 
 interface Props {}
@@ -7,6 +10,9 @@ const ViewMypage = ({}: Props) => {
   return (
     <EmotionWrapper>
       <MyPageProfileInfo />
+      <MyPageBasicInfo />
+      <MyPageOrganizationInfo />
+      <MyPageActionButtons />
     </EmotionWrapper>
   );
 };

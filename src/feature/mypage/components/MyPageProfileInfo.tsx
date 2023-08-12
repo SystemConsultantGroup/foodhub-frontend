@@ -20,6 +20,8 @@ const MyPageProfileInfo = ({}: Props) => {
 export default MyPageProfileInfo;
 
 const EmotionWrapper = styled.div`
+  margin-bottom: 32px;
+
   .profile-section {
     display: flex;
     column-gap: 16px;
