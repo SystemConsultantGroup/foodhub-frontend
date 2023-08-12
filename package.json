@@ -18,9 +18,11 @@
     "@types/react-dom": "18.2.7",
     "emotion-reset": "^3.0.1",
     "eslint-config-next": "13.4.12",
+    "i": "^0.3.7",
     "next": "13.4.12",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.62.0",
