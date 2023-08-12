@@ -24,6 +24,6 @@ const EmotionWrapper = styled.div`
   .item-container {
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
+    row-gap: 12px;
   }
 `;

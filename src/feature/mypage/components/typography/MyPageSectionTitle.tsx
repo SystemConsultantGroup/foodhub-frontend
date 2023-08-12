@@ -12,8 +12,7 @@ const MyPageSectionTitle = ({ children }: Props) => {
 export default MyPageSectionTitle;
 
 const EmotionWrapper = styled.h2`
-  font-size: 16px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.color.black};
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.gray500};
   margin-bottom: 16px;
 `;

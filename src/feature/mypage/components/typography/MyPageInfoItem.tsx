@@ -22,13 +22,13 @@ const EmotionWrapper = styled.div`
   column-gap: 16px;
 
   .label {
-    font-size: 12px;
+    font-size: 16px;
     color: ${({ theme }) => theme.color.gray400};
     min-width: 60px;
   }
 
   .value {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
     color: ${({ theme }) => theme.color.black};
   }
