@@ -1,14 +1,28 @@
 import { ThemeProvider } from "@emotion/react";
 import type { AppProps } from "next/app";
 import { theme } from "../styles/theme";
-import React from "react";
 import { GlobalStyles } from "styles/GlobalStyles";
+import Layout from "components/layout/Layout";
+import CustomError from "pages/_error";
+import { NextComponentType } from "next";
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface CustomAppProps extends AppProps {
+  Component: NextComponentType & { showHero?: boolean };
+}
+
+function MyApp({ Component, pageProps }: CustomAppProps) {
+  const { showHero } = Component;
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <Layout showHero={showHero}>
+        {pageProps?.error ? (
+          <CustomError statusCode={pageProps.error.statusCode} title={pageProps.error.title} />
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </Layout>
     </ThemeProvider>
   );
 }

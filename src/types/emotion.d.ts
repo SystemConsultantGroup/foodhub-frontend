@@ -1,6 +1,14 @@
 import "@emotion/react";
 
 declare module "@emotion/react" {
+  export interface DeviceTheme {
+    mobile: number;
+  }
+  export interface DeviceMediaTheme {
+    mobile: string;
+    pc: string;
+  }
+
   export interface Theme {
     color: {
       black: string;
@@ -47,5 +55,7 @@ declare module "@emotion/react" {
       active: string;
       default: string;
     };
+    device: DeviceMediaTheme;
+    size: DeviceTheme;
   }
 }
