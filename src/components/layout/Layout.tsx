@@ -9,12 +9,13 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
+  showHero?: boolean;
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, showHero = false }: Props) => {
   return (
     <EmotionWrapper>
-      <Hero />
+      {showHero && <Hero />}
       <HeaderMobile />
       <main>{children}</main>
       <Navbar />

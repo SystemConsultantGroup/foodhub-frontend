@@ -4,12 +4,19 @@ import { theme } from "../styles/theme";
 import { GlobalStyles } from "styles/GlobalStyles";
 import Layout from "components/layout/Layout";
 import CustomError from "pages/_error";
+import { NextComponentType } from "next";
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface CustomAppProps extends AppProps {
+  Component: NextComponentType & { showHero?: boolean };
+}
+
+function MyApp({ Component, pageProps }: CustomAppProps) {
+  const { showHero } = Component;
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Layout>
+      <Layout showHero={showHero}>
         {pageProps?.error ? (
           <CustomError statusCode={pageProps.error.statusCode} title={pageProps.error.title} />
         ) : (
