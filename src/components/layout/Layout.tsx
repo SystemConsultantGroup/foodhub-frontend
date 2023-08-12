@@ -6,6 +6,7 @@ import { LAYOUT_MARGIN } from "constant/layoutMargin";
 import { NAVBAR_HEIGHT } from "constant/navbarHeight";
 
 import { ReactNode } from "react";
+import HeaderDesktop from "components/header/HeaderDesktop";
 
 interface Props {
   children: ReactNode;
@@ -15,6 +16,7 @@ interface Props {
 const Layout = ({ children, showHero = false }: Props) => {
   return (
     <EmotionWrapper>
+      <HeaderDesktop />
       {showHero && <Hero />}
       <HeaderMobile />
       <main>{children}</main>

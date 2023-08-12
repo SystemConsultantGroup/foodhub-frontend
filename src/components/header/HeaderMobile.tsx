@@ -8,7 +8,7 @@ const HeaderMobile = ({}: Props) => {
   return (
     <EmotionWrapper>
       <Image src="/images/icons/arrow-left.svg" width={24} height={24} alt="왼쪽 화살표 아이콘" />
-      <h3>푸드허브</h3>
+      <h3>쩝쩝대학</h3>
       <ProfileImage />
     </EmotionWrapper>
   );
