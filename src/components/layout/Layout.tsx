@@ -38,5 +38,6 @@ const EmotionWrapper = styled.div`
     padding-top: 48px;
     padding-bottom: ${NAVBAR_HEIGHT}px;
     max-width: 768px;
+    width: 100%;
   }
 `;
