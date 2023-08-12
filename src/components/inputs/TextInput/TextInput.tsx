@@ -13,88 +13,63 @@ interface Props {
   onTextChange?: (value: string) => void;
 }
 
-const TextInput: React.FC<Props> = ({
-  label,
-  placeholder = "",
-  conditionList,
-  conditionCheckList,
-  multiline = false,
-  errorMessage = "잘못된 입력입니다.",
-  onTextChange,
-}) => {
-  const [value, setValue] = useState("");
-  const [isValid, setIsValid] = useState(true);
-  const [isBlurred, setIsBlurred] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const [borderStyle, setBorderStyle] = useState("default");
+const TextInput: React.FC<Props> = React.forwardRef(
+  (
+    {
+      label,
+      placeholder = "",
+      conditionList,
+      conditionCheckList,
+      multiline = false,
+      errorMessage = "잘못된 입력입니다.",
+      onTextChange,
+      ...props
+    },
+    ref
+  ) => {
+    const [value, setValue] = useState("");
+    const [isValid, setIsValid] = useState(true);
+    const [isFocused, setIsFocused] = useState(false);
+    const [borderStyle, setBorderStyle] = useState("default");
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
+    useEffect(() => {
+      if (isValid) {
+        isFocused
+          ? setBorderStyle("focused")
+          : value
+          ? setBorderStyle("blur")
+          : setBorderStyle("default");
+      } else {
+        setBorderStyle("invalid");
+      }
+    }, [isValid, isFocused, value]);
 
-  const handleBlur = () => {
-    setIsFocused(false);
-    setIsBlurred(true);
-    setIsValid(conditionCheckList ? conditionCheckList.every((check) => check(value)) : true);
-    if (value == "") setIsValid(true);
-  };
+    const InputComponent = multiline ? StyledTextarea : StyledInput;
+    const em = props.errors?.[props.name]?.message;
+    console.log("props", props);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const newValue = event.target.value;
-    setValue(newValue);
+    console.log("em", em);
 
-    // 최초 Blur 발생 후, 입력된 텍스트의 조건 확인을 수행하여 isValid 상태 업데이트
-    if (isFocused && isBlurred && newValue != "") {
-      setIsValid(conditionCheckList ? conditionCheckList.every((check) => check(newValue)) : true);
-    }
-    if (newValue == "") setIsValid(true);
-
-    if (onTextChange) {
-      onTextChange(newValue);
-    }
-  };
-
-  useEffect(() => {
-    if (isValid) {
-      isFocused
-        ? setBorderStyle("focused")
-        : value
-        ? setBorderStyle("blur")
-        : setBorderStyle("default");
-    } else {
-      setBorderStyle("invalid");
-    }
-  }, [isValid, isFocused, value]);
-
-  const InputComponent = multiline ? StyledTextarea : StyledInput;
-
-  return (
-    <EmotionWrapper>
-      {label && <StyledLabel>{label}</StyledLabel>}
-      {conditionList && (
-        <ConditionListWrapper>
-          {conditionList.map((condition, index) => (
-            <StyledCondition key={index}>{condition}</StyledCondition>
-          ))}
-        </ConditionListWrapper>
-      )}
-      <StyledInputWrapper>
-        <InputComponent
-          value={value}
-          placeholder={placeholder}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          isValid={isValid}
-          isFocused={isFocused}
-          borderStyle={borderStyle}
-        />
-        {value && isValid && !isFocused && <CheckIcon size={20} />}
-      </StyledInputWrapper>
-      {!isValid && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
-    </EmotionWrapper>
-  );
-};
+    return (
+      <EmotionWrapper>
+        <p>{em}</p>
+        {label && <StyledLabel>{label}</StyledLabel>}
+        {conditionList && (
+          <ConditionListWrapper>
+            {conditionList.map((condition, index) => (
+              <StyledCondition key={index}>{condition}</StyledCondition>
+            ))}
+          </ConditionListWrapper>
+        )}
+        <StyledInputWrapper>
+          <InputComponent {...props} ref={ref} />
+          {value && isValid && !isFocused && <CheckIcon size={20} />}
+        </StyledInputWrapper>
+        {!isValid && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
+      </EmotionWrapper>
+    );
+  }
+);
 
 export default TextInput;
 
