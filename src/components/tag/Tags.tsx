@@ -34,16 +34,13 @@ const Tags = ({ children, deletable = false, ...props }: Props) => {
 export default Tags;
 
 const EmotionWrapper = styled.div<Props>`
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
   align-items: flex-start;
 `;
 
-const StyledTagItem = styled(TagItem)<{ deletable: boolean }>`
-  cursor: ${(props) => (props.deletable ? "pointer" : "default")};
-
+const StyledTagItem = styled.div<{ deletable: boolean }>`
   &:hover {
     cursor: ${(props) => (props.deletable ? "pointer" : "default")};
   }

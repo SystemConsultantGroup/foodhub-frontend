@@ -34,6 +34,8 @@ const EmotionWrapper = styled.div<TagItemProps>`
   height: auto;
   line-height: 1.5;
 
+  margin-right: 5px;
+
   display: inline-block;
   white-space: nowrap;
   font-size: 12px;
