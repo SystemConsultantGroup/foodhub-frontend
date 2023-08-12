@@ -3,17 +3,15 @@ import Image from "next/image";
 
 interface Props {
   src?: string;
+  defaultPhotoId: number;
 }
 
-const ProfileImage = ({ src }: Props) => {
+const ProfileImage = ({ src, defaultPhotoId }: Props) => {
+  const imageSrc = src ?? `/images/profile-image-default-${defaultPhotoId}.png`;
+
   return (
     <EmotionWrapper>
-      <Image
-        src={src ?? "/images/profile-image-default.png"}
-        width={30}
-        height={30}
-        alt="프로필 이미지"
-      />
+      <Image src={imageSrc} width={30} height={30} alt="프로필 이미지" />
     </EmotionWrapper>
   );
 };
