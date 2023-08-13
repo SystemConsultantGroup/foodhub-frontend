@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "@emotion/styled";
 import { textEllipsis } from "styles/ellipsis/textEllipsis";
+import IconMoreDots from "components/icons/IconMoreDots";
 
 interface Props {
   imageSrc?: string;
@@ -19,6 +20,7 @@ const Member = ({ imageSrc, memberName, memberDescription }: Props) => {
         <p className="member-name">{memberName}</p>
         <p className="member-description">{memberDescription}</p>
       </div>
+      <IconMoreDots />
     </EmotionWrapper>
   );
 };
