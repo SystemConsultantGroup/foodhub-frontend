@@ -66,79 +66,98 @@ const TextInput: React.FC<Props> = ({
     }
   }, [isValid, isFocused, value]);
 
-  const InputComponent = multiline ? StyledTextarea : StyledInput;
-
   return (
-    <EmotionWrapper>
-      {label && <StyledLabel>{label}</StyledLabel>}
+    <EmotionWrapper isValid={isValid} isFocused={isFocused} borderStyle={borderStyle}>
+      {label && <span className="label">{label}</span>}
       {conditionList && (
-        <ConditionListWrapper>
+        <div className="conditionList">
           {conditionList.map((condition, index) => (
-            <StyledCondition key={index}>{condition}</StyledCondition>
+            <span className="condition" key={index}>
+              {condition}
+            </span>
           ))}
-        </ConditionListWrapper>
+        </div>
       )}
-      <StyledInputWrapper>
-        <InputComponent
-          value={value}
-          placeholder={placeholder}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          isValid={isValid}
-          isFocused={isFocused}
-          borderStyle={borderStyle}
-        />
+      <div className="inputContainer">
+        {multiline ? (
+          <textarea
+            value={value}
+            placeholder={placeholder}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          ></textarea>
+        ) : (
+          <input
+            value={value}
+            placeholder={placeholder}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          ></input>
+        )}
         {value && isValid && !isFocused && <CheckIcon size={20} />}
-      </StyledInputWrapper>
-      {!isValid && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
+      </div>
+      {!isValid && <span className="error">{errorMessage}</span>}
     </EmotionWrapper>
   );
 };
 
 export default TextInput;
 
-const EmotionWrapper = styled.div<Props>`
+const EmotionWrapper = styled.div<
+  Props & { isValid: boolean; isFocused: boolean; borderStyle: string }
+>`
   width: 100%;
   text-align: left;
   display: flex;
   flex-direction: column;
   gap: 8px;
-`;
 
-const ConditionListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 4px;
-`;
+  span {
+    font-size: 12px;
+    font-weight: 300;
+    margin-left: 2px;
+  }
 
-const StyledCondition = styled.span`
-  font-size: 12px;
-  font-weight: 300;
-  margin-left: 2px;
-  color: ${({ theme }) => theme.color.gray400};
-`;
+  span.label {
+    font-size: 16px;
+    color: ${({ theme }) => theme.color.gray600};
+  }
 
-const StyledErrorMessage = styled.span`
-  font-size: 12px;
-  font-weight: 300;
-  margin-left: 2px;
-  color: ${({ theme }) => theme.color.danger600};
-`;
+  span.condition {
+    color: ${({ theme }) => theme.color.gray400};
+  }
 
-const StyledLabel = styled.span`
-  color: ${({ theme }) => theme.color.gray600};
-  font-size: 16px;
-  font-weight: 300;
-  margin-left: 2px;
-`;
+  span.error {
+    color: ${({ theme }) => theme.color.danger600};
+  }
 
-const StyledInputWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  div.conditionList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  div.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  input {
+    ${({ theme, isValid, isFocused, borderStyle }) =>
+      commonStyles(theme, isValid, isFocused, borderStyle)};
+    position: relative;
+  }
+
+  textarea {
+    ${({ theme, isValid, isFocused, borderStyle }) =>
+      commonStyles(theme, isValid, isFocused, borderStyle)};
+    resize: none;
+  }
 `;
 
 const commonStyles = (theme: Theme, isValid: boolean, isFocused: boolean, borderStyle: string) => {
@@ -162,25 +181,7 @@ const commonStyles = (theme: Theme, isValid: boolean, isFocused: boolean, border
   `;
 };
 
-const StyledInput = styled.input<
-  Props & { isValid: boolean; isFocused: boolean; borderStyle: string }
->`
-  ${({ theme, isValid, isFocused, borderStyle }) =>
-    commonStyles(theme, isValid, isFocused, borderStyle)};
-
-  position: relative;
-`;
-
-const StyledTextarea = styled.textarea<
-  Props & { isValid: boolean; isFocused: boolean; borderStyle: string }
->`
-  ${({ theme, isValid, isFocused, borderStyle }) =>
-    commonStyles(theme, isValid, isFocused, borderStyle)};
-  resize: none;
-`;
-
 const getBorderStyles = (theme: Theme, variant: string) => {
-  console.log(variant);
   switch (variant) {
     case "focused":
       return css`
