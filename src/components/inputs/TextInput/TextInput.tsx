@@ -4,16 +4,18 @@ import { css, Theme } from "@emotion/react";
 import CheckIcon from "components/inputs/TextInput/CheckIcon";
 
 interface Props {
+  name?: string;
   label?: string;
   placeholder?: string;
   conditionList?: string[];
   conditionCheckList?: ((text: string) => boolean)[];
   multiline?: boolean;
   errorMessage?: string;
-  onTextChange?: (value: string) => void;
+  onTextChange?: (value: string, isValid: boolean) => void;
 }
 
 const TextInput: React.FC<Props> = ({
+  name,
   label,
   placeholder = "",
   conditionList,
@@ -37,8 +39,14 @@ const TextInput: React.FC<Props> = ({
       if (conditionCheckList ? conditionCheckList.every((check) => check(value)) : true) {
         setStatus("success");
         setIsBlurred(true);
+        if (onTextChange) {
+          onTextChange(value, true); // Notify parent component that input is valid
+        }
       } else {
         setStatus("invalid");
+        if (onTextChange) {
+          onTextChange(value, false); // Notify parent component that input is invalid
+        }
       }
     }
   };
@@ -59,7 +67,7 @@ const TextInput: React.FC<Props> = ({
     }
 
     if (onTextChange) {
-      onTextChange(newValue);
+      onTextChange(newValue, status != "invalid" && status != "default");
     }
   };
 
@@ -78,6 +86,7 @@ const TextInput: React.FC<Props> = ({
       <div className="inputContainer">
         {multiline ? (
           <textarea
+            name={name ? name : label}
             value={value}
             placeholder={placeholder}
             onChange={handleChange}
@@ -87,6 +96,7 @@ const TextInput: React.FC<Props> = ({
           />
         ) : (
           <input
+            name={name ? name : label}
             value={value}
             placeholder={placeholder}
             onChange={handleChange}
