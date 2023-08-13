@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { HTMLAttributes } from "react";
 import TagItem, { TagItemProps } from "components/tag/TagItem";
 import React, { useState } from "react";
+import DeleteIcon from "components/tag/DeleteIcon";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   deletable?: boolean;
@@ -17,9 +18,16 @@ const Tags = ({ children, deletable = false, ...props }: Props) => {
 
   const tagItemsWithOnClick = React.Children.map(tagItems, (child, index) => {
     if (deletable && React.isValidElement<TagItemProps>(child)) {
-      return React.cloneElement(child, {
-        onClick: () => handleTagItemClick(index),
-      });
+      return (
+        <StyledTagItem key={index} deletable={deletable}>
+          {React.cloneElement(child, {
+            onClick: () => handleTagItemClick(index),
+          })}
+          <StyledDeleteIcon onClick={() => handleTagItemClick(index)}>
+            <DeleteIcon size={12} />
+          </StyledDeleteIcon>
+        </StyledTagItem>
+      );
     }
     return child;
   });
@@ -41,8 +49,19 @@ const EmotionWrapper = styled.div<Props>`
 `;
 
 const StyledTagItem = styled.div<{ deletable: boolean }>`
+  position: relative;
+  display: inline-block;
   &:hover {
     cursor: ${(props) => (props.deletable ? "pointer" : "default")};
+  }
+`;
+
+const StyledDeleteIcon = styled.div`
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  &:hover {
+    cursor: pointer;
   }
 `;
 
