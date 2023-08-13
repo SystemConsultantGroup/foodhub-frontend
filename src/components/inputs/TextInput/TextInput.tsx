@@ -30,6 +30,7 @@ const TextInput: React.FC<Props> = ({
 
   const handleFocus = () => {
     setIsFocused(true);
+    setIsBlurred(false);
   };
 
   const handleBlur = () => {
@@ -42,6 +43,7 @@ const TextInput: React.FC<Props> = ({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue = event.target.value;
     setValue(newValue);
+    setIsBlurred(false);
 
     // 최초 Blur 발생 후, 입력된 텍스트의 조건 확인을 수행하여 isValid 상태 업데이트
     if (isFocused && isBlurred && newValue != "") {
@@ -67,7 +69,12 @@ const TextInput: React.FC<Props> = ({
   }, [isValid, isFocused, value]);
 
   return (
-    <EmotionWrapper isValid={isValid} isFocused={isFocused} borderStyle={borderStyle}>
+    <EmotionWrapper
+      isValid={isValid}
+      isFocused={isFocused}
+      isBlurred={isBlurred}
+      borderStyle={borderStyle}
+    >
       {label && <span className="label">{label}</span>}
       {conditionList && (
         <div className="conditionList">
@@ -96,7 +103,9 @@ const TextInput: React.FC<Props> = ({
             onBlur={handleBlur}
           />
         )}
-        {value && isValid && !isFocused && <CheckIcon size={20} />}
+        {value && isValid && !isFocused && (
+          <CheckIcon size={20} style={{ position: "absolute", right: "8px" }} />
+        )}
       </div>
       {!isValid && <span className="error">{errorMessage}</span>}
     </EmotionWrapper>
@@ -106,7 +115,7 @@ const TextInput: React.FC<Props> = ({
 export default TextInput;
 
 const EmotionWrapper = styled.div<
-  Props & { isValid: boolean; isFocused: boolean; borderStyle: string }
+  Props & { isValid: boolean; isFocused: boolean; isBlurred: boolean; borderStyle: string }
 >`
   width: 100%;
   text-align: left;
@@ -148,22 +157,24 @@ const EmotionWrapper = styled.div<
   }
 
   input {
-    ${({ theme, isValid, isFocused, borderStyle }) =>
-      commonStyles(theme, isValid, isFocused, borderStyle)};
+    ${({ theme, isValid, isBlurred, borderStyle }) =>
+      commonStyles(theme, isValid, isBlurred, borderStyle)};
     position: relative;
   }
 
   textarea {
-    ${({ theme, isValid, isFocused, borderStyle }) =>
-      commonStyles(theme, isValid, isFocused, borderStyle)};
+    ${({ theme, isValid, isBlurred, borderStyle }) =>
+      commonStyles(theme, isValid, isBlurred, borderStyle)};
     resize: none;
   }
 `;
 
-const commonStyles = (theme: Theme, isValid: boolean, isFocused: boolean, borderStyle: string) => {
+const commonStyles = (theme: Theme, isValid: boolean, isBlurred: boolean, borderStyle: string) => {
   return css`
     width: 100%;
     padding: 6px;
+    position: absolute;
+    padding-right: ${isBlurred ? "35px" : "6px"};
     font-size: 14px;
     border-radius: 6px;
 
