@@ -68,7 +68,7 @@ export const EmotionWrapper = styled.button<Props>`
   > svg {
     width: 14px;
     height: 14px;
-    viewBox="0 0 14 14";
+    viewBox="0 0 14 14"
     preserveAspectRatio= "xMidYMid meet";
   }
 
