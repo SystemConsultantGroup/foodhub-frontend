@@ -86,7 +86,7 @@ const TextInput: React.FC<Props> = ({
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
-          ></textarea>
+          />
         ) : (
           <input
             value={value}
@@ -94,7 +94,7 @@ const TextInput: React.FC<Props> = ({
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
-          ></input>
+          />
         )}
         {value && isValid && !isFocused && <CheckIcon size={20} />}
       </div>
