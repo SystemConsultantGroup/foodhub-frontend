@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
 import CheckIcon from "components/inputs/TextInput/CheckIcon";
+import { TConditionCheck } from "./types/TConditionCheck";
 
 interface Props {
   name?: string;
   label?: string;
   placeholder?: string;
   conditionList?: string[];
-  conditionCheckList?: ((text: string) => boolean)[];
+  conditionCheckList?: TConditionCheck[];
   multiline?: boolean;
-  errorMessage?: string;
   onTextChange?: (value: string, isValid: boolean) => void;
 }
 
@@ -21,7 +21,6 @@ const TextInput: React.FC<Props> = ({
   conditionList,
   conditionCheckList,
   multiline = false,
-  errorMessage = "잘못된 입력입니다.",
   onTextChange,
 }) => {
   const [status, setStatus] = useState("default"); // default / success / invalid / focus
@@ -33,20 +32,16 @@ const TextInput: React.FC<Props> = ({
   };
 
   const handleBlur = () => {
-    if (value == "") {
-      setStatus("default");
+    setIsBlurred(true);
+    if (conditionCheckList ? conditionCheckList.every((check) => check.condition(value)) : true) {
+      setStatus("success");
+      if (onTextChange) {
+        onTextChange(value, true); // Notify parent component that input is valid
+      }
     } else {
-      if (conditionCheckList ? conditionCheckList.every((check) => check(value)) : true) {
-        setStatus("success");
-        setIsBlurred(true);
-        if (onTextChange) {
-          onTextChange(value, true); // Notify parent component that input is valid
-        }
-      } else {
-        setStatus("invalid");
-        if (onTextChange) {
-          onTextChange(value, false); // Notify parent component that input is invalid
-        }
+      setStatus("invalid");
+      if (onTextChange) {
+        onTextChange(value, false); // Notify parent component that input is invalid
       }
     }
   };
@@ -57,7 +52,9 @@ const TextInput: React.FC<Props> = ({
 
     // 최초 Blur 발생 후, 입력된 텍스트의 조건 확인을 수행하여 isValid 상태 업데이트
     if (isBlurred && newValue != "") {
-      if (conditionCheckList ? conditionCheckList.every((check) => check(newValue)) : true) {
+      if (
+        conditionCheckList ? conditionCheckList.every((check) => check.condition(newValue)) : true
+      ) {
         setStatus("focus");
       } else {
         setStatus("invalid");
@@ -75,7 +72,7 @@ const TextInput: React.FC<Props> = ({
     <EmotionWrapper>
       {label && <span className="label">{label}</span>}
       {conditionList && (
-        <div className="conditionList">
+        <div className="spanList">
           {conditionList.map((condition, index) => (
             <span className="condition" key={index}>
               {condition}
@@ -109,7 +106,17 @@ const TextInput: React.FC<Props> = ({
           <CheckIcon size={20} style={{ position: "absolute", right: "8px" }} />
         )}
       </div>
-      {status == "invalid" && <span className="error">{errorMessage}</span>}
+      {status === "invalid" && (
+        <div className="spanList">
+          {conditionCheckList
+            ?.filter((check) => !check.condition(value))
+            .map((check) => (
+              <span key={check.messageOnError} className="error">
+                {check.messageOnError}
+              </span>
+            ))}
+        </div>
+      )}
     </EmotionWrapper>
   );
 };
@@ -142,7 +149,7 @@ const EmotionWrapper = styled.div<Props>`
     color: ${({ theme }) => theme.color.danger600};
   }
 
-  div.conditionList {
+  div.spanList {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
