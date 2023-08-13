@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 interface Props {
+  name: string;
   label?: string;
 }
 
@@ -26,4 +27,8 @@ const Dropdown: React.FC<Props> = () => {
 
 export default Dropdown;
 
-const EmotionWrapper = styled.div<Props>``;
+const EmotionWrapper = styled.div`
+  select {
+    color: red;
+  }
+`;
