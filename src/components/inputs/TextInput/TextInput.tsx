@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
 import CheckIcon from "components/inputs/TextInput/CheckIcon";
@@ -22,59 +22,49 @@ const TextInput: React.FC<Props> = ({
   errorMessage = "잘못된 입력입니다.",
   onTextChange,
 }) => {
+  const [status, setStatus] = useState("default"); // default / success / invalid / focus
   const [value, setValue] = useState("");
-  const [isValid, setIsValid] = useState(true);
   const [isBlurred, setIsBlurred] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const [borderStyle, setBorderStyle] = useState("default");
 
   const handleFocus = () => {
-    setIsFocused(true);
-    setIsBlurred(false);
+    setStatus("focus");
   };
 
   const handleBlur = () => {
-    setIsFocused(false);
-    setIsBlurred(true);
-    setIsValid(conditionCheckList ? conditionCheckList.every((check) => check(value)) : true);
-    if (value == "") setIsValid(true);
+    if (value == "") {
+      setStatus("default");
+    } else {
+      if (conditionCheckList ? conditionCheckList.every((check) => check(value)) : true) {
+        setStatus("success");
+        setIsBlurred(true);
+      } else {
+        setStatus("invalid");
+      }
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue = event.target.value;
     setValue(newValue);
-    setIsBlurred(false);
 
     // 최초 Blur 발생 후, 입력된 텍스트의 조건 확인을 수행하여 isValid 상태 업데이트
-    if (isFocused && isBlurred && newValue != "") {
-      setIsValid(conditionCheckList ? conditionCheckList.every((check) => check(newValue)) : true);
+    if (isBlurred && newValue != "") {
+      if (conditionCheckList ? conditionCheckList.every((check) => check(newValue)) : true) {
+        setStatus("focus");
+      } else {
+        setStatus("invalid");
+      }
+    } else {
+      setStatus("focus");
     }
-    if (newValue == "") setIsValid(true);
 
     if (onTextChange) {
       onTextChange(newValue);
     }
   };
 
-  useEffect(() => {
-    if (isValid) {
-      isFocused
-        ? setBorderStyle("focused")
-        : value
-        ? setBorderStyle("blur")
-        : setBorderStyle("default");
-    } else {
-      setBorderStyle("invalid");
-    }
-  }, [isValid, isFocused, value]);
-
   return (
-    <EmotionWrapper
-      isValid={isValid}
-      isFocused={isFocused}
-      isBlurred={isBlurred}
-      borderStyle={borderStyle}
-    >
+    <EmotionWrapper>
       {label && <span className="label">{label}</span>}
       {conditionList && (
         <div className="conditionList">
@@ -93,6 +83,7 @@ const TextInput: React.FC<Props> = ({
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
+            data-status={status}
           />
         ) : (
           <input
@@ -101,22 +92,21 @@ const TextInput: React.FC<Props> = ({
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
+            data-status={status}
           />
         )}
-        {value && isValid && !isFocused && (
+        {status == "success" && (
           <CheckIcon size={20} style={{ position: "absolute", right: "8px" }} />
         )}
       </div>
-      {!isValid && <span className="error">{errorMessage}</span>}
+      {status == "invalid" && <span className="error">{errorMessage}</span>}
     </EmotionWrapper>
   );
 };
 
 export default TextInput;
 
-const EmotionWrapper = styled.div<
-  Props & { isValid: boolean; isFocused: boolean; isBlurred: boolean; borderStyle: string }
->`
+const EmotionWrapper = styled.div<Props>`
   width: 100%;
   text-align: left;
   display: flex;
@@ -157,32 +147,46 @@ const EmotionWrapper = styled.div<
   }
 
   input {
-    ${({ theme, isValid, isBlurred, borderStyle }) =>
-      commonStyles(theme, isValid, isBlurred, borderStyle)};
+    ${({ theme }) => commonStyles(theme)};
     position: relative;
   }
 
   textarea {
-    ${({ theme, isValid, isBlurred, borderStyle }) =>
-      commonStyles(theme, isValid, isBlurred, borderStyle)};
+    ${({ theme }) => commonStyles(theme)};
     resize: none;
   }
 `;
 
-const commonStyles = (theme: Theme, isValid: boolean, isBlurred: boolean, borderStyle: string) => {
+const commonStyles = (theme: Theme) => {
   return css`
     width: 100%;
     padding: 6px;
     position: absolute;
-    padding-right: ${isBlurred ? "35px" : "6px"};
     font-size: 14px;
     border-radius: 6px;
+    border: 0.5px solid ${theme.color.gray500};
+
+    color: ${theme.color.gray600};
 
     line-height: 1.5;
 
-    ${getBorderStyles(theme, borderStyle)};
-    color: ${isValid ? theme.color.gray600 : theme.color.danger600};
-    box-shadow: ${!isValid && theme.shadow.default};
+    &:focus {
+      outline: none;
+      border: 1.5px solid ${theme.color.primary500};
+      box-shadow: ${theme.shadow.default};
+    }
+
+    &[data-status="success"] {
+      border: 1px solid ${theme.color.primary700};
+      padding-right: 35px;
+    }
+
+    &[data-status="invalid"] {
+      outline: none;
+      border: 0.5px solid ${theme.color.danger600};
+      box-shadow: ${theme.shadow.default};
+      color: ${theme.color.danger600};
+    }
 
     &::placeholder {
       color: ${theme.color.gray400};
@@ -190,29 +194,4 @@ const commonStyles = (theme: Theme, isValid: boolean, isBlurred: boolean, border
       font-weight: 300;
     }
   `;
-};
-
-const getBorderStyles = (theme: Theme, variant: string) => {
-  switch (variant) {
-    case "focused":
-      return css`
-        outline: none;
-        border: 1.5px solid ${theme.color.primary500};
-        box-shadow: ${theme.shadow.default};
-      `;
-    case "blur":
-      return css`
-        border: 1px solid ${theme.color.primary700};
-      `;
-    case "invalid":
-      return css`
-        outline: none;
-        border: 0.5px solid ${theme.color.danger600};
-        box-shadow: ${theme.shadow.default};
-      `;
-    default:
-      return css`
-        border: 0.5px solid ${theme.color.gray500};
-      `;
-  }
 };
