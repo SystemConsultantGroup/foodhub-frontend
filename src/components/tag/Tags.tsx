@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { HTMLAttributes } from "react";
-import TagItem, { TagItemProps } from "components/tag/TagItem";
+import TagItem, { Props as TagItemProps } from "components/tag/TagItem";
 import React, { useState } from "react";
 import DeleteIcon from "components/tag/DeleteIcon";
 
