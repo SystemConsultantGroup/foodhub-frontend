@@ -19,49 +19,49 @@ const Tags = ({ children, deletable = false, ...props }: Props) => {
   const tagItemsWithOnClick = React.Children.map(tagItems, (child, index) => {
     if (deletable && React.isValidElement<TagItemProps>(child)) {
       return (
-        <StyledTagItem key={index} deletable={deletable}>
+        <div className="tagItem" key={index}>
           {React.cloneElement(child, {
             onClick: () => handleTagItemClick(index),
           })}
-          <StyledDeleteIcon onClick={() => handleTagItemClick(index)}>
+          <div className="deleteIcon" onClick={() => handleTagItemClick(index)}>
             <DeleteIcon size={12} />
-          </StyledDeleteIcon>
-        </StyledTagItem>
+          </div>
+        </div>
       );
     }
     return child;
   });
 
   return (
-    <EmotionWrapper {...props}>
-      <StyledTagItem deletable={deletable}>{tagItemsWithOnClick}</StyledTagItem>
+    <EmotionWrapper {...props} deletable={deletable}>
+      {tagItemsWithOnClick}
     </EmotionWrapper>
   );
 };
 
 export default Tags;
 
-const EmotionWrapper = styled.div<Props>`
+const EmotionWrapper = styled.div<Props & { deletable: boolean }>`
   width: fit-content;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-`;
 
-const StyledTagItem = styled.div<{ deletable: boolean }>`
-  position: relative;
-  display: inline-block;
-  &:hover {
-    cursor: ${(props) => (props.deletable ? "pointer" : "default")};
+  div.tagItem {
+    position: relative;
+    display: inline-block;
+    &:hover {
+      cursor: ${(props) => (props.deletable ? "pointer" : "default")};
+    }
   }
-`;
 
-const StyledDeleteIcon = styled.div`
-  position: absolute;
-  top: -5px;
-  right: 0px;
-  &:hover {
-    cursor: pointer;
+  div.deleteIcon {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
