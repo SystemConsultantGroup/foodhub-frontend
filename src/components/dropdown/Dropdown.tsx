@@ -1,15 +1,16 @@
-import React, { useState, ReactNode } from "react";
+import React, { HTMLAttributes, useState } from "react";
 import styled from "@emotion/styled";
-import DropDownIcon from "components/dropdown/items/DropDownIcon";
-import DropUpIcon from "components/dropdown/items/DropUpIcon";
+import { Props as OptionProps } from "components/dropDown/items/DropDownOption";
+import DropDownIcon from "components/dropDown/items/DropDownIcon";
+import DropUpIcon from "components/dropDown/items/DropUpIcon";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   name: string;
   label?: string;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-const Dropdown: React.FC<Props> = ({ children, label, name }: Props) => {
+const DropDown = ({ children, label, name }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -17,28 +18,37 @@ const Dropdown: React.FC<Props> = ({ children, label, name }: Props) => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newValue = event.target.value;
-    setSelectedValue(newValue);
+  const handleOptionClick = (value: string) => {
+    setSelectedValue(value);
+    setIsOpen(false);
   };
 
   return (
     <EmotionWrapper isOpen={isOpen}>
       {label && <span className="label">{label}</span>}
-      <div onClick={toggleDropdown}></div>
-      <select name={name} value={selectedValue} onChange={handleSelectChange}>
-        {children}
-      </select>
-      {isOpen ? (
-        <DropUpIcon style={{ position: "absolute" }} />
-      ) : (
-        <DropDownIcon style={{ position: "absolute" }} />
-      )}
+      <div className="selected-option" onClick={toggleDropdown}>
+        {selectedValue || "Select an option"}
+        {isOpen ? (
+          <DropUpIcon style={{ position: "absolute" }} />
+        ) : (
+          <DropDownIcon style={{ position: "absolute" }} />
+        )}
+      </div>
+      <div className="options">
+        {React.Children.map(
+          children,
+          (child) =>
+            React.isValidElement<OptionProps>(child) &&
+            React.cloneElement(child, {
+              onClick: () => handleOptionClick(child.props.value),
+            })
+        )}
+      </div>
     </EmotionWrapper>
   );
 };
 
-export default Dropdown;
+export default DropDown;
 
 const EmotionWrapper = styled.div<{ isOpen: boolean }>`
   position: relative;
