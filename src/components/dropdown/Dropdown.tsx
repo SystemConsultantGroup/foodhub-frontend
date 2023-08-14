@@ -1,32 +1,55 @@
-import React, { HTMLAttributes, useState } from "react";
+import React, { HTMLAttributes, useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import DropDownOption, { Props as OptionProps } from "components/dropDown/items/DropDownOption";
 import DropDownIcon from "components/dropDown/items/DropDownIcon";
 import DropUpIcon from "components/dropDown/items/DropUpIcon";
+import { TSelectedOption } from "components/dropDown/types/TSelectedOption";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  name: string;
+  name?: string;
   label?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
 }
 
-const DropDown = ({ children, label, name, onSelectValueChange }: Props) => {
+const DropDown = ({ children, label, onSelectValueChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedText, setSelectedText] = useState<React.ReactNode>();
+  const [selectedOption, setSelectedOption] = useState<TSelectedOption | null>(null);
+  const dropDownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptionClick = (value: string, text: React.ReactNode, index: number) => {
-    setSelectedText(text);
+    const newSelectedOption: TSelectedOption = {
+      index: index,
+      text: text,
+      value: value,
+    };
+    setSelectedOption(newSelectedOption);
     setIsOpen(false);
 
     if (onSelectValueChange) {
       onSelectValueChange(value);
     }
   };
+
+  const selectedText = selectedOption ? selectedOption.text : null;
+  const selectedOptionIndex = selectedOption ? selectedOption.index : null;
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropDownRef.current && !dropDownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <EmotionWrapper isOpen={isOpen}>
@@ -35,12 +58,13 @@ const DropDown = ({ children, label, name, onSelectValueChange }: Props) => {
         <span>{selectedText || "Select an option"}</span>
         {isOpen ? <DropUpIcon /> : <DropDownIcon />}
       </div>
-      <div className="options">
+      <div className="options" ref={dropDownRef}>
         {React.Children.map(
           children,
           (child, index) =>
             React.isValidElement<OptionProps>(child) &&
             React.cloneElement(child, {
+              isSelected: selectedOptionIndex === index,
               onClick: () => handleOptionClick(child.props.value, child.props.children, index),
             })
         )}
@@ -86,16 +110,16 @@ const EmotionWrapper = styled.div<{ isOpen: boolean }>`
     border-radius: 6px;
     background-color: white;
     box-shadow: ${({ theme }) => theme.shadow.default};
-    display: ${(props) => (props.isOpen ? "block" : "none")};
+    opacity: ${(props) => (props.isOpen ? 1 : 0)};
+    visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
+    height: ${(props) => (props.isOpen ? "auto" : "0")};
+    transition:
+      opacity 0.3s ease-in-out,
+      height 0.3s ease-in-out;
   }
 
   span.label {
     font-size: 16px;
     color: ${({ theme }) => theme.color.gray600};
-  }
-
-  option {
-    border-radius: 6px;
-    background-color: ${({ theme }) => theme.color.white};
   }
 `;

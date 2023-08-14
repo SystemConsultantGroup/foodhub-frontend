@@ -12,7 +12,7 @@ const DropUpIcon: FC<Props> = ({ size = 16, style }) => {
       width={size}
       height={size}
       alt="drop up 아이콘"
-      src="/images/icons/drop-down-line.svg"
+      src="/images/icons/drop-up-line.svg"
       style={style}
     />
   );
