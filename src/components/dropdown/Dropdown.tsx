@@ -45,6 +45,19 @@ const DropDown = ({ children, label, onSelectValueChange }: Props) => {
       }
     };
 
+    // 자식 옵션 중에서 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
+    React.Children.forEach(children, (child, index) => {
+      if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
+        const newSelectedOption: TSelectedOption = {
+          index: index,
+          text: child.props.children,
+          value: child.props.value,
+        };
+        setSelectedOption(newSelectedOption);
+        return;
+      }
+    });
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -52,7 +65,7 @@ const DropDown = ({ children, label, onSelectValueChange }: Props) => {
   }, []);
 
   return (
-    <EmotionWrapper isOpen={isOpen}>
+    <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
         <span>{selectedText || "Select an option"}</span>
@@ -76,7 +89,7 @@ const DropDown = ({ children, label, onSelectValueChange }: Props) => {
 DropDown.Option = DropDownOption;
 export default DropDown;
 
-const EmotionWrapper = styled.div<{ isOpen: boolean }>`
+const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
   position: relative;
   font-size: 14px;
   width: 100%;
@@ -92,8 +105,16 @@ const EmotionWrapper = styled.div<{ isOpen: boolean }>`
     padding: 8px;
     border-radius: 6px;
     border: 0.5px solid ${({ theme }) => theme.color.gray500};
-    color: ${({ theme }) => theme.color.gray400};
+    border: ${({ isOpen, isCompleted }) => (isOpen || isCompleted ? "1px" : "0.5px")} solid
+      ${({ theme, isOpen, isCompleted }) =>
+        isOpen
+          ? theme.color.primary500
+          : isCompleted
+          ? theme.color.primary700
+          : theme.color.gray500};
+    color: ${({ theme, isCompleted }) => (isCompleted ? theme.color.gray600 : theme.color.gray400)};
     cursor: pointer;
+    box-shadow: ${({ theme, isOpen }) => (isOpen ? theme.shadow.default : "none")};
 
     span {
       width: 100%;
