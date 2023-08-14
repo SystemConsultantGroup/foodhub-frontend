@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Tags from "components/tag/Tags";
 
 export default function Home() {
   return (
@@ -12,11 +11,6 @@ export default function Home() {
       </Head>
       <main>
         <h1>푸드허브</h1>
-        <Tags deletable={true}>
-          <Tags.Item>Tag1</Tags.Item>
-          <Tags.Item>Tag2</Tags.Item>
-          <Tags.Item>Tag3</Tags.Item>
-        </Tags>
       </main>
     </>
   );
