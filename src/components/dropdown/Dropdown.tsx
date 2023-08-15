@@ -15,7 +15,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<TSelectedOption | null>(null);
-  const DropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -38,29 +38,31 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
   const selectedOptionValue = selectedOption ? selectedOption.value : null;
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
     // 자식 옵션 중에서 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
-        const newSelectedOption: TSelectedOption = {
-          children: child.props.children,
-          value: child.props.value,
-        };
-        setSelectedOption(newSelectedOption);
-        return;
-      }
-    });
+    if (selectedOption == null) {
+      React.Children.forEach(children, (child) => {
+        if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
+          const newSelectedOption: TSelectedOption = {
+            children: child.props.children,
+            value: child.props.value,
+          };
+          setSelectedOption(newSelectedOption);
+          return;
+        }
+      });
+    }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [children]);
+  }, [children, selectedOption]);
 
   return (
     <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
@@ -69,7 +71,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
         <span>{selectedOptionChildren || "Select an option"}</span>
         {isOpen ? <DropdownUpIcon /> : <DropdownDownIcon />}
       </div>
-      <div className="options" ref={DropdownRef}>
+      <div className="options" ref={dropdownRef}>
         {React.Children.map(
           children,
           (child) =>
