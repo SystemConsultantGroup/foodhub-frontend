@@ -2,7 +2,7 @@ import React, { HTMLAttributes, useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import DropDownOption, { Props as OptionProps } from "components/dropDown/items/DropDownOption";
 import DropDownIcon from "components/dropDown/items/DropDownIcon";
-import DropUpIcon from "components/dropDown/items/DropUpIcon";
+import DropDownUpIcon from "components/dropDown/items/DropDownUpIcon";
 import { TSelectedOption } from "components/dropDown/types/TSelectedOption";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -69,7 +69,7 @@ const DropDown = ({ children, label, onSelectValueChange }: Props) => {
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
         <span>{selectedText || "Select an option"}</span>
-        {isOpen ? <DropUpIcon /> : <DropDownIcon />}
+        {isOpen ? <DropDownUpIcon /> : <DropDownIcon />}
       </div>
       <div className="options" ref={dropDownRef}>
         {React.Children.map(

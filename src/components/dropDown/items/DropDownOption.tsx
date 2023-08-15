@@ -47,14 +47,12 @@ const EmotionWrapper = styled.option<Props>`
 
   &:hover {
     font-weight: 300;
-    color: ${({ theme }) => theme.color.gray500};
     background-color: ${({ theme }) => theme.color.primary100};
     cursor: pointer;
   }
 
   &.selected {
     font-weight: 400;
-    color: ${({ theme }) => theme.color.gray500};
     background-color: ${({ theme }) => theme.color.primary100};
     cursor: pointer;
   }
