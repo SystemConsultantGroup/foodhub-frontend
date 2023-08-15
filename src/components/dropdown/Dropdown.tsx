@@ -62,7 +62,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [children]);
 
   return (
     <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
