@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import DropDownOption, { Props as OptionProps } from "components/dropDown/items/DropDownOption";
-import DropDownIcon from "components/dropDown/items/DropDownIcon";
-import DropDownUpIcon from "components/dropDown/items/DropDownUpIcon";
+import DropDownOption, { Props as OptionProps } from "components/dropDown/items/testDropDownOption";
+import DropDownIcon from "components/dropDown/items/testDropDownIcon";
+import DropDownUpIcon from "components/dropDown/items/testDropDownUpIcon";
 import { TSelectedOption } from "components/dropDown/types/TSelectedOption";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
