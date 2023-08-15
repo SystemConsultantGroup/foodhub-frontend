@@ -8,11 +8,12 @@ import { TSelectedOption } from "components/dropdown/types/TSelectedOption";
 interface Props extends HTMLAttributes<HTMLDivElement> {
   name?: string;
   label?: string;
+  value?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
 }
 
-const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
+const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<TSelectedOption | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -44,19 +45,22 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
   };
 
   useEffect(() => {
-    // 자식 옵션 중에서 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
+    // value 초기값에 해당하는 옵션 또는 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
     if (selectedOption === null) {
       React.Children.forEach(children, (child) => {
-        if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
-          const newSelectedOption: TSelectedOption = {
-            children: child.props.children,
-            value: child.props.value,
-          };
-          if (onSelectValueChange) {
-            onSelectValueChange(child.props.value);
+        if (React.isValidElement<OptionProps>(child)) {
+          const isDefault = value ? child.props.value === value : child.props.isSelected;
+          if (isDefault) {
+            const newSelectedOption: TSelectedOption = {
+              children: child.props.children,
+              value: child.props.value,
+            };
+            if (onSelectValueChange) {
+              onSelectValueChange(child.props.value);
+            }
+            setSelectedOption(newSelectedOption);
+            return;
           }
-          setSelectedOption(newSelectedOption);
-          return;
         }
       });
     }
@@ -65,7 +69,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [children, selectedOption, onSelectValueChange]);
+  }, [children, selectedOption, onSelectValueChange, value]);
 
   return (
     <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
