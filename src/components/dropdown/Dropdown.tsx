@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import DropdownOption, { Props as OptionProps } from "components/dropdown/items/DropdownOption";
-import DropdownIcon from "components/dropdown/items/DropdownIcon";
+import DropdownDownIcon from "components/dropdown/items/DropdownDownIcon";
 import DropdownUpIcon from "components/dropdown/items/DropdownUpIcon";
 import { TSelectedOption } from "components/dropdown/types/TSelectedOption";
 
@@ -64,7 +64,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
         <span>{selectedOptionChildren || "Select an option"}</span>
-        {isOpen ? <DropdownUpIcon /> : <DropdownIcon />}
+        {isOpen ? <DropdownUpIcon /> : <DropdownDownIcon />}
       </div>
       <div className="options" ref={DropdownRef}>
         {React.Children.map(

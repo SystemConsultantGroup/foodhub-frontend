@@ -12,7 +12,7 @@ const DropDownIcon: FC<Props> = ({ size = 16, style }) => {
       width={size}
       height={size}
       alt="drop down 아이콘"
-      src="/images/icons/drop-down-line.svg"
+      src="/images/icons/dropdown-down-line.svg"
       style={style}
     />
   );
