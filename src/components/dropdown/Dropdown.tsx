@@ -21,9 +21,8 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (value: string, children: React.ReactNode, index: number) => {
+  const handleOptionClick = (value: string, children: React.ReactNode) => {
     const newSelectedOption: TSelectedOption = {
-      index: index,
       children: children,
       value: value,
     };
@@ -35,21 +34,20 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     }
   };
 
-  const selectedChildren = selectedOption ? selectedOption.children : null;
-  const selectedOptionIndex = selectedOption ? selectedOption.index : null;
+  const selectedOptionChildren = selectedOption ? selectedOption.children : null;
+  const selectedOptionValue = selectedOption ? selectedOption.value : null;
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
     // 자식 옵션 중에서 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
     React.Children.forEach(children, (child, index) => {
       if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
         const newSelectedOption: TSelectedOption = {
-          index: index,
           children: child.props.children,
           value: child.props.value,
         };
@@ -59,26 +57,23 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     });
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, [children]);
 
   return (
     <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
-        <span>{selectedChildren || "Select an option"}</span>
+        <span>{selectedOptionChildren || "Select an option"}</span>
         {isOpen ? <DropdownUpIcon /> : <DropdownIcon />}
       </div>
       <div className="options" ref={DropdownRef}>
         {React.Children.map(
           children,
-          (child, index) =>
+          (child) =>
             React.isValidElement<OptionProps>(child) &&
             React.cloneElement(child, {
-              isSelected: selectedOptionIndex === index,
-              onClick: () => handleOptionClick(child.props.value, child.props.children, index),
+              isSelected: selectedOptionValue === child.props.value,
+              onClick: () => handleOptionClick(child.props.value, child.props.children),
             })
         )}
       </div>
