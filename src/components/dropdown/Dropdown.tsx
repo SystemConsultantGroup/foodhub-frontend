@@ -45,13 +45,16 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
 
   useEffect(() => {
     // 자식 옵션 중에서 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
-    if (selectedOption == null) {
+    if (selectedOption === null) {
       React.Children.forEach(children, (child) => {
         if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
           const newSelectedOption: TSelectedOption = {
             children: child.props.children,
             value: child.props.value,
           };
+          if (onSelectValueChange) {
+            onSelectValueChange(child.props.value);
+          }
           setSelectedOption(newSelectedOption);
           return;
         }
@@ -62,7 +65,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [children, selectedOption]);
+  }, [children, selectedOption, onSelectValueChange]);
 
   return (
     <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
