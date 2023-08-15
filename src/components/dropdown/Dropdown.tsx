@@ -57,6 +57,9 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     });
 
     document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [children]);
 
   return (
