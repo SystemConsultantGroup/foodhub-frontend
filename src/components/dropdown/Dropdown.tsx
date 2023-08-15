@@ -23,8 +23,8 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
 
   const handleOptionClick = (value: string, children: React.ReactNode) => {
     const newSelectedOption: TSelectedOption = {
-      children: children,
-      value: value,
+      children,
+      value,
     };
     setSelectedOption(newSelectedOption);
     setIsOpen(false);
@@ -45,7 +45,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
 
   useEffect(() => {
     // 자식 옵션 중에서 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
-    React.Children.forEach(children, (child, index) => {
+    React.Children.forEach(children, (child) => {
       if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
         const newSelectedOption: TSelectedOption = {
           children: child.props.children,
@@ -88,6 +88,9 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
   position: relative;
   font-size: 14px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   div.selected-option {
     display: flex;
@@ -136,6 +139,8 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
 
   span.label {
     font-size: 16px;
+    font-weight: 300;
+    margin-left: 2px;
     color: ${({ theme }) => theme.color.gray600};
   }
 `;
