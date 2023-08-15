@@ -9,7 +9,7 @@ export interface Props {
   onClick?: (value: string) => void;
 }
 
-const DropDownOption: React.FC<Props> = ({
+const DropdownOption: React.FC<Props> = ({
   children,
   value,
   disabled = false,
@@ -65,4 +65,4 @@ const EmotionWrapper = styled.option<Props>`
   }
 `;
 
-export default DropDownOption;
+export default DropdownOption;

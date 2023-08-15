@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import DropDownOption, { Props as OptionProps } from "components/dropDown/items/testDropDownOption";
-import DropDownIcon from "components/dropDown/items/testDropDownIcon";
-import DropDownUpIcon from "components/dropDown/items/testDropDownUpIcon";
+import DropdownOption, { Props as OptionProps } from "components/dropDown/items/DropdownOption";
+import DropdownIcon from "components/dropDown/items/DropdownIcon";
+import DropdownUpIcon from "components/dropDown/items/DropdownUpIcon";
 import { TSelectedOption } from "components/dropDown/types/TSelectedOption";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -12,10 +12,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   onSelectValueChange?: (value: string) => void;
 }
 
-const DropDown = ({ children, label, onSelectValueChange }: Props) => {
+const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<TSelectedOption | null>(null);
-  const dropDownRef = useRef<HTMLDivElement | null>(null);
+  const DropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -40,7 +40,7 @@ const DropDown = ({ children, label, onSelectValueChange }: Props) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropDownRef.current && !dropDownRef.current.contains(event.target as Node)) {
+      if (DropdownRef.current && !DropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -69,9 +69,9 @@ const DropDown = ({ children, label, onSelectValueChange }: Props) => {
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
         <span>{selectedText || "Select an option"}</span>
-        {isOpen ? <DropDownUpIcon /> : <DropDownIcon />}
+        {isOpen ? <DropdownUpIcon /> : <DropdownIcon />}
       </div>
-      <div className="options" ref={dropDownRef}>
+      <div className="options" ref={DropdownRef}>
         {React.Children.map(
           children,
           (child, index) =>
@@ -86,8 +86,8 @@ const DropDown = ({ children, label, onSelectValueChange }: Props) => {
   );
 };
 
-DropDown.Option = DropDownOption;
-export default DropDown;
+Dropdown.Option = DropdownOption;
+export default Dropdown;
 
 const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
   position: relative;
