@@ -21,10 +21,10 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (value: string, text: React.ReactNode, index: number) => {
+  const handleOptionClick = (value: string, children: React.ReactNode, index: number) => {
     const newSelectedOption: TSelectedOption = {
       index: index,
-      text: text,
+      children: children,
       value: value,
     };
     setSelectedOption(newSelectedOption);
@@ -35,7 +35,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     }
   };
 
-  const selectedText = selectedOption ? selectedOption.text : null;
+  const selectedChildren = selectedOption ? selectedOption.children : null;
   const selectedOptionIndex = selectedOption ? selectedOption.index : null;
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
       if (React.isValidElement<OptionProps>(child) && child.props.isSelected) {
         const newSelectedOption: TSelectedOption = {
           index: index,
-          text: child.props.children,
+          children: child.props.children,
           value: child.props.value,
         };
         setSelectedOption(newSelectedOption);
@@ -68,7 +68,7 @@ const Dropdown = ({ children, label, onSelectValueChange }: Props) => {
     <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
-        <span>{selectedText || "Select an option"}</span>
+        <span>{selectedChildren || "Select an option"}</span>
         {isOpen ? <DropdownUpIcon /> : <DropdownIcon />}
       </div>
       <div className="options" ref={DropdownRef}>
