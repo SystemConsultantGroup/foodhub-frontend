@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
 import CheckIcon from "components/inputs/TextInput/CheckIcon";
@@ -7,6 +7,7 @@ import { TConditionCheck } from "./types/TConditionCheck";
 interface Props {
   name?: string;
   label?: string;
+  value?: string;
   placeholder?: string;
   conditionList?: string[];
   conditionCheckList?: TConditionCheck[];
@@ -17,14 +18,15 @@ interface Props {
 const TextInput: React.FC<Props> = ({
   name,
   label,
+  value = "",
   placeholder = "",
   conditionList,
   conditionCheckList,
   multiline = false,
   onTextChange,
 }) => {
-  const [status, setStatus] = useState("default"); // default / success / invalid / focus
-  const [value, setValue] = useState("");
+  const [status, setStatus] = useState(value === "" ? "default" : "success"); // default / success / invalid / focus
+  const [enteredValue, setEnteredValue] = useState(value);
   const [isBlurred, setIsBlurred] = useState(false);
 
   const handleFocus = () => {
@@ -33,22 +35,24 @@ const TextInput: React.FC<Props> = ({
 
   const handleBlur = () => {
     setIsBlurred(true);
-    if (conditionCheckList ? conditionCheckList.every((check) => check.condition(value)) : true) {
+    if (
+      conditionCheckList ? conditionCheckList.every((check) => check.condition(enteredValue)) : true
+    ) {
       setStatus("success");
       if (onTextChange) {
-        onTextChange(value, true); // Notify parent component that input is valid
+        onTextChange(enteredValue, true); // Notify parent component that input is valid
       }
     } else {
       setStatus("invalid");
       if (onTextChange) {
-        onTextChange(value, false); // Notify parent component that input is invalid
+        onTextChange(enteredValue, false); // Notify parent component that input is invalid
       }
     }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue = event.target.value;
-    setValue(newValue);
+    setEnteredValue(newValue);
 
     // 최초 Blur 발생 후, 입력된 텍스트의 조건 확인을 수행하여 isValid 상태 업데이트
     if (isBlurred && newValue != "") {
@@ -62,11 +66,14 @@ const TextInput: React.FC<Props> = ({
     } else {
       setStatus("focus");
     }
-
-    if (onTextChange) {
-      onTextChange(newValue, status != "invalid" && status != "default");
-    }
   };
+
+  useEffect(() => {
+    // 최초 렌더링 시 또는 enteredValue 변경 시에만 실행
+    if (onTextChange) {
+      onTextChange(enteredValue, status !== "invalid" && status !== "default");
+    }
+  }, [enteredValue, status, onTextChange]);
 
   return (
     <EmotionWrapper>
@@ -83,8 +90,8 @@ const TextInput: React.FC<Props> = ({
       <div className="inputContainer">
         {multiline ? (
           <textarea
-            name={name ? name : label}
-            value={value}
+            name={name}
+            value={enteredValue}
             placeholder={placeholder}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -94,7 +101,7 @@ const TextInput: React.FC<Props> = ({
         ) : (
           <input
             name={name ? name : label}
-            value={value}
+            value={enteredValue}
             placeholder={placeholder}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -109,7 +116,7 @@ const TextInput: React.FC<Props> = ({
       {status === "invalid" && (
         <div className="spanList">
           {conditionCheckList
-            ?.filter((check) => !check.condition(value))
+            ?.filter((check) => !check.condition(enteredValue))
             .map((check) => (
               <span key={check.messageOnError} className="error">
                 {check.messageOnError}
