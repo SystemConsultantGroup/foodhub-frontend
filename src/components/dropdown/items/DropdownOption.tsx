@@ -9,7 +9,7 @@ export interface Props {
   onClick?: (value: string) => void;
 }
 
-const DropDownOption: React.FC<Props> = ({
+const DropdownOption: React.FC<Props> = ({
   children,
   value,
   disabled = false,
@@ -47,14 +47,12 @@ const EmotionWrapper = styled.option<Props>`
 
   &:hover {
     font-weight: 300;
-    color: ${({ theme }) => theme.color.gray500};
     background-color: ${({ theme }) => theme.color.primary100};
     cursor: pointer;
   }
 
   &.selected {
     font-weight: 400;
-    color: ${({ theme }) => theme.color.gray500};
     background-color: ${({ theme }) => theme.color.primary100};
     cursor: pointer;
   }
@@ -67,4 +65,4 @@ const EmotionWrapper = styled.option<Props>`
   }
 `;
 
-export default DropDownOption;
+export default DropdownOption;

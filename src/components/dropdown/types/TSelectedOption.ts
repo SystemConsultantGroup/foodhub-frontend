@@ -1,5 +1,4 @@
 export type TSelectedOption = {
-  index: number;
-  text: React.ReactNode;
+  children: React.ReactNode;
   value: string;
 };
