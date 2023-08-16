@@ -170,6 +170,7 @@ const EmotionWrapper = styled.div<Props>`
 
   textarea {
     ${({ theme }) => commonStyles(theme)};
+    position: relative;
     resize: none;
   }
 `;
