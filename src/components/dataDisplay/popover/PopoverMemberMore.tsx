@@ -29,10 +29,10 @@ const PopoverMemberMore = ({}: Props) => {
 export default PopoverMemberMore;
 
 const EmotionWrapper = styled.div`
-  /* filter: drop-shadow(0px 0px 4px ${({ theme }) => theme.color.primary500}); */
+  filter: drop-shadow(0px 0px 4px ${({ theme }) => theme.color.primary500});
 
-  border: 1px solid ${({ theme }) => theme.color.primary500};
-  box-shadow: ${({ theme }) => theme.shadow.default};
+  /* border: 1px solid ${({ theme }) => theme.color.primary500}; */
+  /* box-shadow: ${({ theme }) => theme.shadow.default}; */
   position: absolute;
   top: 40px;
   right: 0px;
