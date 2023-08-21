@@ -33,7 +33,7 @@ const globalStyles = (theme: Theme) => css`
   }
 
   #__next {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
   }
 
   button,

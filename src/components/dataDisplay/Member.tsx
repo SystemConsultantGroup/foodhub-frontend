@@ -2,6 +2,7 @@ import Image from "next/image";
 import styled from "@emotion/styled";
 import { textEllipsis } from "styles/ellipsis/textEllipsis";
 import IconMoreDots from "components/icons/IconMoreDots";
+import { useState } from "react";
 
 interface Props {
   imageSrc?: string;
@@ -10,9 +11,18 @@ interface Props {
 }
 
 const Member = ({ imageSrc, memberName, memberDescription }: Props) => {
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
   const src = imageSrc ?? "/images/defaults/default-member-profile-image.jpeg";
   const alt = `${memberName} 멤버 프로필 사진`;
 
+  const handleTogglePropover = () => {
+    setIsPopoverOpen((prev) => !prev);
+  };
+
+  const handlePopoverClose = () => {
+    setIsPopoverOpen(false);
+  };
   return (
     <EmotionWrapper>
       <Image className="member-profile-image" src={src} width={40} height={40} alt={alt} />
@@ -20,7 +30,11 @@ const Member = ({ imageSrc, memberName, memberDescription }: Props) => {
         <p className="member-name">{memberName}</p>
         <p className="member-description">{memberDescription}</p>
       </div>
-      <IconMoreDots />
+      <IconMoreDots
+        onClick={handleTogglePropover}
+        open={isPopoverOpen}
+        onClose={handlePopoverClose}
+      />
     </EmotionWrapper>
   );
 };
