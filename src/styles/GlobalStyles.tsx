@@ -33,7 +33,7 @@ const globalStyles = (theme: Theme) => css`
   }
 
   #__next {
-    /* overflow-x: hidden; */
+    /* overflow-x: hidden; */ // 모달 스크롤바 문제 발생시 주석 해제 바람
   }
 
   button,
