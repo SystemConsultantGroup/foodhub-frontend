@@ -1,17 +1,23 @@
 import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
 import { useRouter } from "next/router";
+import ProfileOrganization from "feature/organization/organizationMain/views/ViewOrganizationProfile";
+import Divider from "components/divider/Divider";
+import ManagementButtons from "feature/organization/organizationMain/components/ManagementButtons";
 
 const PageOrganizationDetail = () => {
   const { query } = useRouter();
   const organizationId = query.organizationId ?? 0;
+  /**
+   * TODO: 서버에서 해당 단체에 대한 유저의 권한 받아오기
+   */
+  const userAuth = 0; // 해당 단체에 대한 유저의 권한 (0: 관리자, 1: 멤버, 2: 방문객)
+  console.log(userAuth); // 커밋용 임시 코드
 
   return (
     <EmotionWrapper>
-      <PageMarker
-        title={`${organizationId} 번 단체 상세 페이지`}
-        description="단체 관리 및 맛집 목록 등 단체에 대한 정보를 볼 수 있는 페이지 "
-      />
+      <ProfileOrganization organizationId={organizationId}></ProfileOrganization>
+      <ManagementButtons organizationId={organizationId}></ManagementButtons>
+      <Divider />
     </EmotionWrapper>
   );
 };
