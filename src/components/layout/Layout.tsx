@@ -1,20 +1,23 @@
 import styled from "@emotion/styled";
-import Header from "components/header/Header";
+import Hero from "components/header/Hero";
 import HeaderMobile from "components/header/HeaderMobile";
 import Navbar from "components/navbar/Navbar";
 import { LAYOUT_MARGIN } from "constant/layoutMargin";
 import { NAVBAR_HEIGHT } from "constant/navbarHeight";
 
 import { ReactNode } from "react";
+import HeaderDesktop from "components/header/HeaderDesktop";
 
 interface Props {
   children: ReactNode;
+  showHero?: boolean;
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, showHero = false }: Props) => {
   return (
     <EmotionWrapper>
-      <Header />
+      <HeaderDesktop />
+      {showHero && <Hero />}
       <HeaderMobile />
       <main>{children}</main>
       <Navbar />
@@ -35,5 +38,6 @@ const EmotionWrapper = styled.div`
     padding-top: 48px;
     padding-bottom: ${NAVBAR_HEIGHT}px;
     max-width: 768px;
+    width: 100%;
   }
 `;

@@ -3,7 +3,7 @@ import { LAYOUT_MARGIN } from "constant/layoutMargin";
 
 interface Props {}
 
-const Header = ({}: Props) => {
+const Hero = ({}: Props) => {
   return (
     <EmotionWrapper>
       <div className="content-wrapper">
@@ -14,7 +14,7 @@ const Header = ({}: Props) => {
   );
 };
 
-export default Header;
+export default Hero;
 
 const EmotionWrapper = styled.div`
   ${({ theme }) => theme.device.mobile} {

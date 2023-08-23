@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import DropdownOption, { Props as OptionProps } from "components/dropdown/items/DropdownOption";
 import DropdownDownIcon from "components/dropdown/items/DropdownDownIcon";
 import DropdownUpIcon from "components/dropdown/items/DropdownUpIcon";
-import { TSelectedOption } from "components/dropdown/types/TSelectedOption";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   name?: string;
@@ -15,7 +14,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<TSelectedOption | null>(null);
+  const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
@@ -23,20 +22,13 @@ const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
   };
 
   const handleOptionClick = (value: string, children: React.ReactNode) => {
-    const newSelectedOption: TSelectedOption = {
-      children,
-      value,
-    };
-    setSelectedOption(newSelectedOption);
+    setSelectedOptionValue(value);
     setIsOpen(false);
 
     if (onSelectValueChange) {
       onSelectValueChange(value);
     }
   };
-
-  const selectedOptionChildren = selectedOption ? selectedOption.children : null;
-  const selectedOptionValue = selectedOption ? selectedOption.value : null;
 
   const handleClickOutside = (event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -46,19 +38,15 @@ const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
 
   useEffect(() => {
     // value 초기값에 해당하는 옵션 또는 isSelected 값이 true인 옵션을 찾아서 selectedOption 초기화
-    if (selectedOption === null) {
+    if (selectedOptionValue === null) {
       React.Children.forEach(children, (child) => {
         if (React.isValidElement<OptionProps>(child)) {
           const isDefault = value ? child.props.value === value : child.props.isSelected;
           if (isDefault) {
-            const newSelectedOption: TSelectedOption = {
-              children: child.props.children,
-              value: child.props.value,
-            };
+            setSelectedOptionValue(child.props.value);
             if (onSelectValueChange) {
               onSelectValueChange(child.props.value);
             }
-            setSelectedOption(newSelectedOption);
             return;
           }
         }
@@ -69,13 +57,29 @@ const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [children, selectedOption, onSelectValueChange, value]);
+  }, [children, selectedOptionValue, onSelectValueChange, value]);
 
   return (
-    <EmotionWrapper isOpen={isOpen} isCompleted={selectedOption ? true : false}>
+    <EmotionWrapper isOpen={isOpen} isCompleted={selectedOptionValue ? true : false}>
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
-        <span>{selectedOptionChildren || "Select an option"}</span>
+        {selectedOptionValue ? (
+          // 특정 option이 선택된 경우
+          <span>
+            {React.Children.map(children, (child) => {
+              if (
+                React.isValidElement<OptionProps>(child) &&
+                child.props.value === selectedOptionValue
+              ) {
+                return child.props.children;
+              }
+              return null;
+            })}
+          </span>
+        ) : (
+          // 선택되지 않은 경우
+          <span>{"Select an option"}</span>
+        )}
         {isOpen ? <DropdownUpIcon /> : <DropdownDownIcon />}
       </div>
       <div className="options" ref={dropdownRef}>

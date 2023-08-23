@@ -1,7 +1,7 @@
-import PageMarker from "components/pageMarker/PageMarker";
 import Head from "next/head";
+import PageMarker from "components/pageMarker/PageMarker";
 
-export default function Home() {
+function Home() {
   return (
     <>
       <Head>
@@ -17,3 +17,7 @@ export default function Home() {
     </>
   );
 }
+
+Home.showHero = true;
+
+export default Home;

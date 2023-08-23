@@ -2,21 +2,21 @@ import styled from "@emotion/styled";
 import { HTMLAttributes } from "react";
 import { Theme } from "@emotion/react";
 
-export interface TagItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   textColor?: keyof Theme["color"];
   backColor?: keyof Theme["color"];
   outLined?: boolean;
   icon?: React.ReactNode;
 }
 
-const TagItem: React.FC<TagItemProps> = ({
+const TagItem: React.FC<Props> = ({
   children,
   icon,
   textColor = "white",
   backColor = "primary600",
   outLined = false,
   ...props
-}: TagItemProps) => {
+}: Props) => {
   return (
     <EmotionWrapper {...props} textColor={textColor} backColor={backColor} outLined={outLined}>
       {icon}
@@ -27,12 +27,14 @@ const TagItem: React.FC<TagItemProps> = ({
 
 export default TagItem;
 
-const EmotionWrapper = styled.div<TagItemProps>`
+const EmotionWrapper = styled.div<Props>`
   gap: 7px;
   padding: 2px 7px;
   border-radius: 6px;
   height: auto;
   line-height: 1.5;
+
+  margin-right: 5px;
 
   display: inline-block;
   white-space: nowrap;
