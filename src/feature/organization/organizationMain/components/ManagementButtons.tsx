@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import router from "next/router";
 import Button from "components/button/Button";
 import {
   ManagementMemberIcon,
@@ -11,10 +12,14 @@ interface Props {
 }
 
 const ManagementButtons: React.FC<Props> = ({ organizationId }) => {
+  const handleInfoClick = () => {
+    router.push(`/organizations/${organizationId}/management`);
+  };
+
   return (
     <EmotionWrapper>
       <div className="row-1">
-        <Button variant="text" icon={<ManagementInfoIcon />}>
+        <Button variant="text" icon={<ManagementInfoIcon />} onClick={handleInfoClick}>
           정보 수정
         </Button>
       </div>
