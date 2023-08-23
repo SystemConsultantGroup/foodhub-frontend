@@ -137,6 +137,7 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
 
   div.options {
     position: absolute;
+    z-index: 1;
     top: 120%;
     left: 0;
     width: 100%;
