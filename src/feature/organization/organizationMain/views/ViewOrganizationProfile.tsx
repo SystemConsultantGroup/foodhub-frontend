@@ -45,7 +45,7 @@ const EmotionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 
   .profileImage {
     border-radius: 50%;

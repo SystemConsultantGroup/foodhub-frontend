@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import ProfileOrganization from "feature/organization/organizationMain/views/ViewOrganizationProfile";
+import OrganizationProfile from "feature/organization/organizationMain/views/ViewOrganizationProfile";
+import OrganizationButtons from "feature/organization/organizationMain/views/ViewOrganizationButtons";
+import OrganizationRestaurants from "feature/organization/organizationMain/views/ViewOrganizationRestaurants";
 import Divider from "components/divider/Divider";
-import ManagementButtons from "feature/organization/organizationMain/components/ManagementButtons";
 
 const PageOrganizationDetail = () => {
   const { query } = useRouter();
@@ -15,9 +16,10 @@ const PageOrganizationDetail = () => {
 
   return (
     <EmotionWrapper>
-      <ProfileOrganization organizationId={organizationId}></ProfileOrganization>
-      <ManagementButtons organizationId={organizationId}></ManagementButtons>
+      <OrganizationProfile organizationId={organizationId} />
+      <OrganizationButtons organizationId={organizationId} userAuth={userAuth} />
       <Divider />
+      <OrganizationRestaurants organizationId={organizationId} />
     </EmotionWrapper>
   );
 };
