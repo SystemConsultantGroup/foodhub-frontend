@@ -14,7 +14,7 @@ const ViewOrganizationProfile: React.FC<Props> = ({ organizationId }) => {
   const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
   const description = "성균관대학교 최고의 소프트웨어 개발 단체"; // 서버에서 받아온 단체 설명
   const area = "경기도 수원시 장안구 천천동"; // 서버에서 받아온 단체 활동 지역
-  const imageSrc = organizationImageSrc ?? "/images/profile-image-default-organization.svg";
+  const imageSrc = organizationImageSrc ?? "/images/profile-image-default-org.png";
 
   return (
     <EmotionWrapper>
@@ -23,6 +23,7 @@ const ViewOrganizationProfile: React.FC<Props> = ({ organizationId }) => {
         className="profileImage"
         width={90}
         height={90}
+        priority
         alt="단체 프로필 이미지"
       />
       <div className="profileInfo">
