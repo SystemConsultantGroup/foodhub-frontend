@@ -1,17 +1,18 @@
 import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
 import { useRouter } from "next/router";
+import OrganizationManagement from "feature/organization/organizationManagement/views/ViewOrganizationManagement";
 
 const PageOrganizationDetail = () => {
   const { query } = useRouter();
   const organizationId = query.organizationId ?? 0;
+  /**
+   * TODO: 서버에서 해당 단체에 대한 정보 받아오기
+   */
+  console.log(organizationId); // 커밋용 임시 코드
 
   return (
     <EmotionWrapper>
-      <PageMarker
-        title={`${organizationId} 번 단체 상세 페이지`}
-        description="단체 관리 및 맛집 목록 등 단체에 대한 정보를 볼 수 있는 페이지 "
-      />
+      <OrganizationManagement organizationId={organizationId}></OrganizationManagement>
     </EmotionWrapper>
   );
 };
