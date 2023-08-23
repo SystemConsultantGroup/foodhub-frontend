@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import { FilterIcon } from "feature/organization/organizationMain/components/ButtonIcons";
+import TempRestaurant from "feature/organization/organizationMain/components/TempRestaurant";
 
 interface Props {
   organizationId: string | number | string[];
@@ -18,6 +19,16 @@ const ViewOrganizationRestaurants: React.FC<Props> = ({ organizationId }) => {
           </Button>
         </div>
       </div>
+      <div className="restaurants">
+        <TempRestaurant />
+        <TempRestaurant />
+        <TempRestaurant />
+        <TempRestaurant />
+        <TempRestaurant />
+        <TempRestaurant />
+        <TempRestaurant />
+        <TempRestaurant />
+      </div>
     </EmotionWrapper>
   );
 };
@@ -34,6 +45,7 @@ const EmotionWrapper = styled.div`
   div.head {
     display: flex;
     gap: 10px;
+    margin-bottom: 10px;
 
     justify-content: space-between;
     align-items: center;
@@ -48,5 +60,11 @@ const EmotionWrapper = styled.div`
       display: flex;
       gap: 10px;
     }
+  }
+
+  div.restaurants {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 `;
