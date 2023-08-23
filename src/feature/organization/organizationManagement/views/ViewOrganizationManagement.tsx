@@ -47,6 +47,7 @@ const ViewOrganizationManagement: React.FC<Props> = ({ organizationId }) => {
       <TextInput
         name="description"
         label="단체 한줄 소개"
+        multiline={true}
         value={description}
         placeholder="단체 한줄 소개"
         conditionList={["50자 이하로 입력하세요."]}
