@@ -5,7 +5,7 @@ const primaryStyle = (theme: Theme) => {
   return css`
     background-color: ${theme.color.primary600};
     color: ${theme.color.white};
-    border: none;
+    border: 1px solid ${theme.color.primary600};
     box-shadow: none;
 
     &:hover {
@@ -75,7 +75,7 @@ export const getButtonStyles = (
     case "text":
       return css`
         background-color: ${theme.color.white};
-        border: none;
+        border: 1px solid transparent;
         box-shadow: none;
         color: ${theme.color.gray900};
 
