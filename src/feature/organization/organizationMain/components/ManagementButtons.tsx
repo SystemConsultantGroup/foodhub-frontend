@@ -12,22 +12,30 @@ interface Props {
 }
 
 const ManagementButtons: React.FC<Props> = ({ organizationId }) => {
-  const handleInfoClick = () => {
+  const handleManagementClick = () => {
     router.push(`/organizations/${organizationId}/management`);
+  };
+
+  const handleRestaurantClick = () => {
+    router.push(`/organizations/${organizationId}/restaurant`);
+  };
+
+  const handleMemberClick = () => {
+    router.push(`/organizations/${organizationId}/member`);
   };
 
   return (
     <EmotionWrapper>
       <div className="row-1">
-        <Button variant="text" icon={<ManagementInfoIcon />} onClick={handleInfoClick}>
+        <Button variant="text" icon={<ManagementInfoIcon />} onClick={handleManagementClick}>
           정보 수정
         </Button>
       </div>
       <div className="row-2">
-        <Button variant="text" icon={<ManagementRestaurantIcon />}>
+        <Button variant="text" icon={<ManagementRestaurantIcon />} onClick={handleRestaurantClick}>
           맛집 관리
         </Button>
-        <Button variant="text" icon={<ManagementMemberIcon />}>
+        <Button variant="text" icon={<ManagementMemberIcon />} onClick={handleMemberClick}>
           멤버 관리
         </Button>
       </div>
