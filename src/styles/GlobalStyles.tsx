@@ -1,9 +1,11 @@
 import { css, Global, Theme, useTheme } from "@emotion/react";
 import emotionReset from "emotion-reset";
 import { fontFace } from "styles/fontFace";
+import { resetButtonStyle } from "styles/reset/resetButtonStyle";
 
 const globalStyles = (theme: Theme) => css`
   ${emotionReset}
+  ${resetButtonStyle}
   ${fontFace}
 
   html, body {
@@ -31,7 +33,7 @@ const globalStyles = (theme: Theme) => css`
   }
 
   #__next {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */ // 모달 스크롤바 문제 발생시 주석 해제 바람
   }
 
   button,
