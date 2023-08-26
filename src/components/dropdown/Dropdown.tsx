@@ -11,29 +11,36 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   placeHolder?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
+  disabled?: boolean;
 }
 
 const Dropdown = ({
   children,
   label,
   value,
+  name,
   placeHolder = "Select an option",
   onSelectValueChange,
+  disabled = false,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    if (!disabled) {
+      setIsOpen(!isOpen);
+    }
   };
 
   const handleOptionClick = (value: string, children: React.ReactNode) => {
-    setSelectedOptionValue(value);
-    setIsOpen(false);
+    if (!disabled) {
+      setSelectedOptionValue(value);
+      setIsOpen(false);
 
-    if (onSelectValueChange) {
-      onSelectValueChange(value);
+      if (onSelectValueChange) {
+        onSelectValueChange(value);
+      }
     }
   };
 
@@ -144,6 +151,7 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
 
   div.options {
     position: absolute;
+    z-index: 100;
     top: 120%;
     left: 0;
     width: 100%;
