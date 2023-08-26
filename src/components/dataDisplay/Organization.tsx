@@ -4,11 +4,12 @@ import { textEllipsis } from "styles/ellipsis/textEllipsis";
 
 interface Props {
   imageSrc?: string;
+  orgId: number;
   orgName: string;
   orgDescription: string;
 }
 
-const Organization = ({ imageSrc, orgName, orgDescription }: Props) => {
+const Organization = ({ imageSrc, orgId, orgName, orgDescription }: Props) => {
   const src = imageSrc ?? "/images/defaults/default-organization-profile-image.png";
   const alt = `${orgName} 단체 로고`;
 

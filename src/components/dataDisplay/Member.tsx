@@ -6,11 +6,12 @@ import { useState } from "react";
 
 interface Props {
   imageSrc?: string;
+  memberId: number;
   memberName: string;
   memberDescription: string;
 }
 
-const Member = ({ imageSrc, memberName, memberDescription }: Props) => {
+const Member = ({ imageSrc, memberId, memberName, memberDescription }: Props) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const src = imageSrc ?? "/images/defaults/default-member-profile-image.jpeg";
