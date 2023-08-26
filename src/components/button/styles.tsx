@@ -24,7 +24,30 @@ const primaryStyle = (theme: Theme) => {
   `;
 };
 
-export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
+export const getButtonStyles = (
+  theme: Theme,
+  variant: Props["variant"],
+  danger: Props["danger"]
+) => {
+  if (danger) {
+    return css`
+      border: 1px solid ${theme.color.danger500};
+      background-color: ${theme.color.danger500};
+      box-shadow: none;
+      color: ${theme.color.white};
+
+      &:hover {
+        background-color: ${theme.color.danger600};
+      }
+      &:focus {
+        background-color: ${theme.color.danger600};
+      }
+      &.active {
+        background-color: ${theme.color.danger700};
+      }
+    `;
+  }
+
   switch (variant) {
     case "secondary":
       return css`
