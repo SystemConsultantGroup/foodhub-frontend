@@ -2,15 +2,25 @@ import Image from "next/image";
 import styled from "@emotion/styled";
 import { textEllipsis } from "styles/ellipsis/textEllipsis";
 import DefaultRestaurantIcon from "components/dataDisplay/defaults/DefaultRestaurantIcon";
+import IconEditFilled from "components/icons/IconEditFilled";
+import IconTrashFilled from "components/icons/IconTrashFilled";
+import Link from "next/link";
 
 interface Props {
   imageSrc?: string;
+  restaurantId: number;
   restaurantName: string;
   restaurantLocation: string;
 }
 
-const Restaurant = ({ imageSrc, restaurantName, restaurantLocation }: Props) => {
+const Restaurant = ({ imageSrc, restaurantId, restaurantName, restaurantLocation }: Props) => {
   const alt = `${restaurantName} 맛집 대표 이미지`;
+  const editLink = `/restaurants/${restaurantId}/edit`; // TODO: 링크 수정
+  const hasEditOrDeleteAuth = true; // TODO: 권한 확인
+
+  const handleClickDeleteRestaurant = () => {
+    alert("맛집 삭제");
+  };
 
   return (
     <EmotionWrapper>
@@ -29,6 +39,16 @@ const Restaurant = ({ imageSrc, restaurantName, restaurantLocation }: Props) => 
         <p className="restaurant-name">{restaurantName}</p>
         <p className="restaurant-description">{restaurantLocation}</p>
       </div>
+      {hasEditOrDeleteAuth && (
+        <div className="restaurant-action-button-container">
+          <Link href={editLink}>
+            <IconEditFilled />
+          </Link>
+          <button onClick={handleClickDeleteRestaurant}>
+            <IconTrashFilled />
+          </button>
+        </div>
+      )}
     </EmotionWrapper>
   );
 };
@@ -74,5 +94,13 @@ const EmotionWrapper = styled.div`
       color: ${({ theme }) => theme.color.primary100};
       ${textEllipsis}
     }
+  }
+
+  .restaurant-action-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    column-gap: 10px;
   }
 `;
