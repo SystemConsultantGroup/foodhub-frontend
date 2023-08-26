@@ -8,11 +8,18 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   name?: string;
   label?: string;
   value?: string;
+  placeHolder?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
 }
 
-const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
+const Dropdown = ({
+  children,
+  label,
+  value,
+  placeHolder = "Select an option",
+  onSelectValueChange,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -78,7 +85,7 @@ const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
           </span>
         ) : (
           // 선택되지 않은 경우
-          <span>{"Select an option"}</span>
+          <span>{placeHolder}</span>
         )}
         {isOpen ? <DropdownUpIcon /> : <DropdownDownIcon />}
       </div>
@@ -151,6 +158,9 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
     transition:
       opacity 0.3s ease-in-out,
       height 0.3s ease-in-out;
+
+    max-height: 15vh;
+    overflow: auto;
   }
 
   span.label {
