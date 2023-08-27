@@ -1,3 +1,4 @@
+type TGender = "M" | "F" | "U";
 type TFormValueItem = {
   value: string;
   isValid: boolean;
@@ -8,7 +9,7 @@ export type TUser = {
   nickname: string;
   introduction: string;
   birthYear: string;
-  gender: string;
+  gender: TGender;
 };
 
 export type TMypageFormValues = {
