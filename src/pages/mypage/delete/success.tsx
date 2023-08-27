@@ -1,18 +1,11 @@
-import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
+import ViewMypageDeleteSuccess from "feature/mypage/mypage.delete/views/ViewMypageDeleteSuccess";
 import { GetServerSideProps } from "next";
 
 const PageMyPageDeleteSuccess = () => {
-  return (
-    <EmotionWrapper>
-      <PageMarker title="계정삭제 성공 완료" description="계정 삭제 성공 페이지" />
-    </EmotionWrapper>
-  );
+  return <ViewMypageDeleteSuccess />;
 };
 
 export default PageMyPageDeleteSuccess;
-
-const EmotionWrapper = styled.div``;
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
   /**
