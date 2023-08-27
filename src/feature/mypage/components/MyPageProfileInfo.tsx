@@ -7,7 +7,7 @@ const MyPageProfileInfo = ({}: Props) => {
   return (
     <EmotionWrapper>
       <div className="profile-section">
-        <ProfileImage defaultPhotoId={1} size={70} />
+        <ProfileImage size={70} />
         <div>
           <p className="user-name">홍길동</p>
           <p className="user-description">이 시대 최고의 미식 탐험가</p>
