@@ -1,11 +1,19 @@
 import styled from "@emotion/styled";
+import NavbarMenuItem from "components/navbar/components/NavbarMenuItem";
+import { NAVBAR_MENU_LIST } from "components/navbar/constants/navbarMenuList";
 import { LAYOUT_MARGIN } from "constant/layoutMargin";
 import { NAVBAR_HEIGHT } from "constant/navbarHeight";
 
-interface Props {}
+const Navbar = () => {
+  return (
+    <EmotionWrapper>
+      {NAVBAR_MENU_LIST.map((navbarMenu) => {
+        const { label, icon, path } = navbarMenu;
 
-const Navbar = ({}: Props) => {
-  return <EmotionWrapper>Navbar</EmotionWrapper>;
+        return <NavbarMenuItem key={label} label={label} icon={icon} path={path} />;
+      })}
+    </EmotionWrapper>
+  );
 };
 
 export default Navbar;
