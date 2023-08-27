@@ -4,6 +4,7 @@ import { PORTAL_ID } from "constant/portal";
 import { hexToRgba } from "utils/color/hexToRgba";
 import usePreventScroll from "hooks/usePreventScroll";
 import { HTMLAttributes, ReactNode, useEffect, useState } from "react";
+import Button from "components/button/Button";
 
 function ScrollPreventer() {
   usePreventScroll();
@@ -16,10 +17,30 @@ interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   open: boolean;
   onClose: () => void;
   withCloseButton?: boolean;
-  actionButtons: ReactNode;
+  actionButtons?: ReactNode; // 주어지면 기본 버튼은 없어짐
+
+  confirmText?: string;
+  onConfirm?: () => void;
+
+  cancelText?: string;
+  onCancel?: () => void;
+
+  danger?: boolean; // confirm 버튼을 빨간색으로 표시
 }
 
-function Modal({ open, onClose, title, children, content, actionButtons }: Props) {
+function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  content,
+  actionButtons,
+  confirmText = "확인",
+  onConfirm = onClose,
+  cancelText = "취소",
+  onCancel = () => {},
+  danger = false,
+}: Props) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -43,7 +64,29 @@ function Modal({ open, onClose, title, children, content, actionButtons }: Props
                 <p className="content">{content}</p>
               </div>
               {children}
-              <div className="action-button-container">{actionButtons}</div>
+              <div className="action-button-container">
+                {actionButtons ?? (
+                  <>
+                    <Button
+                      variant="secondary"
+                      onClick={() => {
+                        onCancel();
+                        onClose();
+                      }}
+                    >
+                      {cancelText}
+                    </Button>
+                    <Button
+                      danger={danger}
+                      onClick={() => {
+                        onConfirm();
+                      }}
+                    >
+                      {confirmText}
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </>
@@ -105,6 +148,7 @@ const EmotionWrapper = styled.div`
         margin-top: 32px;
         display: flex;
         align-self: flex-end;
+        column-gap: 8px;
       }
     }
   }
