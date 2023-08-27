@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import MyPageSectionTitle from "feature/mypage/mypage.main/components/typography/MyPageSectionTitle";
 
-interface Props {}
-
-const MyPageOrganizationInfo = ({}: Props) => {
+const MyPageOrganizationInfo = () => {
   return (
     <EmotionWrapper>
       <MyPageSectionTitle>내가 속한 단체 정보</MyPageSectionTitle>

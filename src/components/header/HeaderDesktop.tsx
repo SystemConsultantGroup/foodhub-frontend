@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import ProfileImage from "components/profileImage/ProfileImage";
 
-interface Props {}
-
-const HeaderDesktop = ({}: Props) => {
+const HeaderDesktop = () => {
   return (
     <EmotionWrapper>
       <div className="nav-content">

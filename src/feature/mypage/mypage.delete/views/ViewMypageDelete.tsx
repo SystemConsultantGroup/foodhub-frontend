@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import MypageDeleteAlert from "feature/mypage/mypage.delete/components/MypageDeleteAlert";
 import MypageDeleteConfirmForm from "feature/mypage/mypage.delete/components/MypageDeleteConfirmForm";
 
-interface Props {}
-
-const ViewMypageDelete = ({}: Props) => {
+const ViewMypageDelete = () => {
   return (
     <EmotionWrapper>
       <MypageDeleteAlert />

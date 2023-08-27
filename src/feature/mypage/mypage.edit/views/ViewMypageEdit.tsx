@@ -10,9 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 
 const { Option } = Dropdown;
 
-interface Props {}
-
-const ViewMypageEdit = ({}: Props) => {
+const ViewMypageEdit = () => {
   const [formValues, setFormValues] = useState<TMypageFormValues>({
     nickname: { value: "", isValid: false },
     introduction: { value: "", isValid: false },

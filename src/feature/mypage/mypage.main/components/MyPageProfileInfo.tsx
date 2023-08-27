@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import ProfileImage from "components/profileImage/ProfileImage";
 
-interface Props {}
-
-const MyPageProfileInfo = ({}: Props) => {
+const MyPageProfileInfo = () => {
   return (
     <EmotionWrapper>
       <div className="profile-section">
