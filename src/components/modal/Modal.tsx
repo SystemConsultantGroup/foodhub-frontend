@@ -36,7 +36,7 @@ function Modal({
   content,
   actionButtons,
   confirmText = "확인",
-  onConfirm = () => {},
+  onConfirm = onClose,
   cancelText = "취소",
   onCancel = () => {},
   danger = false,
@@ -67,12 +67,19 @@ function Modal({
               <div className="action-button-container">
                 {actionButtons ?? (
                   <>
-                    <Button variant="secondary">{cancelText}</Button>
+                    <Button
+                      variant="secondary"
+                      onClick={() => {
+                        onCancel();
+                        onClose();
+                      }}
+                    >
+                      {cancelText}
+                    </Button>
                     <Button
                       danger={danger}
                       onClick={() => {
                         onConfirm();
-                        onClose();
                       }}
                     >
                       {confirmText}
