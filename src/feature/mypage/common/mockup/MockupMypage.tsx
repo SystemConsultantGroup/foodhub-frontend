@@ -1,4 +1,4 @@
-import { TUser } from "feature/mypage/types/TMypageFormValues";
+import { TUser } from "feature/mypage/mypage.edit/types/TMypageFormValues";
 
 export const MOCKUP_MYPAGE_INITIAL_VALUES: TUser = {
   nickname: "홍길동",

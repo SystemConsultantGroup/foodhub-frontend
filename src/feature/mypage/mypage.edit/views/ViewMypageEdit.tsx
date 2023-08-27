@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import Dropdown from "components/dropdown/Dropdown";
 import TextInput from "components/inputs/TextInput/TextInput";
-import { GENDER_DROPDOWN_VALUE_LIST } from "feature/mypage/constant/GenderDropdownValueList";
-import { MOCKUP_MYPAGE_INITIAL_VALUES } from "feature/mypage/mockup/MockupMypage";
-import { TMypageFormValues } from "feature/mypage/types/TMypageFormValues";
+import { GENDER_DROPDOWN_VALUE_LIST } from "feature/mypage/mypage.edit/constants/GenderDropdownValueList";
+import { MOCKUP_MYPAGE_INITIAL_VALUES } from "feature/mypage/common/mockup/MockupMypage";
+import { TMypageFormValues } from "feature/mypage/mypage.edit/types/TMypageFormValues";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import ViewMyPageEdit from "feature/mypage/views/ViewMypageEdit";
+import ViewMyPageEdit from "feature/mypage/mypage.edit/views/ViewMypageEdit";
 
 const PageMyPageEdit = () => {
   return <ViewMyPageEdit />;

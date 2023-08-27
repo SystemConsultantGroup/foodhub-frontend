@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import MyPageActionButtons from "feature/mypage/components/MyPageActionButtons";
-import MyPageBasicInfo from "feature/mypage/components/MyPageBasicInfo";
-import MyPageOrganizationInfo from "feature/mypage/components/MyPageOrganizationInfo";
-import MyPageProfileInfo from "feature/mypage/components/MyPageProfileInfo";
+import MyPageActionButtons from "feature/mypage/mypage.main/components/MyPageActionButtons";
+import MyPageBasicInfo from "feature/mypage/mypage.main/components/MyPageBasicInfo";
+import MyPageOrganizationInfo from "feature/mypage/mypage.main/components/MyPageOrganizationInfo";
+import MyPageProfileInfo from "feature/mypage/mypage.main/components/MyPageProfileInfo";
 
 interface Props {}
 

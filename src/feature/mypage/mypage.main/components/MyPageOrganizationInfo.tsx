@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import MyPageSectionTitle from "feature/mypage/components/typography/MyPageSectionTitle";
+import MyPageSectionTitle from "feature/mypage/mypage.main/components/typography/MyPageSectionTitle";
 
 interface Props {}
 

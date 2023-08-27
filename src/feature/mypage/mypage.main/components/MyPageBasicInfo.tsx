@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import MyPageInfoItem from "feature/mypage/components/typography/MyPageInfoItem";
-import MyPageSectionTitle from "feature/mypage/components/typography/MyPageSectionTitle";
+import MyPageInfoItem from "feature/mypage/mypage.main/components/typography/MyPageInfoItem";
+import MyPageSectionTitle from "feature/mypage/mypage.main/components/typography/MyPageSectionTitle";
 
 interface Props {}
 
