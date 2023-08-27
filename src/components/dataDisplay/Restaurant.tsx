@@ -5,6 +5,7 @@ import DefaultRestaurantIcon from "components/dataDisplay/defaults/DefaultRestau
 import IconEditFilled from "components/icons/IconEditFilled";
 import IconTrashFilled from "components/icons/IconTrashFilled";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface Props {
   imageSrc?: string;
@@ -14,16 +15,22 @@ interface Props {
 }
 
 const Restaurant = ({ imageSrc, restaurantId, restaurantName, restaurantLocation }: Props) => {
+  const { push } = useRouter();
   const alt = `${restaurantName} 맛집 대표 이미지`;
   const editLink = `/restaurants/${restaurantId}/edit`; // TODO: 링크 수정
   const hasEditOrDeleteAuth = true; // TODO: 권한 확인
+  const restaurantLink = `/restaurants/${restaurantId}`;
+
+  const handleGotoEditPage = () => {
+    push(editLink);
+  };
 
   const handleClickDeleteRestaurant = () => {
     alert("맛집 삭제");
   };
 
   return (
-    <EmotionWrapper>
+    <EmotionWrapper href={restaurantLink}>
       {imageSrc ? (
         <Image
           className="restaurant-profile-image"
@@ -41,9 +48,9 @@ const Restaurant = ({ imageSrc, restaurantId, restaurantName, restaurantLocation
       </div>
       {hasEditOrDeleteAuth && (
         <div className="restaurant-action-button-container">
-          <Link href={editLink}>
+          <button onClick={handleGotoEditPage}>
             <IconEditFilled />
-          </Link>
+          </button>
           <button onClick={handleClickDeleteRestaurant}>
             <IconTrashFilled />
           </button>
@@ -55,7 +62,7 @@ const Restaurant = ({ imageSrc, restaurantId, restaurantName, restaurantLocation
 
 export default Restaurant;
 
-const EmotionWrapper = styled.div`
+const EmotionWrapper = styled(Link)`
   display: flex;
   align-items: center;
 
