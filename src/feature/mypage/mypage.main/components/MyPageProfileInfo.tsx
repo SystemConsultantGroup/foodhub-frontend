@@ -1,16 +1,18 @@
 import styled from "@emotion/styled";
 import ProfileImage from "components/profileImage/ProfileImage";
+import { MOCKUP_MYPAGE_INITIAL_VALUES } from "feature/mypage/common/mockup/MockupMypage";
 
-interface Props {}
+const MyPageProfileInfo = () => {
+  const userInfo = MOCKUP_MYPAGE_INITIAL_VALUES;
+  const { nickname, introduction } = userInfo;
 
-const MyPageProfileInfo = ({}: Props) => {
   return (
     <EmotionWrapper>
       <div className="profile-section">
         <ProfileImage size={70} />
         <div>
-          <p className="user-name">홍길동</p>
-          <p className="user-description">이 시대 최고의 미식 탐험가</p>
+          <p className="user-name">{nickname}</p>
+          <p className="user-description">{introduction}</p>
         </div>
       </div>
     </EmotionWrapper>

@@ -24,6 +24,7 @@ const Button = ({
   loading = false,
   onClick,
   danger = false, // 버튼을 빨간색으로 표시
+  className,
   ...props
 }: Props) => {
   const [isActive, setIsActive] = useState(false);
@@ -50,7 +51,7 @@ const Button = ({
       icon={icon}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      className={isActive ? "active" : ""}
+      className={isActive ? `active ${className}` : className}
     >
       {loading && <Loader />}
       {icon}

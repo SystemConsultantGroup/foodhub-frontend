@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import ViewMypage from "feature/mypage/views/ViewMypage";
+import ViewMypage from "feature/mypage/mypage.main/views/ViewMypage";
 
 const PageMyPage = () => {
   return <ViewMypage />;

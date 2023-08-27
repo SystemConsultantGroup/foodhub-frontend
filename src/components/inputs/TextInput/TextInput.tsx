@@ -75,6 +75,11 @@ const TextInput: React.FC<Props> = ({
     }
   }, [enteredValue, status, onTextChange]);
 
+  useEffect(() => {
+    // 비동기 API 호출로 인한 value 변경 시에만 실행
+    setEnteredValue(value);
+  }, [value]);
+
   return (
     <EmotionWrapper>
       {label && <span className="label">{label}</span>}

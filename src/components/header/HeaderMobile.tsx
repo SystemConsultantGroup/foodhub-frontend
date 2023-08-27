@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import ProfileImage from "components/profileImage/ProfileImage";
 import Image from "next/image";
 
-interface Props {}
-
-const HeaderMobile = ({}: Props) => {
+const HeaderMobile = () => {
   return (
     <EmotionWrapper>
       <Image src="/images/icons/arrow-left.svg" width={24} height={24} alt="왼쪽 화살표 아이콘" />
