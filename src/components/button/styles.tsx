@@ -36,12 +36,11 @@ export const getButtonStyles = (
       box-shadow: none;
       color: ${theme.color.white};
 
-      &:hover {
-        background-color: ${theme.color.danger600};
-      }
+      &:hover,
       &:focus {
         background-color: ${theme.color.danger600};
       }
+
       &.active {
         background-color: ${theme.color.danger700};
       }
