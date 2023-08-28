@@ -1,19 +1,30 @@
 import styled from "@emotion/styled";
 import MainRestaurant from "feature/main/components/restaurant/MainRestaurant";
+import { TMainRestaurant } from "feature/main/types/TMainRestaurant";
 
 interface Props {
   title: string;
+  restaurantList: TMainRestaurant[];
 }
 
-const MainHorizontalContainer = ({ title }: Props) => {
+const MainHorizontalContainer = ({ title, restaurantList }: Props) => {
   return (
     <EmotionWrapper>
       <h2>{title}</h2>
       <div className="restaurant-container">
-        <MainRestaurant />
-        <MainRestaurant />
-        <MainRestaurant />
-        <MainRestaurant />
+        {restaurantList.map((restaurant) => {
+          const { id, imageSrc, restaurantName, orgName, rating } = restaurant;
+
+          return (
+            <MainRestaurant
+              key={id}
+              rating={rating}
+              orgName={orgName}
+              imageSrc={imageSrc}
+              restaurantName={restaurantName}
+            />
+          );
+        })}
       </div>
     </EmotionWrapper>
   );

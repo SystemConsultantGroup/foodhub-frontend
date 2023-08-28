@@ -5,9 +5,12 @@ import { interactiveShadow } from "styles/shadow/interactiveShadow";
 
 interface Props {
   imageSrc?: string;
+  restaurantName: string;
+  orgName: string;
+  rating: number;
 }
 
-const MainRestaurant = ({ imageSrc }: Props) => {
+const MainRestaurant = ({ imageSrc, restaurantName, orgName, rating }: Props) => {
   const src = imageSrc ?? "/images/defaults/default-restaurant-image.png";
 
   return (
@@ -15,9 +18,9 @@ const MainRestaurant = ({ imageSrc }: Props) => {
       <article>
         <Image src={src} width={200} height={100} alt="음식점 사진" />
         <div className="info-container">
-          <h3>멘스시 천애부</h3>
-          <p className="org-name">시스템 컨설턴트 그룹</p>
-          <Rating value={3.25} className="rating" />
+          <h3>{restaurantName}</h3>
+          <p className="org-name">{orgName}</p>
+          <Rating value={rating} className="rating" />
         </div>
       </article>
     </EmotionWrapper>
