@@ -1,28 +1,27 @@
 import styled from "@emotion/styled";
 import Rating from "components/rating/Rating";
+import { TMainRestaurant } from "feature/main/types/TMainRestaurant";
 import Image from "next/image";
+import Link from "next/link";
 import { interactiveShadow } from "styles/shadow/interactiveShadow";
 
-interface Props {
-  imageSrc?: string;
-  restaurantName: string;
-  orgName: string;
-  rating: number;
-}
+type Props = TMainRestaurant;
 
-const MainRestaurant = ({ imageSrc, restaurantName, orgName, rating }: Props) => {
+const MainRestaurant = ({ id, imageSrc, restaurantName, orgName, rating }: Props) => {
   const src = imageSrc ?? "/images/defaults/default-restaurant-image.png";
-
+  const restaurantLink = `/restaurants/${id}`;
   return (
     <EmotionWrapper>
-      <article>
-        <Image src={src} width={200} height={100} alt="음식점 사진" />
-        <div className="info-container">
-          <h3>{restaurantName}</h3>
-          <p className="org-name">{orgName}</p>
-          <Rating value={rating} className="rating" />
-        </div>
-      </article>
+      <Link href={restaurantLink}>
+        <article>
+          <Image src={src} width={200} height={100} alt="음식점 사진" />
+          <div className="info-container">
+            <h3>{restaurantName}</h3>
+            <p className="org-name">{orgName}</p>
+            <Rating value={rating} className="rating" />
+          </div>
+        </article>
+      </Link>
     </EmotionWrapper>
   );
 };
@@ -30,6 +29,12 @@ const MainRestaurant = ({ imageSrc, restaurantName, orgName, rating }: Props) =>
 export default MainRestaurant;
 
 const EmotionWrapper = styled.div`
+  a {
+    // TODO: resetAnchoeStyle 머지 후 제거
+    all: unset;
+    cursor: pointer;
+  }
+
   article {
     border-radius: 8px;
     ${interactiveShadow};

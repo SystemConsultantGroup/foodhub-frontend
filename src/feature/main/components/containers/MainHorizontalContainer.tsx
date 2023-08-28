@@ -18,6 +18,7 @@ const MainHorizontalContainer = ({ title, restaurantList }: Props) => {
           return (
             <MainRestaurant
               key={id}
+              id={id}
               rating={rating}
               orgName={orgName}
               imageSrc={imageSrc}
