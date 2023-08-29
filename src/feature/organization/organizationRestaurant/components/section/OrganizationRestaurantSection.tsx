@@ -1,35 +1,31 @@
 import styled from "@emotion/styled";
-import TempRestaurant from "feature/organization/organizationMain/components/TempRestaurant";
-import Button from "components/button/Button";
+import TempRestaurant from "feature/organization/organizationMain/components/tempRestaurant/TempRestaurant";
 
 interface Props {
   organizationId: string | number | string[];
 }
 
-const ViewOrganizationMember: React.FC<Props> = ({ organizationId }) => {
+const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
   /**
-   * TODO: 서버에서 해당 단체의 메인 정보, 멤버 정보 받아오기
+   * TODO: 서버에서 해당 단체의 메인 정보, 맛집 리스트 받아오기
    */
   const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
-  const memberList = [
-    { name: "홍길동", auth: "관리자", image: "" },
-    { name: "김영희", auth: "멤버", image: "" },
-    { name: "김철수", auth: "멤버", image: "" },
+  const restaurantList = [
+    { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },
+    { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },
+    { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },
   ];
 
   return (
     <EmotionWrapper>
       <div className="head">
         <span className="orgName">{name}</span>
-        <span className="title">멤버 관리</span>
+        <span className="title">맛집 관리</span>
       </div>
       <div className="body">
-        <div className="bodyTitle">
-          <span className="subtitle">이 단체의 멤버</span>
-          <Button variant="text">관리자 승계</Button>
-        </div>
+        <span className="subtitle">이 단체의 맛집</span>
         <div className="restaurants">
-          {memberList.map((data, index) => (
+          {restaurantList.map((data, index) => (
             <TempRestaurant key={index} name={data.name} />
           ))}
         </div>
@@ -38,7 +34,7 @@ const ViewOrganizationMember: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default ViewOrganizationMember;
+export default OrganizationRestaurantSection;
 
 const EmotionWrapper = styled.div`
   display: flex;
@@ -56,23 +52,18 @@ const EmotionWrapper = styled.div`
     gap: 8px;
   }
 
-  div.bodyTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   div.restaurants {
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    align-items: center;
+    justify-content: center;
+    align-items: left;
     gap: 8px;
 
     margin-top: 20px;
   }
 
   span {
+    width: 100%;
     font-weight: 300;
     margin-left: 2px;
     font-size: 16px;

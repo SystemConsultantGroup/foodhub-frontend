@@ -5,7 +5,7 @@ import {
   ManagementMemberIcon,
   ManagementInfoIcon,
   ManagementRestaurantIcon,
-} from "feature/organization/organizationMain/components/ButtonIcons";
+} from "feature/organization/organizationMain/components/icons/ButtonIcons";
 
 interface Props {
   organizationId: string | number | string[];

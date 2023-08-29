@@ -1,22 +1,22 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
-import { MembersIcon } from "feature/organization/organizationMain/components/ButtonIcons";
+import { RegisterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
 
 interface Props {
   organizationId: string | number | string[];
 }
 
-const MemberButtons: React.FC<Props> = ({ organizationId }) => {
+const VisitorButtons: React.FC<Props> = ({ organizationId }) => {
   return (
     <EmotionWrapper>
-      <Button variant="text" icon={<MembersIcon />}>
-        멤버 조회
+      <Button variant="text" icon={<RegisterIcon />}>
+        이 단체에 가입하기
       </Button>
     </EmotionWrapper>
   );
 };
 
-export default MemberButtons;
+export default VisitorButtons;
 
 const EmotionWrapper = styled.div`
   display: flex;

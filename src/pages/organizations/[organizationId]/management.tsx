@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import OrganizationManagement from "feature/organization/organizationManagement/views/ViewOrganizationManagement";
+import OrganizationManagement from "feature/organization/organizationManagement/views/ViewOrganizationManagementPage";
 
 const PageOrganizationManagement = () => {
   const { query } = useRouter();

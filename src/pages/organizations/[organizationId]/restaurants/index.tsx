@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import ViewOrganizationRestaurant from "feature/organization/organizationRestaurant/views/ViewOrganizationRestaurant";
+import ViewOrganizationRestaurantPage from "feature/organization/organizationRestaurant/views/ViewOrganizationRestaurantPage";
 
 const PageOrganizationRestaurant = () => {
   const { query } = useRouter();
@@ -8,7 +8,7 @@ const PageOrganizationRestaurant = () => {
 
   return (
     <EmotionWrapper>
-      <ViewOrganizationRestaurant organizationId={organizationId} />
+      <ViewOrganizationRestaurantPage organizationId={organizationId} />
     </EmotionWrapper>
   );
 };

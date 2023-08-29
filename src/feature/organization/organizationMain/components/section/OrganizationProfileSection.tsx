@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import LocationIcon from "feature/organization/organizationMain/components/LocationIcon";
+import LocationIcon from "feature/organization/organizationMain/components/icons/LocationIcon";
 
 interface Props {
   organizationId: string | number | string[];
 }
 
-const ViewOrganizationProfile: React.FC<Props> = ({ organizationId }) => {
+const OrganizationProfileSection: React.FC<Props> = ({ organizationId }) => {
   /**
    * TODO: organizationId에 해당하는 단체 이름, 설명, 활동 지역, 프로필이미지 받아오기
    */
@@ -38,7 +38,7 @@ const ViewOrganizationProfile: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default ViewOrganizationProfile;
+export default OrganizationProfileSection;
 
 const EmotionWrapper = styled.div`
   display: flex;

@@ -9,7 +9,7 @@ interface Props {
   organizationId: string | number | string[];
 }
 
-const ViewOrganizationManagement: React.FC<Props> = ({ organizationId }) => {
+const OrganizationFormSection: React.FC<Props> = ({ organizationId }) => {
   /**
    * TODO: organizationId에 해당하는 단체 메인 정보 받아오기
    */
@@ -84,7 +84,7 @@ const ViewOrganizationManagement: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default ViewOrganizationManagement;
+export default OrganizationFormSection;
 
 const EmotionWrapper = styled.div`
   display: flex;

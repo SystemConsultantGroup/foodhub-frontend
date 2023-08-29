@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
-import { FilterIcon } from "feature/organization/organizationMain/components/ButtonIcons";
-import TempRestaurant from "feature/organization/organizationMain/components/TempRestaurant";
+import { FilterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
+import TempRestaurant from "feature/organization/organizationMain/components/tempRestaurant/TempRestaurant";
 
 interface Props {
   organizationId: string | number | string[];
 }
 
-const ViewOrganizationRestaurants: React.FC<Props> = ({ organizationId }) => {
+const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId }) => {
   return (
     <EmotionWrapper>
       <div className="head">
@@ -33,7 +33,7 @@ const ViewOrganizationRestaurants: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default ViewOrganizationRestaurants;
+export default OrganizationRestaurantsSection;
 
 const EmotionWrapper = styled.div`
   display: flex;
