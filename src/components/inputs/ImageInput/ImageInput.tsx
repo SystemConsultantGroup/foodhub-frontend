@@ -10,11 +10,7 @@ interface Props {
   label?: string; // 이미지 인풋 레이블
 }
 
-const ImageInput: React.FC<Props> = ({
-  maxImageCount = 1,
-  existingImageUrlList = [],
-  label = "맛집 관련 사진",
-}) => {
+const ImageInput: React.FC<Props> = ({ maxImageCount = 1, existingImageUrlList = [], label }) => {
   const imageUrlRef = useRef<HTMLInputElement>(null); // 이미 서버에 존재하던 이미지 URL 리스트
   const fileInputRef = useRef<HTMLInputElement>(null); // 로컬에서 업로드한 이미지 리스트
   const fileInputUniqueIndexCount = useRef(0); // 로컬 이미지 리스트의 uniqueIndex를 위한 카운트
