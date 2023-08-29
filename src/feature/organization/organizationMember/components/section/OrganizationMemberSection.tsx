@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import TempRestaurant from "feature/organization/organizationMain/components/tempRestaurant/TempRestaurant";
 import Button from "components/button/Button";
+import TempMember from "feature/organization/organizationMember/components/tempMember/TempMember";
 
 interface Props {
   organizationId: string | number | string[];
@@ -30,7 +30,7 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
         </div>
         <div className="restaurants">
           {memberList.map((data, index) => (
-            <TempRestaurant key={index} name={data.name} />
+            <TempMember key={index} memberName={data.name} />
           ))}
         </div>
       </div>

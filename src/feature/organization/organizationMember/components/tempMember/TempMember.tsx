@@ -3,20 +3,18 @@ import styled from "@emotion/styled";
 interface Props {
   id?: number;
   imgSrc?: string;
-  restaurantName?: string;
-  restaurantLocation?: string;
+  memberName?: string;
 }
 
-const TempRestaurant: React.FC<Props> = ({ restaurantName, restaurantLocation }) => {
+const TempMember: React.FC<Props> = ({ memberName }) => {
   return (
     <EmotionWrapper>
-      <p>{restaurantName}</p>
-      <p>{restaurantLocation}</p>
+      <p>{memberName}</p>
     </EmotionWrapper>
   );
 };
 
-export default TempRestaurant;
+export default TempMember;
 
 const EmotionWrapper = styled.div`
   display: flex;
@@ -29,5 +27,5 @@ const EmotionWrapper = styled.div`
   border-radius: 6px;
   padding: 10px;
   color: ${({ theme }) => theme.color.white};
-  background-color: ${({ theme }) => theme.color.primary500};
+  background-color: ${({ theme }) => theme.color.gray100};
 `;

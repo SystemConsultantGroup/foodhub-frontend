@@ -26,7 +26,7 @@ const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
         <span className="subtitle">이 단체의 맛집</span>
         <div className="restaurants">
           {restaurantList.map((data, index) => (
-            <TempRestaurant key={index} name={data.name} />
+            <TempRestaurant key={index} restaurantName={data.name} />
           ))}
         </div>
       </div>

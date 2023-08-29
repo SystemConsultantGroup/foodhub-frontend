@@ -19,7 +19,7 @@ const ViewOrganizationMainPage: React.FC<Props> = ({ organizationId }) => {
       <OrganizationProfileSection organizationId={organizationId} />
       <OrganizationButtonsSection organizationId={organizationId} userAuth={userAuth} />
       <Divider />
-      <OrganizationRestaurantsSection organizationId={organizationId} />
+      <OrganizationRestaurantsSection organizationId={organizationId} userAuth={userAuth} />
     </EmotionWrapper>
   );
 };

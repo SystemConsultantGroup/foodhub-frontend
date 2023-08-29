@@ -2,12 +2,29 @@ import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import { FilterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
 import TempRestaurant from "feature/organization/organizationMain/components/tempRestaurant/TempRestaurant";
+import {
+  EmptyRestaurantMemberIcon,
+  EmptyRestaurantVisitorIcon,
+} from "feature/organization/organizationMain/components/icons/EmptyIcons";
 
 interface Props {
   organizationId: string | number | string[];
+  userAuth: number;
 }
 
-const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId }) => {
+const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userAuth }) => {
+  /**
+   * TODO: organizationId에 해당하는 단체의 맛집 리스트 받아오기
+   */
+  const restaurants = [
+    { restaurantId: 1, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 2, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 3, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 4, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 5, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 6, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+  ];
+
   return (
     <EmotionWrapper>
       <div className="head">
@@ -19,16 +36,33 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId }) => 
           </Button>
         </div>
       </div>
-      <div className="restaurants">
-        <TempRestaurant />
-        <TempRestaurant />
-        <TempRestaurant />
-        <TempRestaurant />
-        <TempRestaurant />
-        <TempRestaurant />
-        <TempRestaurant />
-        <TempRestaurant />
-      </div>
+      {restaurants.length === 0 ? (
+        <div>
+          {userAuth === 0 || userAuth === 1 ? (
+            <div className="emptyDiv">
+              <EmptyRestaurantMemberIcon />
+              <p>이 단체에 등록된 맛집이 없네요.</p>
+              <p>내가 이 단체의 첫 번째 맛집을 추가해 볼까요?</p>
+              <Button>첫 번째 맛집 등록하기</Button>
+            </div>
+          ) : (
+            <div className="emptyDiv">
+              <EmptyRestaurantVisitorIcon />
+              <p>이 단체에 등록된 맛집이 없네요.</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="restaurants">
+          {restaurants.map((data) => (
+            <TempRestaurant
+              key={data.restaurantId}
+              restaurantName={data.restaurantName}
+              restaurantLocation={data.restaurantLocation}
+            />
+          ))}
+        </div>
+      )}
     </EmotionWrapper>
   );
 };
@@ -66,5 +100,21 @@ const EmotionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
+  }
+
+  div.emptyDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 50px 0px;
+
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      color: ${({ theme }) => theme.color.gray700};
+    }
   }
 `;
