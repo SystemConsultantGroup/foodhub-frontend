@@ -22,6 +22,7 @@ const Button = ({
   fullWidth = false,
   loading = false,
   onClick,
+  className,
   ...props
 }: Props) => {
   const [isActive, setIsActive] = useState(false);
@@ -47,7 +48,7 @@ const Button = ({
       icon={icon}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      className={isActive ? "active" : ""}
+      className={isActive ? `active ${className}` : className}
     >
       {loading && <Loader />}
       {icon}

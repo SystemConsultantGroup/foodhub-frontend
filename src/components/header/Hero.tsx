@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import { LAYOUT_MARGIN } from "constant/layoutMargin";
 
-interface Props {}
-
-const Hero = ({}: Props) => {
+const Hero = () => {
   return (
     <EmotionWrapper>
       <div className="content-wrapper">
