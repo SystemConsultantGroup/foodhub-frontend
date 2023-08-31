@@ -13,6 +13,7 @@ export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   fullWidth?: boolean;
   loading?: boolean;
+  danger?: boolean;
 }
 
 const Button = ({
@@ -22,6 +23,7 @@ const Button = ({
   fullWidth = false,
   loading = false,
   onClick,
+  danger = false, // 버튼을 빨간색으로 표시
   className,
   ...props
 }: Props) => {
@@ -42,6 +44,7 @@ const Button = ({
   return (
     <EmotionWrapper
       {...props}
+      danger={danger}
       variant={variant}
       fullWidth={fullWidth}
       disabled={loading}
@@ -89,7 +92,7 @@ export const EmotionWrapper = styled.button<Props>`
     color: ${({ theme }) => theme.color.gray200}
   };
   
-  ${({ theme, variant }) => getButtonStyles(theme, variant)};
+  ${({ theme, variant, danger }) => getButtonStyles(theme, variant, danger)};
   ${({ theme, fullWidth }) => getWidthStyles(theme, fullWidth)};
   ${({ loading }) => setLoadingStyles(loading)};
 
