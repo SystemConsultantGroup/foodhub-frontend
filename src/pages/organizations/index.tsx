@@ -1,21 +1,22 @@
 import styled from "@emotion/styled";
-import router from "next/router";
 import PageMarker from "components/pageMarker/PageMarker";
-import Button from "components/button/Button";
+import Link from "next/link";
+import Organization from "components/dataDisplay/Organization";
 
 const PageOrganizationList = () => {
-  const handleOnClick = () => {
-    router.push("/organizations/1");
-  };
   return (
     <EmotionWrapper>
       <PageMarker
         title="전체 단체 리스트 페이지"
         description="단체를 지역별로 나누어 볼 수 있는 페이지"
       />
-      <Button variant="secondary" onClick={handleOnClick}>
-        단체 개별 페이지로 이동
-      </Button>
+      <Link className="link" href="organizations/1">
+        <Organization
+          orgId={1}
+          orgName="시스템 컨설턴트 그룹"
+          orgDescription="성균관대학교 최고의 소프트웨어 개발 단체"
+        />
+      </Link>
     </EmotionWrapper>
   );
 };
@@ -27,4 +28,8 @@ const EmotionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 50px;
+
+  .link {
+    text-decoration-line: none;
+  }
 `;

@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Organization = ({ imageSrc, orgId, orgName, orgDescription }: Props) => {
-  const src = imageSrc ?? "/images/defaults/default-organization-profile-image.png";
+  const src = imageSrc ?? "/images/defaults/default-organization-profile-image";
   const alt = `${orgName} 단체 로고`;
 
   return (

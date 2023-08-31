@@ -18,7 +18,8 @@ const OrganizationFormSection: React.FC<Props> = ({ organizationId }) => {
   const description = "성균관대학교 최고의 소프트웨어 개발 단체"; // 서버에서 받아온 단체 설명
   const area = "default"; // 서버에서 받아온 단체 활동 지역
   const typeValue = "student"; // 서버에서 받아온 단체 유형
-  const imageSrc = organizationImageSrc ?? "/images/profile-image-default-org.png";
+  const imageSrc =
+    organizationImageSrc ?? "/images/defaults/default-organization-profile-image.png";
 
   const checkNameLength = (value: string) => {
     return value.length <= 20;

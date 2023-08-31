@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import TempRestaurant from "feature/organization/organizationMain/components/tempRestaurant/TempRestaurant";
+import Restaurant from "components/dataDisplay/Restaurant";
+import Link from "next/link";
 
 interface Props {
   organizationId: string | number | string[];
@@ -10,10 +11,13 @@ const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
    * TODO: 서버에서 해당 단체의 메인 정보, 맛집 리스트 받아오기
    */
   const name = "시스템 컨설턴트 그룹"; // 서버에서 받아온 단체 이름
-  const restaurantList = [
-    { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },
-    { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },
-    { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },
+  const restaurants = [
+    { restaurantId: 1, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 2, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 3, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 4, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 5, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 6, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
   ];
 
   return (
@@ -25,8 +29,14 @@ const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
       <div className="body">
         <span className="subtitle">이 단체의 맛집</span>
         <div className="restaurants">
-          {restaurantList.map((data, index) => (
-            <TempRestaurant key={index} restaurantName={data.name} />
+          {restaurants.map((data) => (
+            <Link className="link" key={data.restaurantId} href="/restaurants/1">
+              <Restaurant
+                restaurantId={data.restaurantId}
+                restaurantName={data.restaurantName}
+                restaurantLocation={data.restaurantLocation}
+              />
+            </Link>
           ))}
         </div>
       </div>
@@ -60,6 +70,10 @@ const EmotionWrapper = styled.div`
     gap: 8px;
 
     margin-top: 20px;
+
+    .link {
+      text-decoration-line: none;
+    }
   }
 
   span {
