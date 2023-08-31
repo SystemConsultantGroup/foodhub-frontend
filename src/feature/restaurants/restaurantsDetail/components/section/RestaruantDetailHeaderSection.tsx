@@ -8,7 +8,6 @@ interface Props {
   userAuth: number;
   restaurantName: string;
   restaurantAddress: string;
-  comment: string;
   organizationName: string;
   link: string;
 }
@@ -18,7 +17,6 @@ const RestaurantDetailHeaderSection: React.FC<Props> = ({
   userAuth,
   restaurantName,
   restaurantAddress,
-  comment,
   organizationName,
   link,
 }) => {
