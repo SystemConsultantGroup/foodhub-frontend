@@ -1,14 +1,11 @@
 import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
+import ViewRegisterSuccess from "feature/auth/auth.register/views/ViewRegisterSuccess";
 import { GetServerSideProps } from "next";
 
 const PageRegisterSuccess = () => {
   return (
     <EmotionWrapper>
-      <PageMarker
-        title="회원가입 성공 페이지"
-        description="회원가입 (닉네임 세팅) 하고 나서 랜딩되는 페이지"
-      />
+      <ViewRegisterSuccess />
     </EmotionWrapper>
   );
 };
