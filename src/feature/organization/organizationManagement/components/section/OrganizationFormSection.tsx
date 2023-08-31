@@ -14,7 +14,7 @@ const OrganizationFormSection: React.FC<Props> = ({ organizationId }) => {
    * TODO: organizationId에 해당하는 단체 메인 정보 받아오기
    */
   const organizationImageSrc = null; // 서버에서 받아온 단체 프로필 이미지
-  const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
+  const name = "시스템 컨설턴트 그룹"; // 서버에서 받아온 단체 이름
   const description = "성균관대학교 최고의 소프트웨어 개발 단체"; // 서버에서 받아온 단체 설명
   const area = "default"; // 서버에서 받아온 단체 활동 지역
   const typeValue = "student"; // 서버에서 받아온 단체 유형

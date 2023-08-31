@@ -10,11 +10,17 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
   /**
    * TODO: 서버에서 해당 단체의 메인 정보, 멤버 정보 받아오기
    */
-  const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
+  const name = "시스템 컨설턴트 그룹"; // 서버에서 받아온 단체 이름
   const memberList = [
-    { id: 1, name: "홍길동", auth: "관리자", image: "", description: "아무거나 다 잘먹어요." },
-    { id: 2, name: "김영희", auth: "멤버", image: "", description: "" },
-    { id: 3, name: "김철수", auth: "멤버", image: "", description: "" },
+    {
+      id: 1,
+      name: "홍길동",
+      auth: "관리자",
+      image: "",
+      description: "안녕하세요 : ) 관리자입니다.",
+    },
+    { id: 2, name: "김영희", auth: "멤버", image: "", description: "아무거나 다 잘먹어요." },
+    { id: 3, name: "김철수", auth: "멤버", image: "", description: "김철수입니다." },
   ];
 
   return (
@@ -29,7 +35,7 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
           <Button variant="text">관리자 승계</Button>
         </div>
         <div className="members">
-          {memberList.map((data, index) => (
+          {memberList.map((data) => (
             <Member
               key={data.id}
               memberId={data.id}

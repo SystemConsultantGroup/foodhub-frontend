@@ -9,7 +9,7 @@ const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
   /**
    * TODO: 서버에서 해당 단체의 메인 정보, 맛집 리스트 받아오기
    */
-  const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
+  const name = "시스템 컨설턴트 그룹"; // 서버에서 받아온 단체 이름
   const restaurantList = [
     { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },
     { name: "홍길동 갈비구이", area: "서울특별시 서대문구 홍제동", image: "" },

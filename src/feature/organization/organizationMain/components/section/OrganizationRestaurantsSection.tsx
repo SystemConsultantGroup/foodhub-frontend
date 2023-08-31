@@ -7,6 +7,7 @@ import {
 } from "feature/organization/organizationMain/components/icons/EmptyIcons";
 
 import Restaurant from "components/dataDisplay/Restaurant";
+import Link from "next/link";
 
 interface Props {
   organizationId: string | number | string[];
@@ -56,12 +57,13 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userA
       ) : (
         <div className="restaurants">
           {restaurants.map((data) => (
-            <Restaurant
-              key={data.restaurantId}
-              restaurantId={data.restaurantId}
-              restaurantName={data.restaurantName}
-              restaurantLocation={data.restaurantLocation}
-            />
+            <Link className="link" key={data.restaurantId} href="/restaurants/1">
+              <Restaurant
+                restaurantId={data.restaurantId}
+                restaurantName={data.restaurantName}
+                restaurantLocation={data.restaurantLocation}
+              />
+            </Link>
           ))}
         </div>
       )}
@@ -102,6 +104,10 @@ const EmotionWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    .link {
+      text-decoration-line: none;
+    }
   }
 
   div.emptyDiv {
