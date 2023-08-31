@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import { FilterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
-import TempRestaurant from "feature/organization/organizationMain/components/tempRestaurant/TempRestaurant";
 import {
   EmptyRestaurantMemberIcon,
   EmptyRestaurantVisitorIcon,
 } from "feature/organization/organizationMain/components/icons/EmptyIcons";
+
+import Restaurant from "components/dataDisplay/Restaurant";
 
 interface Props {
   organizationId: string | number | string[];
@@ -17,12 +18,12 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userA
    * TODO: organizationId에 해당하는 단체의 맛집 리스트 받아오기
    */
   const restaurants = [
-    { restaurantId: 1, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
-    { restaurantId: 2, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
-    { restaurantId: 3, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
-    { restaurantId: 4, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
-    { restaurantId: 5, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
-    { restaurantId: 6, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 1, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 2, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 3, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 4, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 5, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 6, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
   ];
 
   return (
@@ -55,8 +56,9 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userA
       ) : (
         <div className="restaurants">
           {restaurants.map((data) => (
-            <TempRestaurant
+            <Restaurant
               key={data.restaurantId}
+              restaurantId={data.restaurantId}
               restaurantName={data.restaurantName}
               restaurantLocation={data.restaurantLocation}
             />

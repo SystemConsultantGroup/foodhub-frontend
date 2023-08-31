@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
-import TempMember from "feature/organization/organizationMember/components/tempMember/TempMember";
+import Member from "components/dataDisplay/Member";
 
 interface Props {
   organizationId: string | number | string[];
@@ -12,9 +12,9 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
    */
   const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
   const memberList = [
-    { name: "홍길동", auth: "관리자", image: "" },
-    { name: "김영희", auth: "멤버", image: "" },
-    { name: "김철수", auth: "멤버", image: "" },
+    { id: 1, name: "홍길동", auth: "관리자", image: "", description: "아무거나 다 잘먹어요." },
+    { id: 2, name: "김영희", auth: "멤버", image: "", description: "" },
+    { id: 3, name: "김철수", auth: "멤버", image: "", description: "" },
   ];
 
   return (
@@ -28,9 +28,14 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
           <span className="subtitle">이 단체의 멤버</span>
           <Button variant="text">관리자 승계</Button>
         </div>
-        <div className="restaurants">
+        <div className="members">
           {memberList.map((data, index) => (
-            <TempMember key={index} memberName={data.name} />
+            <Member
+              key={data.id}
+              memberId={data.id}
+              memberName={data.name}
+              memberDescription={data.description}
+            />
           ))}
         </div>
       </div>
@@ -62,10 +67,10 @@ const EmotionWrapper = styled.div`
     align-items: center;
   }
 
-  div.restaurants {
+  div.members {
     display: flex;
     flex-direction: column;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     gap: 8px;
 

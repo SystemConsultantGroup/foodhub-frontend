@@ -45,6 +45,7 @@ export default Member;
 const EmotionWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
 
   padding: 14px 20px;
   /* background-color: ${({ theme }) => theme.color.primary100}; */

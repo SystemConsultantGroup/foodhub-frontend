@@ -17,7 +17,7 @@ const ManagementButtons: React.FC<Props> = ({ organizationId }) => {
   };
 
   const handleRestaurantClick = () => {
-    router.push(`/organizations/${organizationId}/restaurant`);
+    router.push(`/organizations/${organizationId}/restaurants`);
   };
 
   const handleMemberClick = () => {
