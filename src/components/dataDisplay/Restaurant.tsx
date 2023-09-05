@@ -20,13 +20,10 @@ const Restaurant = ({ imageSrc, restaurantId, restaurantName, restaurantLocation
   const editLink = `/restaurants/${restaurantId}/edit`; // TODO: 링크 수정
   const hasEditOrDeleteAuth = true; // TODO: 권한 확인
   const restaurantLink = `/restaurants/${restaurantId}`;
+  const restaurantDeleteLink = `/restaurants/${restaurantId}/remove`;
 
   const handleGotoEditPage = () => {
     push(editLink);
-  };
-
-  const handleClickDeleteRestaurant = () => {
-    alert("맛집 삭제");
   };
 
   return (
@@ -51,9 +48,11 @@ const Restaurant = ({ imageSrc, restaurantId, restaurantName, restaurantLocation
           <button onClick={handleGotoEditPage}>
             <IconEditFilled />
           </button>
-          <button onClick={handleClickDeleteRestaurant}>
-            <IconTrashFilled />
-          </button>
+          <Link href={restaurantDeleteLink}>
+            <button>
+              <IconTrashFilled />
+            </button>
+          </Link>
         </div>
       )}
     </EmotionWrapper>

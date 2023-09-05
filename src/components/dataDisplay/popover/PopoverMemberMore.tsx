@@ -2,16 +2,20 @@ import styled from "@emotion/styled";
 import PopoverMemberItem from "components/dataDisplay/popover/PopoverMemberItem";
 import IconTrash from "components/icons/IconTrash";
 import IconUserEdit from "components/icons/IconUserEdit";
+import { useRouter } from "next/router";
 
-interface Props {}
+interface Props {
+  memberId: number;
+}
 
-const PopoverMemberMore = ({}: Props) => {
+const PopoverMemberMore = ({ memberId }: Props) => {
+  const { push } = useRouter();
   const handleClickUserEdit = () => {
     alert("관리자로 승급");
   };
 
   const handleClickTrash = () => {
-    alert("멤버 삭제");
+    push(`members/${memberId}/remove`);
   };
 
   return (
@@ -21,6 +25,7 @@ const PopoverMemberMore = ({}: Props) => {
         menuName="관리자로 승급"
         onClick={handleClickUserEdit}
       />
+
       <PopoverMemberItem icon={<IconTrash />} menuName="멤버 삭제" onClick={handleClickTrash} />
     </EmotionWrapper>
   );

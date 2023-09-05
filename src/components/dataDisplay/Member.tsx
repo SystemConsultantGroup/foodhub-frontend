@@ -35,6 +35,7 @@ const Member = ({ imageSrc, memberId, memberName, memberDescription }: Props) =>
         onClick={handleTogglePropover}
         open={isPopoverOpen}
         onClose={handlePopoverClose}
+        memberId={memberId}
       />
     </EmotionWrapper>
   );
