@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import RestaurantExternalLinkIcon from "feature/restaurants/restaurantsDetail/components/icons/RestaurantExternalLinkIcon";
 import Link from "next/link";
-import Button from "components/button/Button";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -25,17 +24,21 @@ const RestaurantDetailHeaderSection: React.FC<Props> = ({
       <div className="overTitleDiv">
         <span className="subtitle">{organizationName}</span>
         {userAuth === 0 || userAuth === 1 ? (
-          <Button variant="text">맛집 수정</Button>
+          <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/edit"}>
+            맛집 수정
+          </Link>
         ) : (
-          <Button variant="text">맛집 복사</Button>
+          <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/copy"}>
+            맛집 수정
+          </Link>
         )}
       </div>
       <span className="title">{restaurantName}</span>
       <div className="underTitleDiv">
         <span className="subtitle">{restaurantAddress}</span>
-        <Link className="externalLinkDiv" href={link}>
+        <Link className="linkDiv" href={link}>
           <RestaurantExternalLinkIcon />
-          <span className="externalLink">맛집 상세 정보 &gt;</span>
+          <span className="linkSpan">맛집 상세 정보 &gt;</span>
         </Link>
       </div>
     </EmotionWrapper>
@@ -66,7 +69,7 @@ const EmotionWrapper = styled.div`
   }
 
   span.title {
-    font-size: 18px;
+    font-size: 30px;
     font-weight: 600;
     color: ${({ theme }) => theme.color.gray700};
   }
@@ -76,20 +79,20 @@ const EmotionWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    button {
-      font-size: 12px;
-    }
   }
 
-  .externalLinkDiv {
+  .linkDiv {
     display: flex;
     justify-content: right;
     align-items: center;
     text-decoration-line: none;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: ${({ theme }) => theme.color.gray700};
   }
 
-  span.externalLink {
+  .linkSpan {
     font-size: 12px;
     font-weight: 300;
     color: ${({ theme }) => theme.color.gray500};

@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
-import RestaurantDetailHeaderSection from "feature/restaurants/restaurantsDetail/components/section/RestaruantDetailHeaderSection";
+import RestaurantDetailHeaderSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailHeaderSection";
 import RestaurantDetailInfoSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailInfoSection";
+import RestaurantDetailReviewSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailReviewSection";
+import Divider from "components/divider/Divider";
+import { restaurant } from "feature/restaurants/restaurantsDetail/mockups/restaurant";
+import { reviewPage1 } from "feature/restaurants/restaurantsDetail/mockups/reviews";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -15,24 +19,15 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
   /**
    * TODO 2: 맛집 상세 정보 불러오기
    */
-  const restaurant = {
-    id: restaurantId,
-    userId: 1,
-    groupId: 1,
-    name: "봉수육",
-    address: "경기도 수원시 율전동",
-    link: "http://naver.me/FJFkPs94",
-    delivery: true,
-    comment: "수육나베 맛있어요",
-    categoryId: 1,
-    capacity: 15,
-    openingHour: "오후 4시 ~ 오후 10시",
-    recommnededMenus: ["수육나베", "고추말이"],
-    orderTip: "수육 2인분 이상 주문시 수육나베 변경 가능",
-    isActivated: true,
-    organizationName: "시스템 컨설턴트 그룹",
-    characteristics: ["가성비", "술 마시기 좋은"],
-  };
+
+  /**
+   * TODO3: 맛집의 모든 리뷰 조회하기
+   * - totalScore, totalPages 확인하기 위한 Read Reviews API 호출
+   * - 리뷰가 없는 경우 404 에러 반환?
+   */
+  const totalScore = reviewPage1.totalScore;
+  const totalCount = reviewPage1.totalCount;
+  const totalPages = reviewPage1.totalPages;
 
   return (
     <EmotionWrapper>
@@ -50,10 +45,20 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
         orderTip={restaurant.orderTip}
         capacity={restaurant.capacity}
         recommendedMenus={restaurant.recommnededMenus}
-        categoryId={restaurant.categoryId}
+        category={restaurant.category}
         delivery={restaurant.delivery}
         openingHour={restaurant.openingHour}
         characteristics={restaurant.characteristics}
+        totalScore={totalScore}
+        totalCount={totalCount}
+      />
+      <Divider />
+      <RestaurantDetailReviewSection
+        restaurantId={restaurantId}
+        userAuth={userAuth}
+        totalScore={totalScore}
+        totalCount={totalCount}
+        totalPages={totalPages}
       />
     </EmotionWrapper>
   );
