@@ -10,9 +10,16 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   value?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
+  selectContainerMaxHeight?: number;
 }
 
-const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
+const Dropdown = ({
+  children,
+  label,
+  value,
+  onSelectValueChange,
+  selectContainerMaxHeight,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -60,7 +67,11 @@ const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
   }, [children, selectedOptionValue, onSelectValueChange, value]);
 
   return (
-    <EmotionWrapper isOpen={isOpen} isCompleted={selectedOptionValue ? true : false}>
+    <EmotionWrapper
+      isOpen={isOpen}
+      isCompleted={selectedOptionValue ? true : false}
+      selectContainerMaxHeight={selectContainerMaxHeight}
+    >
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
         {selectedOptionValue ? (
@@ -100,7 +111,11 @@ const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
 Dropdown.Option = DropdownOption;
 export default Dropdown;
 
-const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
+const EmotionWrapper = styled.div<{
+  isOpen: boolean;
+  isCompleted: boolean;
+  selectContainerMaxHeight?: number;
+}>`
   position: relative;
   font-size: 14px;
   width: 100%;
@@ -140,7 +155,7 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
     top: 120%;
     left: 0;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: ${({ selectContainerMaxHeight }) => (selectContainerMaxHeight ? "scroll" : "auto")};
     border: 0.5px solid ${({ theme }) => theme.color.gray500};
     border-radius: 6px;
     background-color: white;
@@ -151,6 +166,10 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
     transition:
       opacity 0.3s ease-in-out,
       height 0.3s ease-in-out;
+
+    ${({ selectContainerMaxHeight }) =>
+      selectContainerMaxHeight && `max-height: ${selectContainerMaxHeight}px`};
+    z-index: 10;
   }
 
   span.label {

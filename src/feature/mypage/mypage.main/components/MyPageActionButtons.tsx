@@ -1,13 +1,19 @@
+import Link from "next/link";
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
-import Link from "next/link";
 
 const MyPageActionButtons = () => {
+  const LOGOUT_REDIRECT_URL = "/";
+
   return (
     <EmotionWrapper>
-      {/* TODO: 공통 컴포넌트 Button 으로 대체 */}
       <Link href="/mypage/edit">
         <Button variant="text">내 정보 수정</Button>
+      </Link>
+      <Link href={LOGOUT_REDIRECT_URL}>
+        <Button variant="text" className="button-logout">
+          로그아웃
+        </Button>
       </Link>
     </EmotionWrapper>
   );
@@ -16,7 +22,12 @@ const MyPageActionButtons = () => {
 export default MyPageActionButtons;
 
 const EmotionWrapper = styled.div`
+  float: right;
   display: flex;
-  justify-content: flex-end;
-  column-gap: 16px;
+  align-items: flex-end;
+  flex-direction: column;
+
+  .button-logout {
+    color: ${({ theme }) => theme.color.danger600};
+  }
 `;

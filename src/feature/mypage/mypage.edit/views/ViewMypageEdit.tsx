@@ -7,6 +7,7 @@ import { MOCKUP_MYPAGE_INITIAL_VALUES } from "feature/mypage/common/mockup/Mocku
 import { TMypageFormValues } from "feature/mypage/mypage.edit/types/TMypageFormValues";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { BIRTH_YEAR_DROPDOWN_VALUE_LIST } from "feature/mypage/mypage.edit/constants/birthYearDropdownValues";
 
 const { Option } = Dropdown;
 
@@ -31,7 +32,7 @@ const ViewMypageEdit = () => {
   const handleChangeNickname = useCallback(handleChangeInput("nickname"), []);
   const handleChangeDescription = useCallback(handleChangeInput("introduction"), []);
 
-  const { nickname, introduction, gender } = formValues;
+  const { nickname, introduction, gender, birthYear } = formValues;
   const deleteUserAccountLink = "/mypage/delete";
 
   // TODO: 서버 데이터 받아오는 작업 모킹
@@ -66,7 +67,18 @@ const ViewMypageEdit = () => {
           placeholder="자기소개를 입력해주세요!"
           onTextChange={handleChangeDescription}
         />
-        <div>이 자리에 생년월일을 고르는 DatePicker 가 들어갈 예정입니다.</div>
+        <Dropdown
+          label="출생년도"
+          placeholder="출생년도를 선택해주세요!"
+          value={birthYear.value}
+          selectContainerMaxHeight={200}
+        >
+          {BIRTH_YEAR_DROPDOWN_VALUE_LIST.map(({ value, label }) => (
+            <Option key={value} value={value}>
+              <span>{label}</span>
+            </Option>
+          ))}
+        </Dropdown>
         {/* TODO => placeholder 가 적용되지 않는 문제 핵결*/}
         <Dropdown label="성별" placeholder="성별을 선택해주세요!" value={gender.value}>
           {GENDER_DROPDOWN_VALUE_LIST.map(({ value, label }) => (
