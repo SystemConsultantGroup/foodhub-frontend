@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const KAKAO_LOGIN_URL = "";
+const KAKAO_LOGIN_URL = "http://localhost:8000/auth/kakao/login";
 
 const ButtonKakaoLogin = () => {
   return (
