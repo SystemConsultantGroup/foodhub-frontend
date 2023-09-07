@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
-import Dropdown from "components/dropdown/Dropdown";
-import { hangjungdong } from "constant/area";
+import AreaInputSido from "components/inputs/AreaInput/items/AreaInputSido";
+import AreaInputSigungu from "components/inputs/AreaInput/items/AreaInputSigungu";
+import AreaInputDong from "components/inputs/AreaInput/items/AreaInputDong";
 
 interface Props {
   label?: string;
@@ -14,29 +15,19 @@ const AreaInput: React.FC<Props> = ({ label, value, onSelectValueChange }) => {
   const [sigungu, setSigungu] = useState<string>();
   const [dong, setDong] = useState<string>();
 
-  const handleSidoChange = (value: string) => {
+  const handleSidoChange = (value: string | undefined) => {
     setSido(value);
-    setSigungu(undefined);
-    setDong(undefined);
   };
 
-  const handleSigunguChange = (value: string) => {
+  const handleSigunguChange = (value: string | undefined) => {
     setSigungu(value);
-    setDong(undefined);
   };
 
-  const handleDongChange = (value: string) => {
+  const handleDongChange = (value: string | undefined) => {
     setDong(value);
   };
 
   useEffect(() => {
-    const unParsing = () => {
-      const sidoNum = sido ?? "00";
-      const sigunguNum = sigungu ?? "000";
-      const dongNum = dong ?? "000";
-      return Number("1" + sidoNum + sigunguNum + dongNum);
-    };
-
     if (value && !sido && !sigungu && !dong) {
       // 초기값이 존재하고, sido가 선택되지 않은 경우
       const area = value.toString();
@@ -45,8 +36,8 @@ const AreaInput: React.FC<Props> = ({ label, value, onSelectValueChange }) => {
       setDong(area.slice(6));
     }
 
-    if (onSelectValueChange) {
-      onSelectValueChange(unParsing());
+    if (onSelectValueChange && dong) {
+      onSelectValueChange(parseInt(dong));
     }
   }, [value, sido, sigungu, dong, onSelectValueChange]);
 
@@ -54,48 +45,14 @@ const AreaInput: React.FC<Props> = ({ label, value, onSelectValueChange }) => {
     <EmotionWrapper>
       {label && <span className="label">{label}</span>}
       <div className="dropdowns">
-        <Dropdown
-          name="시도"
-          placeHolder="시·도"
-          value={sido}
-          onSelectValueChange={handleSidoChange}
-        >
-          {hangjungdong.sido.map((data) => (
-            <Dropdown.Option key={data.sido} value={data.sido}>
-              {data.codeNm}
-            </Dropdown.Option>
-          ))}
-        </Dropdown>
-        <Dropdown
-          name="시군구"
-          placeHolder="시·군·구"
-          value={sigungu}
-          onSelectValueChange={handleSigunguChange}
-          disabled={!sido}
-        >
-          {hangjungdong.sigungu
-            .filter((item) => item.sido === sido)
-            .map((data) => (
-              <Dropdown.Option key={data.sigungu} value={data.sigungu}>
-                {data.codeNm}
-              </Dropdown.Option>
-            ))}
-        </Dropdown>
-        <Dropdown
-          name="읍면동"
-          placeHolder="읍·면·동"
+        <AreaInputSido value={sido} onSelectSidoChange={handleSidoChange} />
+        <AreaInputSigungu value={sigungu} sido={sido} onSelectSigunguChange={handleSigunguChange} />
+        <AreaInputDong
           value={dong}
-          onSelectValueChange={handleDongChange}
-          disabled={!sigungu}
-        >
-          {hangjungdong.dong
-            .filter((item) => item.sido === sido && item.sigungu === sigungu)
-            .map((data) => (
-              <Dropdown.Option key={data.dong} value={data.dong}>
-                {data.codeNm}
-              </Dropdown.Option>
-            ))}
-        </Dropdown>
+          sido={sido}
+          sigungu={sigungu}
+          onSelectDongChange={handleDongChange}
+        />
       </div>
     </EmotionWrapper>
   );
