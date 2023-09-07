@@ -27,6 +27,7 @@ const AreaInputSigungu: React.FC<Props> = ({ value, sido, onSelectSigunguChange 
 
   return (
     <Dropdown
+      key={sido}
       name="시군구"
       placeHolder="시·군·구"
       value={value}

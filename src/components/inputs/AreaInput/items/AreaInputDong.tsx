@@ -24,10 +24,11 @@ const AreaInputDong: React.FC<Props> = ({ value, sido, sigungu, onSelectDongChan
 
   useEffect(() => {
     setDong(undefined);
-  }, [sido, sigungu]);
+  }, [sigungu]);
 
   return (
     <Dropdown
+      key={sigungu}
       name="읍면동"
       placeHolder="읍·면·동"
       value={value}
