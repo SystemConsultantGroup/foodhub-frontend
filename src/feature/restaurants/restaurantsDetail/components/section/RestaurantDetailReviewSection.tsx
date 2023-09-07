@@ -129,8 +129,9 @@ const EmotionWrapper = styled.div`
     align-items: center;
     width: 100%;
     height: 120px;
-    background-color: ${({ theme }) => theme.color.gray100};
+    background-color: ${({ theme }) => theme.color.primary100};
     padding: 5px 30px;
+    border-radius: 6px;
 
     div.totalInfo {
       display: flex;
@@ -154,7 +155,7 @@ const EmotionWrapper = styled.div`
       span.totalReviewInfo {
         font-size: 12px;
         font-weight: 300;
-        color: ${({ theme }) => theme.color.gray300};
+        color: ${({ theme }) => theme.color.primary500};
       }
     }
   }
