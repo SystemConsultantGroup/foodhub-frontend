@@ -27,7 +27,6 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
 
   const handleSetFormValues = useCallback(
     (key: keyof TOrganizationFormValues) => (value: unknown) => {
-      console.log(key, value);
       setFormValues((prev) => ({ ...prev, [key]: value }));
     },
     []
@@ -48,7 +47,20 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
     []
   );
 
-  const { type } = formValues;
+  const handleSetOrgPassword = useCallback(
+    (value: unknown, isValid: boolean) => handleSetFormValues("password")(value),
+    []
+  );
+
+  const handleSetIsPublic = useCallback((value: unknown) => {
+    const isPublicBoolean = value === "true";
+    setFormValues((prev) => ({
+      ...prev,
+      ["isPublic" as keyof TOrganizationFormValues]: isPublicBoolean,
+    }));
+  }, []);
+
+  const { type, isPublic } = formValues;
 
   return (
     <EmotionWrapper>
@@ -86,9 +98,36 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         className="organization-form-item"
       />
       <p className="text-question">4. 우리 단체는 이 지역에서 주로 활동합니다!</p>
-      <AreaInput label="활동 지역" onSelectValueChange={handleSetOrgAreaId} />
+      <AreaInput
+        label="활동 지역"
+        onSelectValueChange={handleSetOrgAreaId}
+        className="organization-form-item"
+      />
 
-      <Button onClick={handleClickSubmit}>제출하기</Button>
+      <p className="text-question">5. 단체를 비공개로 설정할 수 있어요!</p>
+      <Checkbox.Group
+        checkedList={[String(isPublic)]}
+        setCheckedItem={(value) => handleSetIsPublic(value)}
+        className="organization-form-item"
+      >
+        <Checkbox.Item value="true">공개</Checkbox.Item>
+        <Checkbox.Item value="false">비공개</Checkbox.Item>
+      </Checkbox.Group>
+
+      {true && (
+        <div className="set-password-container" data-ispublic={!!isPublic}>
+          <p className="text-question">6. 비밀번호를 설정해 보아요!</p>
+          <TextInput
+            label="비밀번호"
+            placeholder="비밀번호를 입력해주세요"
+            name="password"
+            onTextChange={handleSetOrgPassword}
+            className="organization-form-item"
+          />
+        </div>
+      )}
+
+      <Button onClick={handleClickSubmit}>단체 만들기</Button>
     </EmotionWrapper>
   );
 };
@@ -111,5 +150,19 @@ const EmotionWrapper = styled.div`
 
   .organization-form-item {
     margin-bottom: 36px;
+  }
+
+  .set-password-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+
+    &[data-ispublic="false"] {
+      max-height: 1000px;
+    }
+  }
+
+  button {
+    float: right;
   }
 `;
