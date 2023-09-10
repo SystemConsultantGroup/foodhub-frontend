@@ -3,4 +3,5 @@ export interface TReviewContent {
   userId: number;
   score: number;
   content: string;
+  createdAt: Date;
 }

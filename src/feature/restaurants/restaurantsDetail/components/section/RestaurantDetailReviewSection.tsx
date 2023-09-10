@@ -7,7 +7,10 @@ import {
   reviewPage3,
 } from "feature/restaurants/restaurantsDetail/mockups/reviews";
 import { TReviewPage } from "feature/restaurants/restaurantsDetail/types/TReviewPage";
+import ReviewItem from "feature/restaurants/restaurantsDetail/components/review/reviewItem";
 import Button from "components/button/Button";
+import IconTogglePageLeft from "components/icons/IconTogglePageLeft";
+import IconTogglePageRight from "components/icons/IconTogglePageRight";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -85,8 +88,21 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
         <div className="scoreReviewCountInfo"></div>
       </div>
       <div className="reviewDiv">
-        {reviewPage?.contents.map((review) => <div key={review.id}></div>)}
-        <Button onClick={handlePageNumberOnClick}>{pageNumber}</Button>
+        {reviewPage?.contents.map((review) => (
+          <ReviewItem
+            key={review.id}
+            reviewId={review.id}
+            userId={review.userId}
+            content={review.content}
+            score={review.score}
+            createdAt={review.createdAt}
+          />
+        ))}
+      </div>
+      <div className="togglePageDiv">
+        <Button icon={<IconTogglePageLeft />} variant="text" onClick={handlePageNumberOnClick} />
+        <span>{pageNumber}</span>
+        <Button icon={<IconTogglePageRight />} variant="text" onClick={handlePageNumberOnClick} />
       </div>
     </EmotionWrapper>
   );
@@ -157,6 +173,24 @@ const EmotionWrapper = styled.div`
         font-weight: 300;
         color: ${({ theme }) => theme.color.primary500};
       }
+    }
+  }
+
+  .reviewDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .togglePageDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    span {
+      font-size: 18px;
+      color: ${({ theme }) => theme.color.gray500};
     }
   }
 `;
