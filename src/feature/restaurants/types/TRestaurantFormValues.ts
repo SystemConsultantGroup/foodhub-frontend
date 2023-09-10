@@ -5,7 +5,7 @@ export type TRestaurantFormValues = {
   name: TFormValue<string>; // 맛집 이름
   categoryId: number; // 맛집 카테고리 id
   tagIds: number[]; // 맛집 태그 id 배열
-  address?: string; // 맛집 주소
+  address?: TFormValue<string>; // 맛집 주소
   link?: string; // 맛집 링크
   delivery?: boolean; // 맛집 배달 여부
   comment?: TFormValue<string>; // 맛집 한줄평

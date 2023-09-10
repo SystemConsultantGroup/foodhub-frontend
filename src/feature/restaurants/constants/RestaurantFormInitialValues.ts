@@ -8,7 +8,10 @@ export const RESTAURANT_FORM_INITIAL_VALUES: TRestaurantFormValues = {
   },
   categoryId: 0,
   tagIds: [0],
-  address: "",
+  address: {
+    value: "",
+    isValid: false,
+  },
   link: "",
   delivery: false,
   comment: {
