@@ -79,8 +79,8 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
       <div className="reviewOverviewDiv">
         <div className="totalInfo">
           <div>
-            <span className="totalScoreInfo">{totalScore}</span>
-            <span className="measure">/ 5</span>
+            <span className="totalScoreInfo">{totalCount ? totalScore : "-"}</span>
+            <span className="measure"> / 5</span>
           </div>
           <span className="totalReviewInfo">총 {totalCount}개의 리뷰</span>
         </div>
@@ -106,9 +106,19 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
         ))}
       </div>
       <div className="togglePageDiv">
-        <Button icon={<IconTogglePageLeft />} variant="text" onClick={handlePageNumberOnClick} />
+        <Button
+          icon={<IconTogglePageLeft />}
+          variant="text"
+          onClick={handlePageNumberOnClick}
+          disabled={totalCount === 0}
+        />
         <span>{pageNumber}</span>
-        <Button icon={<IconTogglePageRight />} variant="text" onClick={handlePageNumberOnClick} />
+        <Button
+          icon={<IconTogglePageRight />}
+          variant="text"
+          onClick={handlePageNumberOnClick}
+          disabled={totalCount === 0}
+        />
       </div>
     </EmotionWrapper>
   );
