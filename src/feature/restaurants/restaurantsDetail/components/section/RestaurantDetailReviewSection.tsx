@@ -7,7 +7,7 @@ import {
   reviewPage3,
 } from "feature/restaurants/restaurantsDetail/mockups/reviews";
 import { TReviewPage } from "feature/restaurants/restaurantsDetail/types/TReviewPage";
-import ReviewItem from "feature/restaurants/restaurantsDetail/components/review/temp";
+import ReviewItem from "feature/restaurants/restaurantsDetail/components/review/ReviewItem";
 import Button from "components/button/Button";
 import IconTogglePageLeft from "components/icons/IconTogglePageLeft";
 import IconTogglePageRight from "components/icons/IconTogglePageRight";
