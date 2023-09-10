@@ -12,8 +12,9 @@ import {
   validateOrganizationPasswordEmpty,
   validateOrganizationPasswordLength,
 } from "feature/organizations/functions/validateOrganizationForm";
+import { MOCKUP_ORGANIZATION_INITIAL_DATA } from "feature/organizations/mockups/mockupOrganiationInitialData";
 import { TOrganizationFormValues } from "feature/organizations/types/TOrganizationFormValues";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface Props {
   isEditMode?: boolean;
@@ -68,7 +69,12 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
     }));
   }, []);
 
-  const { type, isPublic } = formValues;
+  const { type, isPublic, name, password, nickname } = formValues;
+
+  // 데이터 fetching 로직이 들어올 시 비동기적으로 form values 를 업데이트 해야함
+  useEffect(() => {
+    if (isEditMode) setFormValues(MOCKUP_ORGANIZATION_INITIAL_DATA);
+  }, [isEditMode]);
 
   return (
     <EmotionWrapper>
@@ -97,6 +103,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         onTextChange={handleSetOrgName}
         className="organization-form-item"
         conditionCheckList={[validateOrganizationNameLength, validateOrganizationNameEmpty]}
+        value={name}
       />
       <p className="text-question">3. 나는 이 단체에서 이 이름을 쓸거에요!</p>
       <TextInput
@@ -106,12 +113,14 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         onTextChange={handleSetOrgNickname}
         className="organization-form-item"
         conditionCheckList={[validateOrganizationNicknameLength, validateOrganizationNicknameEmpty]}
+        value={nickname}
       />
       <p className="text-question">4. 우리 단체는 이 지역에서 주로 활동합니다!</p>
       <AreaInput
         label="활동 지역"
         onSelectValueChange={handleSetOrgAreaId}
         className="organization-form-item"
+        // value={areaId}
       />
 
       <p className="text-question">5. 단체를 비공개로 설정할 수 있어요!</p>
@@ -124,22 +133,21 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         <Checkbox.Item value="false">비공개</Checkbox.Item>
       </Checkbox.Group>
 
-      {true && (
-        <div className="set-password-container" data-ispublic={!!isPublic}>
-          <p className="text-question">6. 비밀번호를 설정해 보아요!</p>
-          <TextInput
-            label="비밀번호"
-            placeholder="비밀번호를 입력해주세요"
-            name="password"
-            onTextChange={handleSetOrgPassword}
-            className="organization-form-item"
-            conditionCheckList={[
-              validateOrganizationPasswordLength,
-              validateOrganizationPasswordEmpty,
-            ]}
-          />
-        </div>
-      )}
+      <div className="set-password-container" data-ispublic={!!isPublic}>
+        <p className="text-question">6. 비밀번호를 설정해 보아요!</p>
+        <TextInput
+          label="비밀번호"
+          value={password}
+          placeholder="비밀번호를 입력해주세요"
+          name="password"
+          onTextChange={handleSetOrgPassword}
+          className="organization-form-item"
+          conditionCheckList={[
+            validateOrganizationPasswordLength,
+            validateOrganizationPasswordEmpty,
+          ]}
+        />
+      </div>
 
       <Button onClick={handleClickSubmit}>단체 만들기</Button>
     </EmotionWrapper>
