@@ -13,16 +13,29 @@ import FormItemRestaurantOrderTip from "feature/restaurants/components/formItems
 import FormItemRestaurantRecommendedMenu from "feature/restaurants/components/formItems/FormItemRestaurantRecommendedMenu";
 import FormItemTagIds from "feature/restaurants/components/formItems/FormItemTagIds";
 import FormTitle from "feature/restaurants/components/formItems/FormTitle";
+import { RESTAURANT_FORM_INITIAL_VALUES } from "feature/restaurants/constants/RestaurantFormInitialValues";
+import { TRestaurantFormValues } from "feature/restaurants/types/TRestaurantFormValues";
+import { useState } from "react";
 
 interface Props {
   isEditMode?: boolean;
 }
 
 const RestaurantForm = ({ isEditMode = false }: Props) => {
+  const [formValues, setFormValues] = useState<TRestaurantFormValues>(
+    RESTAURANT_FORM_INITIAL_VALUES
+  );
+
+  const commonProps = {
+    isEditMode,
+    formValues,
+    setFormValues,
+  };
+
   return (
     <EmotionWrapper>
       <FormTitle />
-      <FormItemRestaurantName />
+      <FormItemRestaurantName {...commonProps} />
       <FormItemRestaurantComment />
       <FormItemRestaurantAddress />
       <FormItemRestaurantDelivery />
