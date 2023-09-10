@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { Children, ReactNode, cloneElement, isValidElement } from "react";
+import { Children, HTMLAttributes, ReactNode, cloneElement, isValidElement } from "react";
 
-export interface Props {
+export interface Props extends HTMLAttributes<HTMLUListElement> {
   children: ReactNode;
   checkedList: string[];
   setCheckedItem: (checkedList: string) => void;
@@ -15,7 +15,7 @@ export interface CheckboxItemProps {
   setChecked: (value: string) => void;
 }
 
-const CheckboxGroup = ({ children, checkedList, setCheckedItem }: Props) => {
+const CheckboxGroup = ({ children, checkedList, setCheckedItem, ...props }: Props) => {
   const childrenWithProps = Children.map(children, (child) => {
     if (isValidElement<CheckboxItemProps>(child)) {
       const checked = checkedList.includes(child.props.value);
@@ -28,12 +28,12 @@ const CheckboxGroup = ({ children, checkedList, setCheckedItem }: Props) => {
     return child;
   });
 
-  return <EmotionWrapper>{childrenWithProps}</EmotionWrapper>;
+  return <EmotionWrapper {...props}>{childrenWithProps}</EmotionWrapper>;
 };
 
 export default CheckboxGroup;
 
-const EmotionWrapper = styled.div`
+const EmotionWrapper = styled.ul`
   display: flex;
   flex-direction: column;
 `;

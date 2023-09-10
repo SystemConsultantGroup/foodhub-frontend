@@ -13,6 +13,7 @@ interface Props {
   conditionCheckList?: TConditionCheck[];
   multiline?: boolean;
   onTextChange?: (value: string, isValid: boolean) => void;
+  className?: string;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const TextInput: React.FC<Props> = ({
   conditionCheckList,
   multiline = false,
   onTextChange,
+  className,
 }) => {
   const [status, setStatus] = useState(value === "" ? "default" : "success"); // default / success / invalid / focus
   const [enteredValue, setEnteredValue] = useState(value);
@@ -76,7 +78,7 @@ const TextInput: React.FC<Props> = ({
   }, [enteredValue, status, onTextChange]);
 
   return (
-    <EmotionWrapper>
+    <EmotionWrapper className={className}>
       {label && <span className="label">{label}</span>}
       {conditionList && (
         <div className="spanList">
