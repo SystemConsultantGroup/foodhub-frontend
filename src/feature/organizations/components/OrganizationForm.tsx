@@ -4,6 +4,14 @@ import Checkbox from "components/checkbox/Checkbox";
 import AreaInput from "components/inputs/AreaInput/AreaInput";
 import TextInput from "components/inputs/TextInput/TextInput";
 import { ORGANIZATION_TYPE_CHECKBOX_ITEM_LIST } from "feature/organizations/constants/orgnizationTypeCheckboxItemList";
+import {
+  validateOrganizationNameEmpty,
+  validateOrganizationNameLength,
+  validateOrganizationNicknameEmpty,
+  validateOrganizationNicknameLength,
+  validateOrganizationPasswordEmpty,
+  validateOrganizationPasswordLength,
+} from "feature/organizations/functions/validateOrganizationForm";
 import { TOrganizationFormValues } from "feature/organizations/types/TOrganizationFormValues";
 import { useCallback, useState } from "react";
 
@@ -88,6 +96,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         name="name"
         onTextChange={handleSetOrgName}
         className="organization-form-item"
+        conditionCheckList={[validateOrganizationNameLength, validateOrganizationNameEmpty]}
       />
       <p className="text-question">3. 나는 이 단체에서 이 이름을 쓸거에요!</p>
       <TextInput
@@ -96,6 +105,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         name="nickname"
         onTextChange={handleSetOrgNickname}
         className="organization-form-item"
+        conditionCheckList={[validateOrganizationNicknameLength, validateOrganizationNicknameEmpty]}
       />
       <p className="text-question">4. 우리 단체는 이 지역에서 주로 활동합니다!</p>
       <AreaInput
@@ -123,6 +133,10 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
             name="password"
             onTextChange={handleSetOrgPassword}
             className="organization-form-item"
+            conditionCheckList={[
+              validateOrganizationPasswordLength,
+              validateOrganizationPasswordEmpty,
+            ]}
           />
         </div>
       )}
