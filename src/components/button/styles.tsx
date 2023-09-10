@@ -5,7 +5,7 @@ const primaryStyle = (theme: Theme) => {
   return css`
     background-color: ${theme.color.primary600};
     color: ${theme.color.white};
-    border: none;
+    border: 1px solid ${theme.color.primary600};
     box-shadow: none;
 
     &:hover {
@@ -24,7 +24,29 @@ const primaryStyle = (theme: Theme) => {
   `;
 };
 
-export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
+export const getButtonStyles = (
+  theme: Theme,
+  variant: Props["variant"],
+  danger: Props["danger"]
+) => {
+  if (danger) {
+    return css`
+      border: 1px solid ${theme.color.danger500};
+      background-color: ${theme.color.danger500};
+      box-shadow: none;
+      color: ${theme.color.white};
+
+      &:hover,
+      &:focus {
+        background-color: ${theme.color.danger600};
+      }
+
+      &.active {
+        background-color: ${theme.color.danger700};
+      }
+    `;
+  }
+
   switch (variant) {
     case "secondary":
       return css`
@@ -52,7 +74,7 @@ export const getButtonStyles = (theme: Theme, variant: Props["variant"]) => {
     case "text":
       return css`
         background-color: ${theme.color.white};
-        border: none;
+        border: 1px solid transparent;
         box-shadow: none;
         color: ${theme.color.gray900};
 
