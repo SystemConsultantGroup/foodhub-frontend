@@ -1,16 +1,10 @@
 import styled from "@emotion/styled";
+import { TOrganizationProps } from "components/dataDisplay/types/TOrganizationProps";
 import Image from "next/image";
 import Link from "next/link";
 import { textEllipsis } from "styles/ellipsis/textEllipsis";
 
-interface Props {
-  imageSrc?: string;
-  orgId: number;
-  orgName: string;
-  orgDescription: string;
-}
-
-const Organization = ({ imageSrc, orgId, orgName, orgDescription }: Props) => {
+const Organization = ({ imageSrc, orgId, orgName, orgDescription }: TOrganizationProps) => {
   const src = imageSrc ?? "/images/defaults/default-organization-profile-image.png";
   const alt = `${orgName} 단체 로고`;
   const orgLink = `/organizations/${orgId}`;
