@@ -18,6 +18,7 @@ interface Props {
   totalScore: number;
   totalCount: number;
   totalPages: number;
+  scoreStatistics: number[]; // 별점 별 리뷰 개수 (별점 높은 순)
 }
 
 const RestaurantDetailReviewSection: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
   totalScore,
   totalCount,
   totalPages,
+  scoreStatistics,
 }) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [reviewPage, setReviewPage] = useState<TReviewPage | null>(null);
@@ -37,9 +39,6 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
    * TODO 2: 리뷰가 없는 경우
    */
 
-  /**
-   * 임시 코드 (리뷰 페이지 전환용)
-   */
   const handlePageNumberOnClick = () => {
     if (pageNumber === totalPages) {
       setPageNumber(1);
@@ -85,7 +84,14 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
           </div>
           <span className="totalReviewInfo">총 {totalCount}개의 리뷰</span>
         </div>
-        <div className="scoreReviewCountInfo"></div>
+        <div className="scoreStatisticsDiv">
+          {scoreStatistics.map((count, index) => (
+            <div key={index} className="scoreStatisticsItem">
+              <span>{count}개</span>
+              <div>{5 - index}점 score 컴포넌트</div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="reviewDiv">
         {reviewPage?.contents.map((review) => (
@@ -172,6 +178,23 @@ const EmotionWrapper = styled.div`
         font-size: 12px;
         font-weight: 300;
         color: ${({ theme }) => theme.color.primary500};
+      }
+    }
+
+    div.scoreStatisticsDiv {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      font-size: 14px;
+      font-weight: 300;
+      color: ${({ theme }) => theme.color.primary500};
+
+      div.scoreStatisticsItem {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        gap: 15px;
       }
     }
   }

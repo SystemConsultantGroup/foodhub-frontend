@@ -7,4 +7,5 @@ export interface TReviewPage {
   totalCount: number;
   totalPages: number;
   totalScore: number;
+  scoreStatistics: number[];
 }

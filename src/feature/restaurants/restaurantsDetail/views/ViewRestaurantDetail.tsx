@@ -28,6 +28,7 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
   const totalScore = reviewPage1.totalScore;
   const totalCount = reviewPage1.totalCount;
   const totalPages = reviewPage1.totalPages;
+  const scoreStatistics = reviewPage1.scoreStatistics;
 
   return (
     <EmotionWrapper>
@@ -59,6 +60,7 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
         totalScore={totalScore}
         totalCount={totalCount}
         totalPages={totalPages}
+        scoreStatistics={scoreStatistics}
       />
     </EmotionWrapper>
   );

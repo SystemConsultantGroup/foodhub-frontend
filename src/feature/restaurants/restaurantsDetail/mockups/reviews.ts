@@ -48,6 +48,7 @@ export const reviewPage1: TReviewPage = {
   totalCount: 13,
   totalPages: 3,
   totalScore: 4.5,
+  scoreStatistics: [7, 3, 2, 1, 0],
 };
 
 export const reviewPage2: TReviewPage = {
@@ -98,6 +99,7 @@ export const reviewPage2: TReviewPage = {
   totalCount: 13,
   totalPages: 3,
   totalScore: 4.5,
+  scoreStatistics: [0, 1, 2, 3, 7],
 };
 
 export const reviewPage3: TReviewPage = {
@@ -132,4 +134,5 @@ export const reviewPage3: TReviewPage = {
   totalCount: 13,
   totalPages: 3,
   totalScore: 4.5,
+  scoreStatistics: [7, 3, 2, 1, 0],
 };
