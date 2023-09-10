@@ -1,4 +1,4 @@
-import { RESTAURANT_NAME_MAX_LENGTH } from "constant/limit";
+import { RESTAURANT_COMMENT_MAX_LENGTH, RESTAURANT_NAME_MAX_LENGTH } from "constant/limit";
 
 // 맛집 이름 유효성 검사 조건을 정의합니다.
 export const validateRestaurantNameLength = {
@@ -16,4 +16,13 @@ export const validateRestaurantNameEmpty = {
     return true;
   },
   messageOnError: "맛집 이름을 입력해주세요.",
+};
+
+// 맛집 한줄평 유효성 검사 조건을 정의합니다.
+export const validateRestaurantCommentLength = {
+  condition: (value: string): boolean => {
+    if (value?.length > RESTAURANT_COMMENT_MAX_LENGTH) return false;
+    return true;
+  },
+  messageOnError: `맛집 한줄평은 ${RESTAURANT_COMMENT_MAX_LENGTH}자 이내로 입력해주세요.`,
 };

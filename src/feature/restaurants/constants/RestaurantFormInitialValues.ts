@@ -11,7 +11,10 @@ export const RESTAURANT_FORM_INITIAL_VALUES: TRestaurantFormValues = {
   address: "",
   link: "",
   delivery: false,
-  comment: "",
+  comment: {
+    value: "",
+    isValid: false,
+  },
   capacity: 0,
   openingHour: "",
   recommendedMenu: "",

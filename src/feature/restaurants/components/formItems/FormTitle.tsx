@@ -13,6 +13,5 @@ export default FormTitle;
 const EmotionWrapper = styled.h1`
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 36px;
   line-height: 1.5;
 `;

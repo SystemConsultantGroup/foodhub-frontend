@@ -36,7 +36,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
     <EmotionWrapper>
       <FormTitle />
       <FormItemRestaurantName {...commonProps} />
-      <FormItemRestaurantComment />
+      <FormItemRestaurantComment {...commonProps} />
       <FormItemRestaurantAddress />
       <FormItemRestaurantDelivery />
       <FormItemTagIds />
@@ -55,6 +55,10 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
 export default RestaurantForm;
 
 const EmotionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 36px;
+
   button {
     margin-top: 24px;
     float: right;
