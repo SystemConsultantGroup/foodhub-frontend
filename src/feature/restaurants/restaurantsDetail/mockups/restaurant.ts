@@ -15,4 +15,5 @@ export const restaurant = {
   isActivated: true,
   organizationName: "시스템 컨설턴트 그룹",
   characteristics: ["가성비", "술 마시기 좋은"],
+  imgSrcList: [],
 };

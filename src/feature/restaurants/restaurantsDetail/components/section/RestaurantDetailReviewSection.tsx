@@ -71,7 +71,7 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
       <div className="titleDiv">
         <span>우리 멤버들이 남긴 리뷰</span>
         {(userAuth === 0 || userAuth === 1) && (
-          <Link className="linkDiv" href={"/retaurants/" + restaurantId + "/review/create"}>
+          <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/review/create"}>
             리뷰 작성하기 &gt;
           </Link>
         )}

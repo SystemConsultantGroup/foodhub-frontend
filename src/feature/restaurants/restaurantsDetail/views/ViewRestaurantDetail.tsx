@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import RestaurantDetailImgSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailImgSection";
 import RestaurantDetailHeaderSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailHeaderSection";
 import RestaurantDetailInfoSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailInfoSection";
 import RestaurantDetailReviewSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailReviewSection";
@@ -32,6 +33,7 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
 
   return (
     <EmotionWrapper>
+      <RestaurantDetailImgSection imgSrcList={restaurant.imgSrcList} />
       <RestaurantDetailHeaderSection
         restaurantId={restaurantId}
         userAuth={userAuth}
