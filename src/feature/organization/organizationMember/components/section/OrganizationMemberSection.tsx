@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
-import TempMember from "feature/organization/organizationMember/components/tempMember/TempMember";
+import Member from "components/dataDisplay/Member";
 
 interface Props {
   organizationId: string | number | string[];
@@ -12,9 +12,15 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
    */
   const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
   const memberList = [
-    { name: "홍길동", auth: "관리자", image: "" },
-    { name: "김영희", auth: "멤버", image: "" },
-    { name: "김철수", auth: "멤버", image: "" },
+    { id: 1, memberName: "홍길동", auth: "관리자", image: "", memberDescription: "관리자입니다." },
+    { id: 2, memberName: "김영희", auth: "멤버", image: "", memberDescription: "김영희입니다." },
+    {
+      id: 3,
+      memberName: "김철수",
+      auth: "멤버",
+      image: "",
+      memberDescription: "아무거나 다 잘 먹어요.",
+    },
   ];
 
   return (
@@ -29,8 +35,13 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
           <Button variant="text">관리자 승계</Button>
         </div>
         <div className="restaurants">
-          {memberList.map((data, index) => (
-            <TempMember key={index} memberName={data.name} />
+          {memberList.map((data) => (
+            <Member
+              key={data.id}
+              memberId={data.id}
+              memberName={data.memberName}
+              memberDescription={data.memberDescription}
+            />
           ))}
         </div>
       </div>

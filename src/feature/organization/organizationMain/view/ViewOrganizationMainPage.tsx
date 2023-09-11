@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import OrganizationProfileSection from "feature/organization/organizationMain/components/section/OrganizationProfileSection";
-import OrganizationButtonsSection from "feature/organization/organizationMain/components/section/OrganizationButtonsSection";
-import OrganizationRestaurantsSection from "feature/organization/organizationMain/components/section/OrganizationRestaurantsSection";
+import OrganizationMainProfileSection from "feature/organization/organizationMain/components/section/OrganizationMainProfileSection";
+import OrganizationMainButtonsSection from "feature/organization/organizationMain/components/section/OrganizationMainButtonsSection";
+import OrganizationMainRestaurantsSection from "feature/organization/organizationMain/components/section/OrganizationMainRestaurantsSection";
 import Divider from "components/divider/Divider";
 
 interface Props {
@@ -16,10 +16,10 @@ const ViewOrganizationMainPage: React.FC<Props> = ({ organizationId }) => {
 
   return (
     <EmotionWrapper>
-      <OrganizationProfileSection organizationId={organizationId} />
-      <OrganizationButtonsSection organizationId={organizationId} userAuth={userAuth} />
+      <OrganizationMainProfileSection organizationId={organizationId} />
+      <OrganizationMainButtonsSection organizationId={organizationId} userAuth={userAuth} />
       <Divider />
-      <OrganizationRestaurantsSection organizationId={organizationId} userAuth={userAuth} />
+      <OrganizationMainRestaurantsSection organizationId={organizationId} userAuth={userAuth} />
     </EmotionWrapper>
   );
 };

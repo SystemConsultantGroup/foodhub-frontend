@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import { FilterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
-import TempRestaurant from "feature/organization/organizationMain/components/tempRestaurant/TempRestaurant";
+import Restaurant from "components/dataDisplay/Restaurant";
 import {
   EmptyRestaurantMemberIcon,
   EmptyRestaurantVisitorIcon,
@@ -55,8 +55,9 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userA
       ) : (
         <div className="restaurants">
           {restaurants.map((data) => (
-            <TempRestaurant
+            <Restaurant
               key={data.restaurantId}
+              restaurantId={data.restaurantId}
               restaurantName={data.restaurantName}
               restaurantLocation={data.restaurantLocation}
             />
