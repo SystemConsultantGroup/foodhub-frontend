@@ -8,25 +8,39 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   name?: string;
   label?: string;
   value?: string;
+  placeHolder?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
+  disabled?: boolean;
 }
 
-const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
+const Dropdown = ({
+  children,
+  label,
+  value,
+  name,
+  placeHolder = "Select an option",
+  onSelectValueChange,
+  disabled = false,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    if (!disabled) {
+      setIsOpen(!isOpen);
+    }
   };
 
   const handleOptionClick = (value: string, children: React.ReactNode) => {
-    setSelectedOptionValue(value);
-    setIsOpen(false);
+    if (!disabled) {
+      setSelectedOptionValue(value);
+      setIsOpen(false);
 
-    if (onSelectValueChange) {
-      onSelectValueChange(value);
+      if (onSelectValueChange) {
+        onSelectValueChange(value);
+      }
     }
   };
 
@@ -78,7 +92,7 @@ const Dropdown = ({ children, label, value, onSelectValueChange }: Props) => {
           </span>
         ) : (
           // 선택되지 않은 경우
-          <span>{"Select an option"}</span>
+          <span>{placeHolder}</span>
         )}
         {isOpen ? <DropdownUpIcon /> : <DropdownDownIcon />}
       </div>
@@ -137,6 +151,7 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
 
   div.options {
     position: absolute;
+    z-index: 100;
     top: 120%;
     left: 0;
     width: 100%;
@@ -151,6 +166,9 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
     transition:
       opacity 0.3s ease-in-out,
       height 0.3s ease-in-out;
+
+    max-height: 15vh;
+    overflow: auto;
   }
 
   span.label {
