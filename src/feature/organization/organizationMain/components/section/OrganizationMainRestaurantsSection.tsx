@@ -12,7 +12,7 @@ interface Props {
   userAuth: number;
 }
 
-const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userAuth }) => {
+const OrganizationMainRestaurantsSection: React.FC<Props> = ({ organizationId, userAuth }) => {
   /**
    * TODO: organizationId에 해당하는 단체의 맛집 리스트 받아오기
    */
@@ -68,7 +68,7 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userA
   );
 };
 
-export default OrganizationRestaurantsSection;
+export default OrganizationMainRestaurantsSection;
 
 const EmotionWrapper = styled.div`
   display: flex;
