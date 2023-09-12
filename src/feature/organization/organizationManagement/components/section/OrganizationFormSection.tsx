@@ -4,6 +4,7 @@ import Button from "components/button/Button";
 import TextInput from "components/inputs/TextInput/TextInput";
 import ImageInput from "components/inputs/ImageInput/ImageInput";
 import Dropdown from "components/dropdown/Dropdown";
+import AreaInput from "components/inputs/AreaInput/AreaInput";
 
 interface Props {
   organizationId: string | number | string[];
@@ -16,7 +17,6 @@ const OrganizationFormSection: React.FC<Props> = ({ organizationId }) => {
   const organizationImageSrc = null; // 서버에서 받아온 단체 프로필 이미지
   const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
   const description = "성균관대학교 최고의 소프트웨어 개발 단체"; // 서버에서 받아온 단체 설명
-  const area = "default"; // 서버에서 받아온 단체 활동 지역
   const typeValue = "student"; // 서버에서 받아온 단체 유형
   const imageSrc = organizationImageSrc ?? "/images/profile-image-default-org.png";
 
@@ -64,17 +64,7 @@ const OrganizationFormSection: React.FC<Props> = ({ organizationId }) => {
       </Dropdown>
       <div className="area">
         <span className="areaLabel">주요 활동 지역</span>
-        <div className="areaDropdowns">
-          <Dropdown name="areaLevel1" value={area}>
-            <Dropdown.Option value="default">시·도</Dropdown.Option>
-          </Dropdown>
-          <Dropdown name="areaLevel2" value={area}>
-            <Dropdown.Option value="default">시·군·구</Dropdown.Option>
-          </Dropdown>
-          <Dropdown name="areaLevel3" value={area}>
-            <Dropdown.Option value="default">읍·면·동</Dropdown.Option>
-          </Dropdown>
-        </div>
+        <AreaInput />
       </div>
       <ImageInput maxImageCount={1} existingImageUrlList={[imageSrc]}></ImageInput>
       <Button fullWidth={true} onClick={handleSubmit}>

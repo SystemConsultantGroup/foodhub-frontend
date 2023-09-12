@@ -8,13 +8,15 @@ import { TMember } from "feature/organization/organizationMember/types/TMember";
 
 interface Props {
   organizationId: string | number | string[];
+  userAuth: number;
 }
 
-const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
+const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }) => {
   const [isSuccession, setIsSuccession] = useState(false);
   const [isSelectButtonVIsible, setButtonVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TMember | null>(null);
+  const isManager = userAuth === 0;
 
   /**
    * TODO: 서버에서 해당 단체의 메인 정보, 멤버 정보 받아오기
@@ -59,14 +61,16 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
     <EmotionWrapper isSuccession={isSuccession}>
       <div className="head">
         <span className="orgName">{name}</span>
-        <span className="title">멤버 관리</span>
+        <span className="title">{isManager ? "멤버 관리" : "멤버 조회"}</span>
       </div>
       <div className="body">
         <div className="bodyTitle">
           <span className="subtitle">이 단체의 멤버</span>
-          <Button variant="text" onClick={handleSuccessionButton}>
-            {isSuccession ? "취소" : "관리자 승계"}
-          </Button>
+          {isManager && (
+            <Button variant="text" onClick={handleSuccessionButton}>
+              {isSuccession ? "취소" : "관리자 승계"}
+            </Button>
+          )}
         </div>
         <div className="members">
           {memberList.map((member) => (
@@ -76,6 +80,7 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId }) => {
                   memberId={member.id}
                   memberName={member.memberName}
                   memberDescription={member.memberDescription}
+                  showManagementButton={isManager}
                 />
               </div>
               {isSuccession && isSelectButtonVIsible && member.auth !== "관리자" && (
