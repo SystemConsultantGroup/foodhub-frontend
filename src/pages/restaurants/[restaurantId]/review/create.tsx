@@ -1,14 +1,10 @@
-import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
+import { useRouter } from "next/router";
+import ViewRestaurantReviewCreate from "feature/restaurants/restaurantsReview/views/ViewRestaurantsReviewCreate";
 
-const PageCreateReview = () => {
-  return (
-    <EmotionWrapper>
-      <PageMarker title="맛집 리뷰 생성 페이지" description="맛집 리뷰 생성 페이지" />
-    </EmotionWrapper>
-  );
+const PageReviewCreate = () => {
+  const { query } = useRouter();
+  const restaurantId = query.restaurantId ?? 0;
+  return <ViewRestaurantReviewCreate restaurantId={restaurantId} />;
 };
 
-export default PageCreateReview;
-
-const EmotionWrapper = styled.div``;
+export default PageReviewCreate;
