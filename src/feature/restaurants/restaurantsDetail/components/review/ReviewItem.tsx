@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { useState } from "react";
+import Rating from "components/rating/Rating";
 
 interface Props {
   reviewId: number;
@@ -42,7 +43,7 @@ const ReviewItem: React.FC<Props> = ({ reviewId, userId, score, content, created
           <span className="userName">{userName}</span>
           <span className="date">{formatDate(createdAt)}</span>
         </div>
-        <div className="scoreDiv">score 컴포넌트 자리</div>
+        <Rating value={score} />
       </div>
       <div className="contentDiv">
         <span>{displayContent}</span>
@@ -87,11 +88,6 @@ const EmotionWrapper = styled.div`
         font-weight: 300;
         color: ${({ theme }) => theme.color.gray300};
       }
-    }
-
-    .scoreDiv {
-      color: ${({ theme }) => theme.color.gray500};
-      background-color: ${({ theme }) => theme.color.gray200};
     }
   }
 

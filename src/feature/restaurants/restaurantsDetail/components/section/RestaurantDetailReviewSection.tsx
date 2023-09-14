@@ -11,6 +11,7 @@ import ReviewItem from "feature/restaurants/restaurantsDetail/components/review/
 import Button from "components/button/Button";
 import IconTogglePageLeft from "components/icons/IconTogglePageLeft";
 import IconTogglePageRight from "components/icons/IconTogglePageRight";
+import Rating from "components/rating/Rating";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -88,7 +89,7 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
           {scoreStatistics.map((count, index) => (
             <div key={index} className="scoreStatisticsItem">
               <span>{count}개</span>
-              <div>{5 - index}점 score 컴포넌트</div>
+              <Rating value={5 - index} />
             </div>
           ))}
         </div>
@@ -160,11 +161,10 @@ const EmotionWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 120px;
-    background-color: ${({ theme }) => theme.color.primary100};
+    height: 150px;
+    background-color: ${({ theme }) => theme.color.gray100};
     padding: 5px 30px;
     border-radius: 6px;
-    box-shadow: ${({ theme }) => theme.shadow.default};
 
     div.totalInfo {
       display: flex;
@@ -188,7 +188,7 @@ const EmotionWrapper = styled.div`
       span.totalReviewInfo {
         font-size: 12px;
         font-weight: 300;
-        color: ${({ theme }) => theme.color.primary500};
+        color: ${({ theme }) => theme.color.gray400};
       }
     }
 
@@ -196,10 +196,11 @@ const EmotionWrapper = styled.div`
       display: flex;
       flex-direction: column;
       gap: 8px;
+      margin: 10px
 
       font-size: 14px;
       font-weight: 300;
-      color: ${({ theme }) => theme.color.primary500};
+      color: ${({ theme }) => theme.color.gray400};
 
       div.scoreStatisticsItem {
         display: flex;
