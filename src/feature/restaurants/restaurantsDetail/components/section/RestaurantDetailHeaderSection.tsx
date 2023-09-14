@@ -74,19 +74,6 @@ const EmotionWrapper = styled.div`
     color: ${({ theme }) => theme.color.gray700};
   }
 
-  .restaurantImgDiv {
-    position: relative;
-    width: 100%;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-
-    .restaurantImg {
-      object-fit: cover;
-    }
-  }
-
   .underTitleDiv,
   .overTitleDiv {
     display: flex;

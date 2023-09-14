@@ -164,6 +164,7 @@ const EmotionWrapper = styled.div`
     background-color: ${({ theme }) => theme.color.primary100};
     padding: 5px 30px;
     border-radius: 6px;
+    box-shadow: ${({ theme }) => theme.shadow.default};
 
     div.totalInfo {
       display: flex;

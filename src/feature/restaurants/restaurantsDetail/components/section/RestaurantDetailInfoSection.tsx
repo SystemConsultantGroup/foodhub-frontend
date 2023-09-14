@@ -132,6 +132,7 @@ const EmotionWrapper = styled.div`
       background-color: ${({ theme }) => theme.color.white};
       border: 0.5px solid ${({ theme }) => theme.color.gray200};
       border-radius: 6px;
+      box-shadow: ${({ theme }) => theme.shadow.default};
 
       span.label {
         font-size: 12px;
