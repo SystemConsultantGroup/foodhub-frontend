@@ -98,6 +98,7 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
         {reviewPage?.contents.map((review) => (
           <ReviewItem
             key={review.id}
+            restaurantId={restaurantId}
             reviewId={review.id}
             userId={review.userId}
             content={review.content}

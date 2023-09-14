@@ -2,8 +2,11 @@ import styled from "@emotion/styled";
 import Image from "next/image";
 import { useState } from "react";
 import Rating from "components/rating/Rating";
+import IconEditFilledWhite from "components/icons/IconEditFilledWhite";
+import Link from "next/link";
 
 interface Props {
+  restaurantId: string | number | string[];
   reviewId: number;
   userId: number;
   score: number;
@@ -11,21 +14,34 @@ interface Props {
   createdAt: Date;
 }
 
-const ReviewItem: React.FC<Props> = ({ reviewId, userId, score, content, createdAt }) => {
+const ReviewItem: React.FC<Props> = ({
+  restaurantId,
+  reviewId,
+  userId,
+  score,
+  content,
+  createdAt,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = () => {
     setIsExpanded((isExpanded) => !isExpanded);
   };
 
+  const editLink = `/restaurants/${restaurantId}/review/${reviewId}/edit`;
   const displayContent =
     content.length > 100 && !isExpanded ? content.slice(0, 100) + "..." : content;
 
   /**
-   * TODO: userId로 userInfo 불러오기 (API가 있나??)
+   * TODO 1: userId로 userInfo 불러오기
    */
   const userName = "홍길동";
   const ImgSrc = "/images/profile-image-default-1.png";
+
+  /**
+   * TODO 2: 현재 로그인된 유저 아이디 가져오기 (리뷰 수정 권한 확인용)
+   */
+  const currentUserId = 1;
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
@@ -42,6 +58,11 @@ const ReviewItem: React.FC<Props> = ({ reviewId, userId, score, content, created
           <Image src={ImgSrc} alt={"유저 프로필 이미지"} width={30} height={30} />
           <span className="userName">{userName}</span>
           <span className="date">{formatDate(createdAt)}</span>
+          {currentUserId === userId && (
+            <Link href={editLink}>
+              <IconEditFilledWhite />
+            </Link>
+          )}
         </div>
         <Rating value={score} />
       </div>
