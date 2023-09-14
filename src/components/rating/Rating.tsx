@@ -77,7 +77,14 @@ const Rating = ({ value, isInput = false, onSelectedValueChange, ...props }: Pro
           )
         )}
       </div>
-      <p className="rating-value">{selectedValue}</p>
+      {isInput ? (
+        <div>
+          <span className="rating-value-selected">{selectedValue}</span>
+          <span className="rating-full-marks"> / 5</span>
+        </div>
+      ) : (
+        <p className="rating-value">{value}</p>
+      )}
     </EmotionWrapper>
   );
 };
@@ -87,15 +94,27 @@ export default Rating;
 const EmotionWrapper = styled.div<{ isInput: boolean }>`
   display: flex;
   align-items: center;
-  column-gap: ${({ isInput }) => (isInput ? "10px" : "4px")};
+  ${({ isInput }) => (isInput ? "flex-direction: column; gap: 20px;" : "column-gap: 4px;")}
 
   .star-container {
     display: flex;
     column-gap: 2px;
   }
 
+  color: ${({ theme }) => theme.color.gray400};
+
+  .rating-full-marks {
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .rating-value-selected {
+    font-size: 32px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color.gray700};
+  }
+
   .rating-value {
-    font-size: ${({ isInput }) => (isInput ? "30px" : "12px")};
-    color: ${({ theme }) => theme.color.gray400};
+    font-size: 12px;
   }
 `;

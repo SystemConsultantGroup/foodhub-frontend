@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
 import CheckIcon from "components/inputs/TextInput/CheckIcon";
-import { TConditionCheck } from "./types/TConditionCheck";
+import { TConditionCheck } from "components/inputs/TextInput/types/TConditionCheck";
 
 interface Props {
   name?: string;
@@ -12,6 +12,7 @@ interface Props {
   conditionList?: string[];
   conditionCheckList?: TConditionCheck[];
   multiline?: boolean;
+  height?: string;
   onTextChange?: (value: string, isValid: boolean) => void;
 }
 
@@ -23,6 +24,7 @@ const TextInput: React.FC<Props> = ({
   conditionList,
   conditionCheckList,
   multiline = false,
+  height,
   onTextChange,
 }) => {
   const [status, setStatus] = useState(value === "" ? "default" : "success"); // default / success / invalid / focus
@@ -76,7 +78,7 @@ const TextInput: React.FC<Props> = ({
   }, [enteredValue, status, onTextChange]);
 
   return (
-    <EmotionWrapper>
+    <EmotionWrapper height={height}>
       {label && <span className="label">{label}</span>}
       {conditionList && (
         <div className="spanList">
@@ -179,6 +181,7 @@ const EmotionWrapper = styled.div<Props>`
     ${({ theme }) => commonStyles(theme)};
     position: relative;
     resize: none;
+    height: ${({ height }) => (height ? height : "auto")};
   }
 `;
 
