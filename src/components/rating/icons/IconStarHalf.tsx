@@ -1,12 +1,17 @@
 import styled from "@emotion/styled";
 
-const IconStarHalf = () => {
+interface Props {
+  size?: number;
+  onClick?: (event: React.MouseEvent) => void;
+}
+
+const IconStarHalf = ({ size = 15, onClick, ...props }: Props) => {
   return (
-    <EmotionWrapper>
+    <EmotionWrapper onClick={onClick}>
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 30 30"
+        width={size}
+        height={size}
+        viewBox="0 0 15 15"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -15,8 +20,8 @@ const IconStarHalf = () => {
           fill="#999999"
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M7.65283 12.4892L3.54753 14.6525L4.33353 10.0705L1.00019 6.82582L5.60019 6.15915L7.65283 2V12.4892Z"
           fill="#999999"
         />

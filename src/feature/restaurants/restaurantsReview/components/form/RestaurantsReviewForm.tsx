@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Rating from "components/rating/Rating";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -9,7 +10,11 @@ interface Props {
 }
 
 const RestaurantsReviewForm: React.FC<Props> = ({ restaurantId }) => {
-  return <EmotionWrapper></EmotionWrapper>;
+  return (
+    <EmotionWrapper>
+      <Rating value={3} isInput={true} />
+    </EmotionWrapper>
+  );
 };
 
 export default RestaurantsReviewForm;
