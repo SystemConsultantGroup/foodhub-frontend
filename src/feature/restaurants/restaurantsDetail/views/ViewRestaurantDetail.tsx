@@ -51,7 +51,7 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
         category={restaurant.category}
         delivery={restaurant.delivery}
         openingHour={restaurant.openingHour}
-        characteristics={restaurant.characteristics}
+        tags={restaurant.tags}
         totalScore={totalScore}
         totalCount={totalCount}
       />

@@ -11,7 +11,7 @@ interface Props {
   category: string;
   delivery: boolean;
   openingHour: string;
-  characteristics: string[];
+  tags: string[];
   totalScore: number;
   totalCount: number;
 }
@@ -25,7 +25,7 @@ const RestaurantDetailInfoSection: React.FC<Props> = ({
   category,
   delivery,
   openingHour,
-  characteristics,
+  tags,
   totalScore,
   totalCount,
 }) => {
@@ -41,7 +41,7 @@ const RestaurantDetailInfoSection: React.FC<Props> = ({
     <EmotionWrapper>
       <Tags>
         {delivery && <Tags.Item>배달 가능</Tags.Item>}
-        {characteristics.map((data, index) => (
+        {tags.map((data, index) => (
           <Tags.Item key={index} outLined={true} textColor="primary600" backColor="white">
             {data}
           </Tags.Item>

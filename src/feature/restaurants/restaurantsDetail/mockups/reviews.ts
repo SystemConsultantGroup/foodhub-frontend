@@ -12,7 +12,7 @@ export const reviewPage1: TReviewPage = {
     },
     {
       id: 2,
-      userId: 1,
+      userId: 2,
       score: 3,
       content:
         "리뷰 2 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -28,7 +28,7 @@ export const reviewPage1: TReviewPage = {
     },
     {
       id: 4,
-      userId: 1,
+      userId: 3,
       score: 2,
       content:
         "리뷰 4 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -36,7 +36,7 @@ export const reviewPage1: TReviewPage = {
     },
     {
       id: 5,
-      userId: 1,
+      userId: 4,
       score: 5,
       content:
         "리뷰 5 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -55,7 +55,7 @@ export const reviewPage2: TReviewPage = {
   contents: [
     {
       id: 6,
-      userId: 1,
+      userId: 2,
       score: 5,
       content:
         "리뷰 6 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -63,7 +63,7 @@ export const reviewPage2: TReviewPage = {
     },
     {
       id: 7,
-      userId: 1,
+      userId: 3,
       score: 3,
       content:
         "리뷰 7 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -71,7 +71,7 @@ export const reviewPage2: TReviewPage = {
     },
     {
       id: 8,
-      userId: 1,
+      userId: 4,
       score: 4,
       content:
         "리뷰 8 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -79,7 +79,7 @@ export const reviewPage2: TReviewPage = {
     },
     {
       id: 9,
-      userId: 1,
+      userId: 5,
       score: 2,
       content:
         "리뷰 9 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -114,7 +114,7 @@ export const reviewPage3: TReviewPage = {
     },
     {
       id: 12,
-      userId: 1,
+      userId: 5,
       score: 3,
       content:
         "리뷰 12 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",
@@ -122,7 +122,7 @@ export const reviewPage3: TReviewPage = {
     },
     {
       id: 13,
-      userId: 1,
+      userId: 6,
       score: 4,
       content:
         "리뷰 13 내가 먹어본 수육 중 인생수육임 ㄹㅇ 꼭 먹으셈 두번 먹으셈. 진짜 너무너무너무 맛있음",

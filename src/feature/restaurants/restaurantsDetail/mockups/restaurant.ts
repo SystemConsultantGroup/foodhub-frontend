@@ -14,6 +14,6 @@ export const restaurant = {
   orderTip: "수육 2인분 이상 주문시 수육나베 변경 가능",
   isActivated: true,
   organizationName: "시스템 컨설턴트 그룹",
-  characteristics: ["가성비", "술 마시기 좋은"],
+  tags: ["가성비", "술 마시기 좋은"],
   imgSrcList: [],
 };
