@@ -12,22 +12,19 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 const Rating = ({ value, isInput = false, onSelectedValueChange, ...props }: Props) => {
   const [selectedValue, setSelectedValue] = useState<number>(value);
-  const [filledStarCount, setFilledStarCount] = useState<number>(0);
-  const [emptyStarCount, setEmptyStarCount] = useState<number>(0);
-  const [hasHalfStar, setHasHalfStar] = useState<boolean>(false);
 
   // round value to the nearest 0.5
+  const startCount = Math.round(selectedValue * 2) / 2;
+
+  const filledStarCount = Math.floor(startCount);
+  const hasHalfStar = startCount % 1 !== 0;
+  const emptyStarCount = 5 - filledStarCount - (hasHalfStar ? 1 : 0);
 
   useEffect(() => {
-    const startCount = Math.round(selectedValue * 2) / 2;
-    setHasHalfStar(startCount % 1 !== 0);
-    setFilledStarCount(Math.floor(startCount));
-    setEmptyStarCount(5 - filledStarCount - (hasHalfStar ? 1 : 0));
-
     if (onSelectedValueChange) {
       onSelectedValueChange(selectedValue);
     }
-  }, [selectedValue, value, filledStarCount, hasHalfStar, onSelectedValueChange]);
+  }, [selectedValue, onSelectedValueChange]);
 
   const handleOnClick = (event: React.MouseEvent, index: number) => {
     const clickX = event.nativeEvent.clientX; // 클릭한 위치의 X 좌표
@@ -50,7 +47,7 @@ const Rating = ({ value, isInput = false, onSelectedValueChange, ...props }: Pro
           isInput ? (
             <IconStarFilled
               key={index}
-              size={50}
+              size={40}
               onClick={(event: React.MouseEvent) => handleOnClick(event, index)}
             />
           ) : (
@@ -60,7 +57,7 @@ const Rating = ({ value, isInput = false, onSelectedValueChange, ...props }: Pro
         {hasHalfStar &&
           (isInput ? (
             <IconStarHalf
-              size={50}
+              size={40}
               onClick={(event: React.MouseEvent) => handleOnClick(event, filledStarCount)}
             />
           ) : (
@@ -70,7 +67,7 @@ const Rating = ({ value, isInput = false, onSelectedValueChange, ...props }: Pro
           isInput ? (
             <IconStarOutlined
               key={index}
-              size={50}
+              size={40}
               onClick={(event: React.MouseEvent) =>
                 handleOnClick(event, filledStarCount + index + (hasHalfStar ? 1 : 0))
               }
