@@ -2,9 +2,11 @@ import "@emotion/react";
 
 declare module "@emotion/react" {
   export interface DeviceTheme {
+    fold: number;
     mobile: number;
   }
   export interface DeviceMediaTheme {
+    fold: string;
     mobile: string;
     pc: string;
   }

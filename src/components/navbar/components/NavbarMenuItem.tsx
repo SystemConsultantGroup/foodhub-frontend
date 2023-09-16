@@ -41,12 +41,16 @@ const EmotionWrapper = styled(Link)<{ active: boolean }>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  width: 80px;
   height: 60px;
   padding: 10px auto;
   text-decoration: none; // TODO: globalStyles 에서 resetAnchorStyle 머지 후 제거
   color: ${({ theme, active }) => (active ? theme.color.gray700 : theme.color.gray200)};
   stroke: ${({ theme, active }) => (active ? theme.color.gray700 : theme.color.gray200)};
+
+  ${({ theme }) => theme.device.fold} {
+    width: 60px;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.color.gray500};
