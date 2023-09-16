@@ -47,7 +47,7 @@ const EmotionWrapper = styled.div`
   background-color: ${({ theme }) => theme.color.gray100};
   height: ${NAVBAR_HEIGHT}px;
   padding: ${LAYOUT_MARGIN};
-  padding-bottom: 20px; // iOS 하단바 대응
+  padding-bottom: 0px; // iOS 하단바 대응
   display: flex;
   justify-content: center;
 
