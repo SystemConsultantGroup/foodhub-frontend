@@ -8,9 +8,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   name?: string;
   label?: string;
   value?: string;
+  placeHolder?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
   selectContainerMaxHeight?: number;
+  disabled?: boolean;
 }
 
 const Dropdown = ({
@@ -19,21 +21,28 @@ const Dropdown = ({
   value,
   onSelectValueChange,
   selectContainerMaxHeight,
+  name,
+  placeHolder = "Select an option",
+  disabled = false,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    if (!disabled) {
+      setIsOpen(!isOpen);
+    }
   };
 
   const handleOptionClick = (value: string, children: React.ReactNode) => {
-    setSelectedOptionValue(value);
-    setIsOpen(false);
+    if (!disabled) {
+      setSelectedOptionValue(value);
+      setIsOpen(false);
 
-    if (onSelectValueChange) {
-      onSelectValueChange(value);
+      if (onSelectValueChange) {
+        onSelectValueChange(value);
+      }
     }
   };
 
@@ -89,7 +98,7 @@ const Dropdown = ({
           </span>
         ) : (
           // 선택되지 않은 경우
-          <span>{"Select an option"}</span>
+          <span>{placeHolder}</span>
         )}
         {isOpen ? <DropdownUpIcon /> : <DropdownDownIcon />}
       </div>
@@ -152,6 +161,7 @@ const EmotionWrapper = styled.div<{
 
   div.options {
     position: absolute;
+    z-index: 100;
     top: 120%;
     left: 0;
     width: 100%;
@@ -170,6 +180,8 @@ const EmotionWrapper = styled.div<{
     ${({ selectContainerMaxHeight }) =>
       selectContainerMaxHeight && `max-height: ${selectContainerMaxHeight}px`};
     z-index: 10;
+    max-height: 15vh;
+    overflow: auto;
   }
 
   span.label {
