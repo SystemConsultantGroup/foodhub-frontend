@@ -1,11 +1,13 @@
 import { css, Global, Theme, useTheme } from "@emotion/react";
 import emotionReset from "emotion-reset";
 import { fontFace } from "styles/fontFace";
+import { resetAnchorStyle } from "styles/reset/resetAnchorStyle";
 import { resetButtonStyle } from "styles/reset/resetButtonStyle";
 
 const globalStyles = (theme: Theme) => css`
   ${emotionReset}
   ${resetButtonStyle}
+  ${resetAnchorStyle}
   ${fontFace}
 
   html, body {
