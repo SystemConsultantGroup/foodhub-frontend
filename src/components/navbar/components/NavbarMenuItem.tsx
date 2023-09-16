@@ -1,9 +1,15 @@
-import styled from "@emotion/styled";
-import { TNavbarMenu } from "components/navbar/types/TNavbarMenu";
 import Link from "next/link";
+import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { TNavbarMenu } from "components/navbar/types/TNavbarMenu";
 
-const NavbarMenuItem = ({ path, label, icon }: TNavbarMenu) => {
+type NavbarMenuItemComponentProps = {
+  onClick: (menuIndex: TNavbarMenu["menuIndex"]) => void;
+};
+
+type Props = NavbarMenuItemComponentProps & TNavbarMenu;
+
+const NavbarMenuItem = ({ path, label, icon, menuIndex, onClick }: Props) => {
   const { pathname } = useRouter();
 
   // 메인페이지는 항상 "/" 로 시작하기에 필요한 예외처리
@@ -15,7 +21,13 @@ const NavbarMenuItem = ({ path, label, icon }: TNavbarMenu) => {
   const active = isMainPage ? isMainPageActive : isOtherPagesActive;
 
   return (
-    <EmotionWrapper active={active} href={path}>
+    <EmotionWrapper
+      active={active}
+      href={path}
+      onClick={() => {
+        onClick(menuIndex);
+      }}
+    >
       {icon}
       <p className="menu-item-name">{label}</p>
     </EmotionWrapper>
