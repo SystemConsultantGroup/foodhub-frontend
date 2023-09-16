@@ -5,7 +5,14 @@ import { useRouter } from "next/router";
 
 const NavbarMenuItem = ({ path, label, icon }: TNavbarMenu) => {
   const { pathname } = useRouter();
-  const active = pathname === path;
+
+  // 메인페이지는 항상 "/" 로 시작하기에 필요한 예외처리
+  // 더 좋은 로직이 있다면 교체 바람.
+  const isMainPage = pathname === "/";
+  const isMainPageActive = isMainPage && path === "/";
+  const isOtherPagesActive = path !== "/" && pathname.startsWith(path);
+
+  const active = isMainPage ? isMainPageActive : isOtherPagesActive;
 
   return (
     <EmotionWrapper active={active} href={path}>
