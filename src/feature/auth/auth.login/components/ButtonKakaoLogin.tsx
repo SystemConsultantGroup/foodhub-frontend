@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { API_ENDPOINT } from "constant/api";
+import { processEnv } from "constant/processEnv";
 
-const KAKAO_LOGIN_URL = "http://localhost:8000/auth/kakao/login";
+const KAKAO_LOGIN_URL = processEnv.NEXT_PUBLIC_API_ENDPOINT + API_ENDPOINT.auth.kakao.login;
 
 const ButtonKakaoLogin = () => {
   return (
