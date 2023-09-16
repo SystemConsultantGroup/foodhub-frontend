@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { LINK_MAIN_PAGE } from "constant/link";
 import ViewRegister from "feature/auth/auth.register/views/ViewRegister";
 import { GetServerSideProps } from "next";
 
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   const hasAuthenticated = true;
 
   if (isNicknameAlreadySet || !hasAuthenticated) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 

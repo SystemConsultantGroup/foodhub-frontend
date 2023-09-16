@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { LINK_MAIN_PAGE } from "constant/link";
 import ViewRegisterSuccess from "feature/auth/auth.register/views/ViewRegisterSuccess";
 import { GetServerSideProps } from "next";
 
@@ -21,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   const hasUserAlreadyViewedSuccessPage = false;
 
   if (hasUserAlreadyViewedSuccessPage) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 

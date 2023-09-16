@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import TextInput from "components/inputs/TextInput/TextInput";
+import { LINK_REGISTER_SUCCESS } from "constant/link";
 import {
   NICKNAME_LENGTH_LIMIT_MAX,
   NICKNAME_LENGTH_LIMIT_MIN,
@@ -16,7 +17,7 @@ const ViewRegister = () => {
     isValid: false,
   });
 
-  const registerSuccessLink = "/register/success";
+  const registerSuccessLink = LINK_REGISTER_SUCCESS;
 
   const handleFoodhubNicknameChange = useCallback((value: string, isValid: boolean) => {
     setFoodhubNickname({

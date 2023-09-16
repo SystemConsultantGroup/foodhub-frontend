@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { LINK_MAIN_PAGE } from "constant/link";
 import ViewLogin from "feature/auth/auth.login/views/ViewLogin";
 import { GetServerSideProps } from "next";
 
@@ -22,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   const isLoggedIn = req.cookies.accessToken;
 
   if (isLoggedIn) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 
