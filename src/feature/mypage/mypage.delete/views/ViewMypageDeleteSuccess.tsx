@@ -1,14 +1,13 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
+import { LINK_MAIN_PAGE } from "constant/link";
 import Link from "next/link";
 
 const ViewMypageDeleteSuccess = () => {
-  const mainPageUrl = "/";
-
   return (
     <EmotionWrapper>
       <h1>회원탈퇴가 완료되었습니다.</h1>
-      <Link href={mainPageUrl}>
+      <Link href={LINK_MAIN_PAGE}>
         <Button>푸드허브 메인으로</Button>
       </Link>
     </EmotionWrapper>

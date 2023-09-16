@@ -1,3 +1,4 @@
+import { LINK_ACCOUNT_DELETE, LINK_MAIN_PAGE } from "constant/link";
 import ViewMypageDeleteSuccess from "feature/mypage/mypage.delete/views/ViewMypageDeleteSuccess";
 import { GetServerSideProps } from "next";
 
@@ -14,12 +15,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
    */
   const referer = req.headers.referer;
   const isLoggedIn = false;
-  const isFromDeletePage = referer?.includes("/mypage/delete");
+  const isFromDeletePage = referer?.includes(LINK_ACCOUNT_DELETE);
 
   const shouldRedirect = !isLoggedIn || !isFromDeletePage;
 
   if (shouldRedirect) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 

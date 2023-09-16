@@ -1,3 +1,4 @@
+import { LINK_MAIN_PAGE, LINK_MYPAGE } from "constant/link";
 import ViewMypageDelete from "feature/mypage/mypage.delete/views/ViewMypageDelete";
 import { GetServerSideProps } from "next";
 
@@ -15,11 +16,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
 
   const referer = req.headers.referer;
   const isLoggedIn = true;
-  const isFromMyPage = referer?.includes("/mypage");
+  const isFromMyPage = referer?.includes(LINK_MYPAGE);
   const shouldRedirect = !isLoggedIn || !isFromMyPage;
 
   if (shouldRedirect) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 
