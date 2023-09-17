@@ -27,6 +27,10 @@ export const RESTAURANT_FORM_INITIAL_VALUES: TRestaurantFormValues = {
     isValid: false,
   },
   recommendedMenu: "",
-  orderTip: "",
+  orderTip: {
+    value: "",
+    isValid: false,
+  },
+
   // 이미지는 따로 처리
 };

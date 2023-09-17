@@ -12,7 +12,7 @@ export type TRestaurantFormValues = {
   capacity?: TFormValue<string>; // 맛집 수용인원
   openingHour?: TFormValue<string>; // 맛집 운영 시간
   recommendedMenu?: string; // 맛집 추천 메뉴
-  orderTip?: string; // 맛집 주문 팁
+  orderTip?: TFormValue<string>; // 맛집 주문 팁
   // 맛집 이미지 파일들의 uuid 배열
   files?: {
     uuid: string;
