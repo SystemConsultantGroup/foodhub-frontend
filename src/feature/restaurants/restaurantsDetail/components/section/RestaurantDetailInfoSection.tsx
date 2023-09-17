@@ -11,7 +11,7 @@ interface Props {
   category: string;
   delivery: boolean;
   openingHour: string;
-  characteristics: string[];
+  tags: string[];
   totalScore: number;
   totalCount: number;
 }
@@ -25,7 +25,7 @@ const RestaurantDetailInfoSection: React.FC<Props> = ({
   category,
   delivery,
   openingHour,
-  characteristics,
+  tags,
   totalScore,
   totalCount,
 }) => {
@@ -41,7 +41,7 @@ const RestaurantDetailInfoSection: React.FC<Props> = ({
     <EmotionWrapper>
       <Tags>
         {delivery && <Tags.Item>배달 가능</Tags.Item>}
-        {characteristics.map((data, index) => (
+        {tags.map((data, index) => (
           <Tags.Item key={index} outLined={true} textColor="primary600" backColor="white">
             {data}
           </Tags.Item>
@@ -173,22 +173,22 @@ const EmotionWrapper = styled.div`
       }
     }
 
-    .item:nth-child(1) {
+    .item:nth-of-type(1) {
       grid-column-start: 1;
       grid-column-end: 4;
     }
 
-    .item:nth-child(2) {
+    .item:nth-of-type(2) {
       grid-column-start: 4;
       grid-column-end: 7;
     }
 
-    .item:nth-child(3) {
+    .item:nth-of-type(3) {
       grid-column-start: 1;
       grid-column-end: 5;
     }
 
-    .item:nth-child(4) {
+    .item:nth-of-type(4) {
       grid-column-start: 5;
       grid-column-end: 7;
     }

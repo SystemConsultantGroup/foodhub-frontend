@@ -7,7 +7,11 @@ import {
   reviewPage3,
 } from "feature/restaurants/restaurantsDetail/mockups/reviews";
 import { TReviewPage } from "feature/restaurants/restaurantsDetail/types/TReviewPage";
+import ReviewItem from "feature/restaurants/restaurantsDetail/components/review/ReviewItem";
 import Button from "components/button/Button";
+import IconTogglePageLeft from "components/icons/IconTogglePageLeft";
+import IconTogglePageRight from "components/icons/IconTogglePageRight";
+import Rating from "components/rating/Rating";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -15,6 +19,7 @@ interface Props {
   totalScore: number;
   totalCount: number;
   totalPages: number;
+  scoreStatistics: number[]; // 별점 별 리뷰 개수 (별점 높은 순)
 }
 
 const RestaurantDetailReviewSection: React.FC<Props> = ({
@@ -23,6 +28,7 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
   totalScore,
   totalCount,
   totalPages,
+  scoreStatistics,
 }) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [reviewPage, setReviewPage] = useState<TReviewPage | null>(null);
@@ -34,9 +40,6 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
    * TODO 2: 리뷰가 없는 경우
    */
 
-  /**
-   * 임시 코드 (리뷰 페이지 전환용)
-   */
   const handlePageNumberOnClick = () => {
     if (pageNumber === totalPages) {
       setPageNumber(1);
@@ -69,7 +72,7 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
       <div className="titleDiv">
         <span>우리 멤버들이 남긴 리뷰</span>
         {(userAuth === 0 || userAuth === 1) && (
-          <Link className="linkDiv" href={"/retaurants/" + restaurantId + "/review/create"}>
+          <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/review/create"}>
             리뷰 작성하기 &gt;
           </Link>
         )}
@@ -77,16 +80,47 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
       <div className="reviewOverviewDiv">
         <div className="totalInfo">
           <div>
-            <span className="totalScoreInfo">{totalScore}</span>
-            <span className="measure">/ 5</span>
+            <span className="totalScoreInfo">{totalCount ? totalScore : "-"}</span>
+            <span className="measure"> / 5</span>
           </div>
           <span className="totalReviewInfo">총 {totalCount}개의 리뷰</span>
         </div>
-        <div className="scoreReviewCountInfo"></div>
+        <div className="scoreStatisticsDiv">
+          {scoreStatistics.map((count, index) => (
+            <div key={index} className="scoreStatisticsItem">
+              <span>{count}개</span>
+              <Rating value={5 - index} />
+            </div>
+          ))}
+        </div>
       </div>
       <div className="reviewDiv">
-        {reviewPage?.contents.map((review) => <div key={review.id}></div>)}
-        <Button onClick={handlePageNumberOnClick}>{pageNumber}</Button>
+        {reviewPage?.contents.map((review) => (
+          <ReviewItem
+            key={review.id}
+            restaurantId={restaurantId}
+            reviewId={review.id}
+            userId={review.userId}
+            content={review.content}
+            score={review.score}
+            createdAt={review.createdAt}
+          />
+        ))}
+      </div>
+      <div className="togglePageDiv">
+        <Button
+          icon={<IconTogglePageLeft />}
+          variant="text"
+          onClick={handlePageNumberOnClick}
+          disabled={totalCount === 0}
+        />
+        <span>{pageNumber}</span>
+        <Button
+          icon={<IconTogglePageRight />}
+          variant="text"
+          onClick={handlePageNumberOnClick}
+          disabled={totalCount === 0}
+        />
       </div>
     </EmotionWrapper>
   );
@@ -128,9 +162,10 @@ const EmotionWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 120px;
+    height: 150px;
     background-color: ${({ theme }) => theme.color.gray100};
     padding: 5px 30px;
+    border-radius: 6px;
 
     div.totalInfo {
       display: flex;
@@ -154,8 +189,44 @@ const EmotionWrapper = styled.div`
       span.totalReviewInfo {
         font-size: 12px;
         font-weight: 300;
-        color: ${({ theme }) => theme.color.gray300};
+        color: ${({ theme }) => theme.color.gray400};
       }
+    }
+
+    div.scoreStatisticsDiv {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px
+
+      font-size: 14px;
+      font-weight: 300;
+      color: ${({ theme }) => theme.color.gray400};
+
+      div.scoreStatisticsItem {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        gap: 15px;
+      }
+    }
+  }
+
+  .reviewDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .togglePageDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    span {
+      font-size: 18px;
+      color: ${({ theme }) => theme.color.gray500};
     }
   }
 `;

@@ -4,11 +4,12 @@ import Link from "next/link";
 
 interface Props {
   restaurantId: string | number | string[];
-  userAuth: number;
+  userAuth?: number;
   restaurantName: string;
   restaurantAddress: string;
   organizationName: string;
-  link: string;
+  link?: string;
+  isMain?: boolean;
 }
 
 const RestaurantDetailHeaderSection: React.FC<Props> = ({
@@ -18,28 +19,32 @@ const RestaurantDetailHeaderSection: React.FC<Props> = ({
   restaurantAddress,
   organizationName,
   link,
+  isMain = true,
 }) => {
   return (
     <EmotionWrapper>
       <div className="overTitleDiv">
         <span className="subtitle">{organizationName}</span>
-        {userAuth === 0 || userAuth === 1 ? (
-          <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/edit"}>
-            맛집 수정
-          </Link>
-        ) : (
-          <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/copy"}>
-            맛집 수정
-          </Link>
-        )}
+        {isMain &&
+          (userAuth === 0 || userAuth === 1 ? (
+            <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/edit"}>
+              맛집 수정
+            </Link>
+          ) : (
+            <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/copy"}>
+              맛집 수정
+            </Link>
+          ))}
       </div>
       <span className="title">{restaurantName}</span>
       <div className="underTitleDiv">
         <span className="subtitle">{restaurantAddress}</span>
-        <Link className="linkDiv" href={link}>
-          <RestaurantExternalLinkIcon />
-          <span className="linkSpan">맛집 상세 정보 &gt;</span>
-        </Link>
+        {link && (
+          <Link className="linkDiv" href={link}>
+            <RestaurantExternalLinkIcon />
+            <span className="linkSpan">맛집 상세 정보 &gt;</span>
+          </Link>
+        )}
       </div>
     </EmotionWrapper>
   );
@@ -74,8 +79,8 @@ const EmotionWrapper = styled.div`
     color: ${({ theme }) => theme.color.gray700};
   }
 
-  div.underTitleDiv,
-  div.overTitleDiv {
+  .underTitleDiv,
+  .overTitleDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;

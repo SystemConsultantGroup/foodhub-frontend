@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import RestaurantDetailImgSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailImgSection";
 import RestaurantDetailHeaderSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailHeaderSection";
 import RestaurantDetailInfoSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailInfoSection";
 import RestaurantDetailReviewSection from "feature/restaurants/restaurantsDetail/components/section/RestaurantDetailReviewSection";
@@ -28,9 +29,11 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
   const totalScore = reviewPage1.totalScore;
   const totalCount = reviewPage1.totalCount;
   const totalPages = reviewPage1.totalPages;
+  const scoreStatistics = reviewPage1.scoreStatistics;
 
   return (
     <EmotionWrapper>
+      <RestaurantDetailImgSection imgSrcList={restaurant.imgSrcList} />
       <RestaurantDetailHeaderSection
         restaurantId={restaurantId}
         userAuth={userAuth}
@@ -48,7 +51,7 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
         category={restaurant.category}
         delivery={restaurant.delivery}
         openingHour={restaurant.openingHour}
-        characteristics={restaurant.characteristics}
+        tags={restaurant.tags}
         totalScore={totalScore}
         totalCount={totalCount}
       />
@@ -59,6 +62,7 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
         totalScore={totalScore}
         totalCount={totalCount}
         totalPages={totalPages}
+        scoreStatistics={scoreStatistics}
       />
     </EmotionWrapper>
   );
