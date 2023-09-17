@@ -38,7 +38,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
       <FormItemRestaurantName {...commonProps} />
       <FormItemRestaurantComment {...commonProps} />
       <FormItemRestaurantAddress {...commonProps} />
-      <FormItemRestaurantDelivery />
+      <FormItemRestaurantDelivery {...commonProps} />
       <FormItemTagIds />
       <FormItemRestaurantCapacity />
       <FormItemRestaurantOpeningHour />
@@ -47,7 +47,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
       <FormItemRestaurantOrderTip />
       <FormItemRestaurantLink />
       <FormItemRestaurantImages />
-      <Button>저장하기</Button>
+      <Button className="submit">저장하기</Button>
     </EmotionWrapper>
   );
 };
@@ -59,7 +59,7 @@ const EmotionWrapper = styled.div`
   flex-direction: column;
   row-gap: 36px;
 
-  button {
+  button.submit {
     margin-top: 24px;
     float: right;
   }
