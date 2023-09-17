@@ -158,6 +158,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
       <div className="set-password-container" data-ispublic={!!isPublic}>
         <p className="text-question">7. 비밀번호를 설정해 보아요!</p>
         <TextInput
+          type="password"
           label="비밀번호"
           value={password}
           placeholder="비밀번호를 입력해주세요"
