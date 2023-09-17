@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, InputHTMLAttributes } from "react";
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
 import CheckIcon from "components/inputs/TextInput/CheckIcon";
 import { TConditionCheck } from "components/inputs/TextInput/types/TConditionCheck";
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   name?: string;
   label?: string;
   value?: string;
@@ -14,6 +14,7 @@ interface Props {
   multiline?: boolean;
   height?: string;
   onTextChange?: (value: string, isValid: boolean) => void;
+  className?: string;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -26,6 +27,8 @@ const TextInput: React.FC<Props> = ({
   multiline = false,
   height,
   onTextChange,
+  className,
+  ...props // input 태그의 나머지 속성들
 }) => {
   const [status, setStatus] = useState(value === "" ? "default" : "success"); // default / success / invalid / focus
   const [enteredValue, setEnteredValue] = useState(value);
@@ -77,13 +80,13 @@ const TextInput: React.FC<Props> = ({
     }
   }, [enteredValue, status, onTextChange]);
 
+  // 비동기적인 value 변경에 대한 처리 (API 호출 시)
   useEffect(() => {
-    // 비동기 API 호출로 인한 value 변경 시에만 실행
     setEnteredValue(value);
   }, [value]);
 
   return (
-    <EmotionWrapper height={height}>
+    <EmotionWrapper className={className}>
       {label && <span className="label">{label}</span>}
       {conditionList && (
         <div className="spanList">
@@ -104,6 +107,7 @@ const TextInput: React.FC<Props> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             data-status={status}
+            {...props}
           />
         ) : (
           <input
@@ -114,6 +118,7 @@ const TextInput: React.FC<Props> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             data-status={status}
+            {...props}
           />
         )}
         {status == "success" && (
