@@ -32,8 +32,13 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
     setFormValues,
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(formValues);
+  };
+
   return (
-    <EmotionWrapper>
+    <EmotionWrapper onSubmit={handleSubmit}>
       <FormTitle />
       <FormItemRestaurantName {...commonProps} />
       <FormItemRestaurantComment {...commonProps} />
@@ -54,7 +59,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
 
 export default RestaurantForm;
 
-const EmotionWrapper = styled.div`
+const EmotionWrapper = styled.form`
   display: flex;
   flex-direction: column;
   row-gap: 36px;
