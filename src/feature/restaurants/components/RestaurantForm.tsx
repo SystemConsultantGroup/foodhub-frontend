@@ -72,7 +72,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
       <FormItemRestaurantRecommendedMenu />
       <FormItemRestaurantCategoryId />
       <FormItemRestaurantOrderTip {...commonProps} />
-      <FormItemRestaurantLink />
+      <FormItemRestaurantLink {...commonProps} />
       <FormItemRestaurantImages />
       <Button className="submit">저장하기</Button>
     </EmotionWrapper>

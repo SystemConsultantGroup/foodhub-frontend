@@ -12,7 +12,10 @@ export const RESTAURANT_FORM_INITIAL_VALUES: TRestaurantFormValues = {
     value: "",
     isValid: false,
   },
-  link: "",
+  link: {
+    value: "",
+    isValid: false,
+  },
   delivery: false,
   comment: {
     value: "",
