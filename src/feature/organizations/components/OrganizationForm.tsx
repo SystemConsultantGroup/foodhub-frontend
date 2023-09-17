@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import Checkbox from "components/checkbox/Checkbox";
 import AreaInput from "components/inputs/AreaInput/AreaInput";
+import ImageInput from "components/inputs/ImageInput/ImageInput";
 import TextInput from "components/inputs/TextInput/TextInput";
 import { ORGANIZATION_TYPE_CHECKBOX_ITEM_LIST } from "feature/organizations/constants/orgnizationTypeCheckboxItemList";
 import {
@@ -16,6 +17,11 @@ import { MOCKUP_ORGANIZATION_INITIAL_DATA } from "feature/organizations/mockups/
 import { TOrganizationFormValues } from "feature/organizations/types/TOrganizationFormValues";
 import { useCallback, useEffect, useState } from "react";
 
+type TCustomFormTarget = {
+  imageInput: { files: FileList };
+  imageUrlInput: { value: string };
+};
+
 interface Props {
   isEditMode?: boolean;
 }
@@ -29,8 +35,16 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
     password: "",
     nickname: "",
   });
-  const handleClickSubmit = async () => {
+
+  const handleClickSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & TCustomFormTarget;
+
+    console.log("submit");
     console.log(formValues);
+
+    console.log(target.imageInput.files);
+    console.log(target.imageUrlInput.value);
   };
 
   const handleSetFormValues = useCallback(
@@ -69,6 +83,8 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
   }, []);
 
   const { type, isPublic, name, password, nickname, areaId } = formValues;
+  const organizationImageSrc = null; // 서버에서 받아온 단체 프로필 이미지
+  const existingImageUrlList = organizationImageSrc ? [organizationImageSrc] : [];
 
   // 데이터 fetching 로직이 들어올 시 비동기적으로 form values 를 업데이트 해야함
   useEffect(() => {
@@ -76,7 +92,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
   }, [isEditMode]);
 
   return (
-    <EmotionWrapper>
+    <EmotionWrapper onSubmit={handleClickSubmit}>
       <h1>{isEditMode ? "단체 정보 수정" : "단체 만들기"}</h1>
       <p className="text-question">1. 내 단체는 어떤 단체인가요?</p>
       <Checkbox.Group
@@ -148,14 +164,17 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         />
       </div>
 
-      <Button onClick={handleClickSubmit}>단체 만들기</Button>
+      <p className="text-question">7. 우리 단체를 대표하는 이미지를 설정해보세요!</p>
+      <ImageInput maxImageCount={1} existingImageUrlList={existingImageUrlList} />
+
+      <Button type="submit">단체 만들기</Button>
     </EmotionWrapper>
   );
 };
 
 export default OrganizationForm;
 
-const EmotionWrapper = styled.div`
+const EmotionWrapper = styled.form`
   h1 {
     font-size: 24px;
     font-weight: 700;
