@@ -1,23 +1,22 @@
 import styled from "@emotion/styled";
 import Restaurant from "components/dataDisplay/Restaurant";
-import Link from "next/link";
 
 interface Props {
   organizationId: string | number | string[];
 }
 
-const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
+const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId }) => {
   /**
    * TODO: 서버에서 해당 단체의 메인 정보, 맛집 리스트 받아오기
    */
-  const name = "시스템 컨설턴트 그룹"; // 서버에서 받아온 단체 이름
+  const name = "System Consultant Group"; // 서버에서 받아온 단체 이름
   const restaurants = [
-    { restaurantId: 1, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
-    { restaurantId: 2, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
-    { restaurantId: 3, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
-    { restaurantId: 4, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
-    { restaurantId: 5, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
-    { restaurantId: 6, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율전동" },
+    { restaurantId: 1, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 2, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 3, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 4, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 5, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
+    { restaurantId: 6, restaurantName: "봉수육", restaurantLocation: "경기도 수원시 율천동" },
   ];
 
   return (
@@ -29,14 +28,13 @@ const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
       <div className="body">
         <span className="subtitle">이 단체의 맛집</span>
         <div className="restaurants">
-          {restaurants.map((data) => (
-            <Link className="link" key={data.restaurantId} href="/restaurants/1">
-              <Restaurant
-                restaurantId={data.restaurantId}
-                restaurantName={data.restaurantName}
-                restaurantLocation={data.restaurantLocation}
-              />
-            </Link>
+          {restaurants.map((restaurant) => (
+            <Restaurant
+              key={restaurant.restaurantId}
+              restaurantId={restaurant.restaurantId}
+              restaurantName={restaurant.restaurantName}
+              restaurantLocation={restaurant.restaurantLocation}
+            />
           ))}
         </div>
       </div>
@@ -44,7 +42,7 @@ const OrganizationRestaurantSection: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default OrganizationRestaurantSection;
+export default OrganizationRestaurantsSection;
 
 const EmotionWrapper = styled.div`
   display: flex;

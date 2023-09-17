@@ -9,7 +9,7 @@ interface Props {
   userAuth: number;
 }
 
-const OrganizationButtonsSection: React.FC<Props> = ({ userAuth, organizationId }) => {
+const OrganizationMainButtonsSection: React.FC<Props> = ({ userAuth, organizationId }) => {
   let AuthButtonsComponent;
 
   if (userAuth === 0) {
@@ -30,6 +30,6 @@ const OrganizationButtonsSection: React.FC<Props> = ({ userAuth, organizationId 
   );
 };
 
-export default OrganizationButtonsSection;
+export default OrganizationMainButtonsSection;
 
 const EmotionWrapper = styled.div``;

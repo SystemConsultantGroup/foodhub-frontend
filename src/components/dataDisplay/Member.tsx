@@ -9,9 +9,16 @@ interface Props {
   memberId: number;
   memberName: string;
   memberDescription: string;
+  showManagementButton?: boolean;
 }
 
-const Member = ({ imageSrc, memberId, memberName, memberDescription }: Props) => {
+const Member = ({
+  imageSrc,
+  memberId,
+  memberName,
+  memberDescription,
+  showManagementButton = true,
+}: Props) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const src = imageSrc ?? "/images/defaults/default-member-profile-image.jpeg";
@@ -31,12 +38,14 @@ const Member = ({ imageSrc, memberId, memberName, memberDescription }: Props) =>
         <p className="member-name">{memberName}</p>
         <p className="member-description">{memberDescription}</p>
       </div>
-      <IconMoreDots
-        onClick={handleTogglePopover}
-        open={isPopoverOpen}
-        onClose={handlePopoverClose}
-        memberId={memberId}
-      />
+      {showManagementButton && (
+        <IconMoreDots
+          onClick={handleTogglePopover}
+          open={isPopoverOpen}
+          onClose={handlePopoverClose}
+          memberId={memberId}
+        />
+      )}
     </EmotionWrapper>
   );
 };

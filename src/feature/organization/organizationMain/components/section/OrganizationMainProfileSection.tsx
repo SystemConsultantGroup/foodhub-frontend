@@ -6,7 +6,7 @@ interface Props {
   organizationId: string | number | string[];
 }
 
-const OrganizationProfileSection: React.FC<Props> = ({ organizationId }) => {
+const OrganizationMainProfileSection: React.FC<Props> = ({ organizationId }) => {
   /**
    * TODO: organizationId에 해당하는 단체 이름, 설명, 활동 지역, 프로필이미지 받아오기
    */
@@ -39,7 +39,7 @@ const OrganizationProfileSection: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default OrganizationProfileSection;
+export default OrganizationMainProfileSection;
 
 const EmotionWrapper = styled.div`
   display: flex;

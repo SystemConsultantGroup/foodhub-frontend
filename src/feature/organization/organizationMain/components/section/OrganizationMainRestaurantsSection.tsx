@@ -1,20 +1,18 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import { FilterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
+import Restaurant from "components/dataDisplay/Restaurant";
 import {
   EmptyRestaurantMemberIcon,
   EmptyRestaurantVisitorIcon,
 } from "feature/organization/organizationMain/components/icons/EmptyIcons";
-
-import Restaurant from "components/dataDisplay/Restaurant";
-import Link from "next/link";
 
 interface Props {
   organizationId: string | number | string[];
   userAuth: number;
 }
 
-const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userAuth }) => {
+const OrganizationMainRestaurantsSection: React.FC<Props> = ({ organizationId, userAuth }) => {
   /**
    * TODO: organizationId에 해당하는 단체의 맛집 리스트 받아오기
    */
@@ -57,13 +55,12 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userA
       ) : (
         <div className="restaurants">
           {restaurants.map((data) => (
-            <Link className="link" key={data.restaurantId} href="/restaurants/1">
-              <Restaurant
-                restaurantId={data.restaurantId}
-                restaurantName={data.restaurantName}
-                restaurantLocation={data.restaurantLocation}
-              />
-            </Link>
+            <Restaurant
+              key={data.restaurantId}
+              restaurantId={data.restaurantId}
+              restaurantName={data.restaurantName}
+              restaurantLocation={data.restaurantLocation}
+            />
           ))}
         </div>
       )}
@@ -71,7 +68,7 @@ const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId, userA
   );
 };
 
-export default OrganizationRestaurantsSection;
+export default OrganizationMainRestaurantsSection;
 
 const EmotionWrapper = styled.div`
   display: flex;

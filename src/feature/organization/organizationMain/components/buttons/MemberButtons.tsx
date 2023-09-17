@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import router from "next/router";
 import Button from "components/button/Button";
 import { MembersIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
 
@@ -7,9 +8,12 @@ interface Props {
 }
 
 const MemberButtons: React.FC<Props> = ({ organizationId }) => {
+  const handleOnClick = () => {
+    router.push(`/organizations/${organizationId}/member`);
+  };
   return (
     <EmotionWrapper>
-      <Button variant="text" icon={<MembersIcon />}>
+      <Button variant="text" icon={<MembersIcon />} onClick={handleOnClick}>
         멤버 조회
       </Button>
     </EmotionWrapper>
