@@ -18,7 +18,10 @@ export const RESTAURANT_FORM_INITIAL_VALUES: TRestaurantFormValues = {
     value: "",
     isValid: false,
   },
-  capacity: 0,
+  capacity: {
+    value: "1",
+    isValid: false,
+  },
   openingHour: "",
   recommendedMenu: "",
   orderTip: "",

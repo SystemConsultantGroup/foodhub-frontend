@@ -9,7 +9,7 @@ export type TRestaurantFormValues = {
   link?: string; // 맛집 링크
   delivery?: boolean; // 맛집 배달 여부
   comment?: TFormValue<string>; // 맛집 한줄평
-  capacity?: number; // 맛집 수용인원
+  capacity?: TFormValue<string>; // 맛집 수용인원
   openingHour?: string; // 맛집 운영 시간
   recommendedMenu?: string; // 맛집 추천 메뉴
   orderTip?: string; // 맛집 주문 팁
