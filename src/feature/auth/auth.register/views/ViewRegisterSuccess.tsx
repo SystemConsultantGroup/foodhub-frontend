@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
+import { LINK_MAIN_PAGE } from "constant/link";
 import { useRouter } from "next/router";
 
 const ViewRegisterSuccess = () => {
@@ -8,7 +9,7 @@ const ViewRegisterSuccess = () => {
   const foodhubNickname = "을지문덕"; // TODO: API 에서 받아오는 닉네임으로 변경
 
   const handleGotoMain = () => {
-    push("/");
+    push(LINK_MAIN_PAGE);
   };
   return (
     <EmotionWrapper>

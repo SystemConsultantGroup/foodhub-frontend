@@ -9,6 +9,9 @@ export const LINK_MAIN_PAGE = "/";
 // 로그인 페이지 경로
 export const LINK_LOGIN_PAGE = "/login";
 
+// 회원가입 성공 시 페이지경로
+export const LINK_REGISTER_SUCCESS = "/register/success";
+
 // 마이 페이지
 export const LINK_MYPAGE = "/mypage";
 

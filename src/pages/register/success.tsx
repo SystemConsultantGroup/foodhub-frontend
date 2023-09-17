@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import ViewRegisterSuccess from "feature/auth/auth.register/views/ViewRegisterSuccess";
 import { LINK_MAIN_PAGE } from "constant/link";
+import ViewRegisterSuccess from "feature/auth/auth.register/views/ViewRegisterSuccess";
 import { GetServerSideProps } from "next";
 
 const PageRegisterSuccess = () => {
