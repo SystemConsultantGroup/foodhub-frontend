@@ -138,8 +138,14 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         className="organization-form-item"
         value={areaId}
       />
+      <p className="text-question">5. 우리 단체를 대표하는 이미지를 설정해보세요!</p>
+      <ImageInput
+        maxImageCount={ORGANIZATION_IMAGE_MAX_COUNT}
+        existingImageUrlList={existingImageUrlList}
+        className="organization-form-item"
+      />
 
-      <p className="text-question">5. 단체를 비공개로 설정할 수 있어요!</p>
+      <p className="text-question">6. 단체를 비공개로 설정할 수 있어요!</p>
       <Checkbox.Group
         checkedList={[String(isPublic)]}
         setCheckedItem={(value) => handleSetIsPublic(value)}
@@ -150,7 +156,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
       </Checkbox.Group>
 
       <div className="set-password-container" data-ispublic={!!isPublic}>
-        <p className="text-question">6. 비밀번호를 설정해 보아요!</p>
+        <p className="text-question">7. 비밀번호를 설정해 보아요!</p>
         <TextInput
           label="비밀번호"
           value={password}
@@ -164,12 +170,6 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
           ]}
         />
       </div>
-
-      <p className="text-question">7. 우리 단체를 대표하는 이미지를 설정해보세요!</p>
-      <ImageInput
-        maxImageCount={ORGANIZATION_IMAGE_MAX_COUNT}
-        existingImageUrlList={existingImageUrlList}
-      />
 
       <Button type="submit">단체 만들기</Button>
     </EmotionWrapper>

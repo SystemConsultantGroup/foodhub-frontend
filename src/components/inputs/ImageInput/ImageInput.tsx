@@ -8,9 +8,15 @@ interface Props {
   maxImageCount?: number; // 최대 입력할 수 있는 이미지 개수
   existingImageUrlList?: string[]; // 이미 서버에 존재하던 이미지 URL 리스트
   label?: string; // 이미지 인풋 레이블
+  className?: string;
 }
 
-const ImageInput: React.FC<Props> = ({ maxImageCount = 1, existingImageUrlList = [], label }) => {
+const ImageInput: React.FC<Props> = ({
+  maxImageCount = 1,
+  existingImageUrlList = [],
+  label,
+  className,
+}) => {
   const imageUrlRef = useRef<HTMLInputElement>(null); // 이미 서버에 존재하던 이미지 URL 리스트
   const fileInputRef = useRef<HTMLInputElement>(null); // 로컬에서 업로드한 이미지 리스트
   const fileInputUniqueIndexCount = useRef(0); // 로컬 이미지 리스트의 uniqueIndex를 위한 카운트
@@ -89,7 +95,7 @@ const ImageInput: React.FC<Props> = ({ maxImageCount = 1, existingImageUrlList =
   }, [imageUrlListState]);
 
   return (
-    <EmotionWrapper>
+    <EmotionWrapper className={className}>
       <label className="label">{label}</label>
       <p className="description">최대 {maxImageCount}장 선택</p>
       <div className="image-input-item-wrapper">
