@@ -14,8 +14,17 @@ import FormItemRestaurantRecommendedMenu from "feature/restaurants/components/fo
 import FormItemTagIds from "feature/restaurants/components/formItems/FormItemTagIds";
 import FormTitle from "feature/restaurants/components/formItems/FormTitle";
 import { RESTAURANT_FORM_INITIAL_VALUES } from "feature/restaurants/constants/RestaurantFormInitialValues";
+import { TTagIdName } from "feature/restaurants/constants/restaurantTagIdsItemList";
 import { TRestaurantFormValues } from "feature/restaurants/types/TRestaurantFormValues";
 import { useState } from "react";
+
+type TTagId = {
+  // eslint 가 key 값을 unused var 로 인식. TS 에서 이런 일이 일어나면 안되지만 임시조치
+  // eslint-disable-next-line no-unused-vars
+  [key in TTagIdName]: {
+    checked: boolean;
+  };
+};
 
 interface Props {
   isEditMode?: boolean;
@@ -35,6 +44,19 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(formValues);
+
+    // TODO: 더 나은 방식 생각해내기
+    const target = event.target as typeof event.target & TTagId;
+
+    const mood = target.mood.checked;
+    const value = target.value.checked;
+    const kind = target.kind.checked;
+    const liquor = target.liquor.checked;
+
+    console.log("mood", mood);
+    console.log("value", value);
+    console.log("kind", kind);
+    console.log("liquor", liquor);
   };
 
   return (
@@ -44,7 +66,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
       <FormItemRestaurantComment {...commonProps} />
       <FormItemRestaurantAddress {...commonProps} />
       <FormItemRestaurantDelivery {...commonProps} />
-      <FormItemTagIds />
+      <FormItemTagIds {...commonProps} />
       <FormItemRestaurantCapacity />
       <FormItemRestaurantOpeningHour />
       <FormItemRestaurantRecommendedMenu />

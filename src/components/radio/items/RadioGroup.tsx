@@ -31,6 +31,7 @@ const EmotionWrapper = styled.div`
 
   .radio-item-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
   }
 `;
