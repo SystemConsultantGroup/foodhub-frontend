@@ -4,6 +4,7 @@ import Checkbox from "components/checkbox/Checkbox";
 import AreaInput from "components/inputs/AreaInput/AreaInput";
 import ImageInput from "components/inputs/ImageInput/ImageInput";
 import TextInput from "components/inputs/TextInput/TextInput";
+import { ORGANIZATION_IMAGE_MAX_COUNT } from "constant/limit";
 import { ORGANIZATION_TYPE_CHECKBOX_ITEM_LIST } from "feature/organizations/constants/orgnizationTypeCheckboxItemList";
 import {
   validateOrganizationNameEmpty,
@@ -165,7 +166,10 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
       </div>
 
       <p className="text-question">7. 우리 단체를 대표하는 이미지를 설정해보세요!</p>
-      <ImageInput maxImageCount={1} existingImageUrlList={existingImageUrlList} />
+      <ImageInput
+        maxImageCount={ORGANIZATION_IMAGE_MAX_COUNT}
+        existingImageUrlList={existingImageUrlList}
+      />
 
       <Button type="submit">단체 만들기</Button>
     </EmotionWrapper>
