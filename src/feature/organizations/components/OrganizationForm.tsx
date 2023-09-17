@@ -29,7 +29,6 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
     password: "",
     nickname: "",
   });
-
   const handleClickSubmit = async () => {
     console.log(formValues);
   };
@@ -69,7 +68,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
     }));
   }, []);
 
-  const { type, isPublic, name, password, nickname } = formValues;
+  const { type, isPublic, name, password, nickname, areaId } = formValues;
 
   // 데이터 fetching 로직이 들어올 시 비동기적으로 form values 를 업데이트 해야함
   useEffect(() => {
@@ -120,7 +119,7 @@ const OrganizationForm = ({ isEditMode = false }: Props) => {
         label="활동 지역"
         onSelectValueChange={handleSetOrgAreaId}
         className="organization-form-item"
-        // value={areaId}
+        value={areaId}
       />
 
       <p className="text-question">5. 단체를 비공개로 설정할 수 있어요!</p>
