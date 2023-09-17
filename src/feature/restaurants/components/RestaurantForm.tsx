@@ -68,7 +68,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
       <FormItemRestaurantDelivery {...commonProps} />
       <FormItemTagIds {...commonProps} />
       <FormItemRestaurantCapacity {...commonProps} />
-      <FormItemRestaurantOpeningHour />
+      <FormItemRestaurantOpeningHour {...commonProps} />
       <FormItemRestaurantRecommendedMenu />
       <FormItemRestaurantCategoryId />
       <FormItemRestaurantOrderTip />
