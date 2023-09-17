@@ -35,7 +35,7 @@ const AreaInput: React.FC<Props> = ({ label, value, onSelectValueChange, classNa
 
   useEffect(() => {
     const areaId = `${sido ?? "NN"}${sigungu ?? "NNN"}${dong ?? "NNN"}`;
-
+    if (!sido || !sigungu || !dong) return;
     onSelectValueChange?.(parseInt(areaId));
   }, [sido, sigungu, dong, onSelectValueChange]);
 
@@ -46,7 +46,7 @@ const AreaInput: React.FC<Props> = ({ label, value, onSelectValueChange, classNa
       const nextSido = area.slice(0, 2);
       const nextSigungu = area.slice(2, 5);
       const nextDong = area.slice(5);
-      // 무한 렌더링을 막기 위한 조치, 이전 값과 변경 예정인 값이 같을 경우 렌더링을 막는다.
+
       if (nextSido === previousSido && nextSigungu === previousSigungu && nextDong === previousDong)
         return;
       setSido(nextSido);
