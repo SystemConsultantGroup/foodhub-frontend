@@ -23,8 +23,8 @@ const Button = ({
   fullWidth = false,
   loading = false,
   onClick,
-  danger = false, // 버튼을 빨간색으로 표시
   className,
+  danger = false, // 버튼을 빨간색으로 표시
   ...props
 }: Props) => {
   const [isActive, setIsActive] = useState(false);

@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import ViewMyPageEdit from "feature/mypage/mypage.edit/views/ViewMypageEdit";
+import { LINK_LOGIN_PAGE } from "constant/link";
 
 const PageMyPageEdit = () => {
   return <ViewMyPageEdit />;
@@ -14,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   const isLoggedIn = true;
 
   if (!isLoggedIn) {
-    res.writeHead(302, { Location: "/login" });
+    res.writeHead(302, { Location: LINK_LOGIN_PAGE });
     res.end();
   }
 

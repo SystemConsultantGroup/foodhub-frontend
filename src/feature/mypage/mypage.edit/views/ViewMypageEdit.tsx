@@ -8,6 +8,7 @@ import { TMypageFormValues } from "feature/mypage/mypage.edit/types/TMypageFormV
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { BIRTH_YEAR_DROPDOWN_VALUE_LIST } from "feature/mypage/mypage.edit/constants/birthYearDropdownValues";
+import { LINK_ACCOUNT_DELETE } from "constant/link";
 
 const { Option } = Dropdown;
 
@@ -33,7 +34,6 @@ const ViewMypageEdit = () => {
   const handleChangeDescription = useCallback(handleChangeInput("introduction"), []);
 
   const { nickname, introduction, gender, birthYear } = formValues;
-  const deleteUserAccountLink = "/mypage/delete";
 
   // TODO: 서버 데이터 받아오는 작업 모킹
   useEffect(() => {
@@ -91,7 +91,7 @@ const ViewMypageEdit = () => {
       <Button fullWidth className="button-save">
         저장하기
       </Button>
-      <Link className="button-remove-account" href={deleteUserAccountLink}>
+      <Link className="button-remove-account" href={LINK_ACCOUNT_DELETE}>
         탈퇴하기
       </Link>
     </EmotionWrapper>

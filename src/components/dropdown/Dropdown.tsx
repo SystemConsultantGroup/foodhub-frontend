@@ -78,7 +78,7 @@ const Dropdown = ({
   return (
     <EmotionWrapper
       isOpen={isOpen}
-      isCompleted={selectedOptionValue ? true : false}
+      isCompleted={!!selectedOptionValue}
       selectContainerMaxHeight={selectContainerMaxHeight}
     >
       {label && <span className="label">{label}</span>}

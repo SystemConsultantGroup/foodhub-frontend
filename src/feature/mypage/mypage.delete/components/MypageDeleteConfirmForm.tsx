@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
 import TextInput from "components/inputs/TextInput/TextInput";
+import { LINK_ACCOUNT_DELETE_SUCCESS } from "constant/link";
 import { validateDeleteConfirmMessage } from "feature/mypage/mypage.delete/functions/validateDeleteConfirmMessage";
 import { TTextInputItem } from "feature/mypage/mypage.delete/types/TTextInputItem";
 import { useRouter } from "next/router";
@@ -8,7 +9,6 @@ import { useCallback, useState } from "react";
 
 const MypageDeleteConfirmForm = () => {
   const { push } = useRouter();
-  const deleteSuccessLink = "/mypage/delete/success";
 
   const [confirmFormValues, setConfirmFormValues] = useState<TTextInputItem>({
     value: "",
@@ -29,7 +29,7 @@ const MypageDeleteConfirmForm = () => {
       return;
     }
     // TODO: API 연동 , 여기서 실제 탈퇴 API 호출 후 성공 시 아래 링크로 이동
-    push(deleteSuccessLink);
+    push(LINK_ACCOUNT_DELETE_SUCCESS);
   };
 
   return (
