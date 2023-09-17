@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
+import Link from "next/link";
 import { textEllipsis } from "styles/ellipsis/textEllipsis";
 
 interface Props {
@@ -12,9 +13,10 @@ interface Props {
 const Organization = ({ imageSrc, orgId, orgName, orgDescription }: Props) => {
   const src = imageSrc ?? "/images/defaults/default-organization-profile-image.png";
   const alt = `${orgName} 단체 로고`;
+  const orgLink = `/organizations/${orgId}`;
 
   return (
-    <EmotionWrapper>
+    <EmotionWrapper href={orgLink}>
       <Image className="organization-profile-image" src={src} width={40} height={40} alt={alt} />
       <div className="organization-info">
         <p className="organization-name">{orgName}</p>
@@ -26,7 +28,7 @@ const Organization = ({ imageSrc, orgId, orgName, orgDescription }: Props) => {
 
 export default Organization;
 
-const EmotionWrapper = styled.div`
+const EmotionWrapper = styled(Link)`
   display: flex;
   align-items: center;
 

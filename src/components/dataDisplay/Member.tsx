@@ -17,7 +17,7 @@ const Member = ({ imageSrc, memberId, memberName, memberDescription }: Props) =>
   const src = imageSrc ?? "/images/defaults/default-member-profile-image.jpeg";
   const alt = `${memberName} 멤버 프로필 사진`;
 
-  const handleTogglePropover = () => {
+  const handleTogglePopover = () => {
     setIsPopoverOpen((prev) => !prev);
   };
 
@@ -32,9 +32,10 @@ const Member = ({ imageSrc, memberId, memberName, memberDescription }: Props) =>
         <p className="member-description">{memberDescription}</p>
       </div>
       <IconMoreDots
-        onClick={handleTogglePropover}
+        onClick={handleTogglePopover}
         open={isPopoverOpen}
         onClose={handlePopoverClose}
+        memberId={memberId}
       />
     </EmotionWrapper>
   );
