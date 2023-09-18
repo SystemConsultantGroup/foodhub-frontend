@@ -1,14 +1,12 @@
 import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
+import { LINK_MAIN_PAGE } from "constant/link";
+import ViewLogin from "feature/auth/auth.login/views/ViewLogin";
 import { GetServerSideProps } from "next";
 
 const PageLogin = () => {
   return (
     <EmotionWrapper>
-      <PageMarker
-        title="로그인 페이지"
-        description="카카오 계정을 이용해 로그인할 수 있는 페이지"
-      />
+      <ViewLogin />
     </EmotionWrapper>
   );
 };
@@ -25,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   const isLoggedIn = req.cookies.accessToken;
 
   if (isLoggedIn) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 

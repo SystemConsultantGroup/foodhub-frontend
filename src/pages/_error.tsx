@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { NextPageContext } from "next";
+import { LINK_MAIN_PAGE } from "constant/link";
 
 interface Props {
   statusCode?: number;
@@ -13,7 +14,7 @@ const CustomError = ({ statusCode, title }: Props) => {
     <EmotionWrapper>
       <p className="status-code">{statusCode}</p>
       <p className="title">{title}</p>
-      <Link href="/">홈으로</Link>
+      <Link href={LINK_MAIN_PAGE}>홈으로</Link>
     </EmotionWrapper>
   );
 };

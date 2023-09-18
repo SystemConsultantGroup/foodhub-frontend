@@ -1,14 +1,12 @@
 import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
+import { LINK_MAIN_PAGE } from "constant/link";
+import ViewRegisterSuccess from "feature/auth/auth.register/views/ViewRegisterSuccess";
 import { GetServerSideProps } from "next";
 
 const PageRegisterSuccess = () => {
   return (
     <EmotionWrapper>
-      <PageMarker
-        title="회원가입 성공 페이지"
-        description="회원가입 (닉네임 세팅) 하고 나서 랜딩되는 페이지"
-      />
+      <ViewRegisterSuccess />
     </EmotionWrapper>
   );
 };
@@ -24,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   const hasUserAlreadyViewedSuccessPage = false;
 
   if (hasUserAlreadyViewedSuccessPage) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 
