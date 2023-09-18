@@ -23,6 +23,7 @@ const Button = ({
   fullWidth = false,
   loading = false,
   onClick,
+  disabled,
   danger = false, // 버튼을 빨간색으로 표시
   ...props
 }: Props) => {
@@ -46,7 +47,7 @@ const Button = ({
       danger={danger}
       variant={variant}
       fullWidth
-      disabled={loading}
+      disabled={loading || disabled}
       icon={icon}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
@@ -88,6 +89,7 @@ export const EmotionWrapper = styled.button<Props>`
     pointer-events: none;
     background-color: ${({ theme }) => theme.color.gray100};
     box-shadow: inset 0 0 0 1px ${({ theme }) => theme.color.gray200};
+    border: 1px solid ${({ theme }) => theme.color.gray200};
     color: ${({ theme }) => theme.color.gray200}
   };
   

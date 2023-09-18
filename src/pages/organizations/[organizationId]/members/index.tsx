@@ -7,7 +7,7 @@ const PageOrganizationMember = () => {
   /**
    * TODO: userAuth 받아오기
    */
-  const userAuth = 1;
+  const userAuth = 0;
 
   return <ViewOrganizationMemberPage organizationId={organizationId} userAuth={userAuth} />;
 };
