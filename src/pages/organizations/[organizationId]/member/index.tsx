@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import ViewOrganizationMemberPage from "feature/organization/organizationMember/views/ViewOrganizationMemberPage";
 
@@ -10,13 +9,7 @@ const PageOrganizationMember = () => {
    */
   const userAuth = 1;
 
-  return (
-    <EmotionWrapper>
-      <ViewOrganizationMemberPage organizationId={organizationId} userAuth={userAuth} />
-    </EmotionWrapper>
-  );
+  return <ViewOrganizationMemberPage organizationId={organizationId} userAuth={userAuth} />;
 };
 
 export default PageOrganizationMember;
-
-const EmotionWrapper = styled.div``;
