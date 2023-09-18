@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import OrganizationMemberSection from "feature/organization/organizationMember/components/section/OrganizationMemberSection";
+import OrganizationMemberSection from "feature/organization/organizationMembers/components/section/OrganizationMembersSection";
 
 interface Props {
   organizationId: string | number | string[];

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import ViewOrganizationMemberPage from "feature/organization/organizationMember/views/ViewOrganizationMemberPage";
+import ViewOrganizationMemberPage from "feature/organization/organizationMembers/views/ViewOrganizationMembersPage";
 
 const PageOrganizationMember = () => {
   const { query } = useRouter();

@@ -9,7 +9,7 @@ interface Props {
 
 const MemberButtons: React.FC<Props> = ({ organizationId }) => {
   const handleOnClick = () => {
-    router.push(`/organizations/${organizationId}/member`);
+    router.push(`/organizations/${organizationId}/members`);
   };
   return (
     <EmotionWrapper>

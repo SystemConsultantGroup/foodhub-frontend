@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import ViewOrganizationRestaurantPage from "feature/organization/organizationRestaurant/views/ViewOrganizationRestaurantPage";
+import ViewOrganizationRestaurantPage from "feature/organization/organizationRestaurants/views/ViewOrganizationRestaurantsPage";
 
 const PageOrganizationRestaurant = () => {
   const { query } = useRouter();
