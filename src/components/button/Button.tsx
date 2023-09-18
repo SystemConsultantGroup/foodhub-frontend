@@ -45,7 +45,7 @@ const Button = ({
       {...props}
       danger={danger}
       variant={variant}
-      fullWidth={fullWidth}
+      fullWidth
       disabled={loading}
       icon={icon}
       onMouseDown={handleMouseDown}

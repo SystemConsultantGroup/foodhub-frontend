@@ -8,10 +8,10 @@ interface Props {
 const ActionButtons: React.FC<Props> = ({ organizationId }) => {
   return (
     <EmotionWrapper>
-      <Button variant="primary" fullWidth={true}>
+      <Button variant="primary" fullWidth>
         투표 바로가기
       </Button>
-      <Button variant="primary" fullWidth={true}>
+      <Button variant="primary" fullWidth>
         맛집 추가하기
       </Button>
     </EmotionWrapper>
