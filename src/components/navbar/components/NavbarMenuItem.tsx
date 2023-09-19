@@ -2,6 +2,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { TNavbarMenu } from "components/navbar/types/TNavbarMenu";
+import { isNavbarMenuActive } from "components/navbar/functions/isNavbarMenuActive";
 
 type NavbarMenuItemComponentProps = {
   onClick: (menuIndex: TNavbarMenu["menuIndex"]) => void;
@@ -12,13 +13,10 @@ type Props = NavbarMenuItemComponentProps & TNavbarMenu;
 const NavbarMenuItem = ({ path, label, icon, menuIndex, onClick }: Props) => {
   const { pathname } = useRouter();
 
-  // 메인페이지는 항상 "/" 로 시작하기에 필요한 예외처리
-  // 더 좋은 로직이 있다면 교체 바람.
-  const isMainPage = pathname === "/";
-  const isMainPageActive = isMainPage && path === "/";
-  const isOtherPagesActive = path !== "/" && pathname.startsWith(path);
-
-  const active = isMainPage ? isMainPageActive : isOtherPagesActive;
+  const active = isNavbarMenuActive({
+    currentPathname: pathname,
+    navbarPathname: path,
+  });
 
   return (
     <EmotionWrapper
