@@ -23,6 +23,7 @@ const Button = ({
   fullWidth = false,
   loading = false,
   onClick,
+  className,
   danger = false, // 버튼을 빨간색으로 표시
   ...props
 }: Props) => {
@@ -50,7 +51,7 @@ const Button = ({
       icon={icon}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      className={isActive ? "active" : ""}
+      className={isActive ? `active ${className}` : className}
     >
       {loading && <Loader />}
       {icon}

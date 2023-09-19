@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import PageMarker from "components/pageMarker/PageMarker";
+import { LINK_MAIN_PAGE } from "constant/link";
 import { GetServerSideProps } from "next";
 
 const PageRegisterSuccess = () => {
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, query }
   const hasUserAlreadyViewedSuccessPage = false;
 
   if (hasUserAlreadyViewedSuccessPage) {
-    res.writeHead(302, { Location: "/" });
+    res.writeHead(302, { Location: LINK_MAIN_PAGE });
     res.end();
   }
 

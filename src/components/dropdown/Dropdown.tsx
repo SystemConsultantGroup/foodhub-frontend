@@ -11,6 +11,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   placeHolder?: string;
   children: React.ReactNode;
   onSelectValueChange?: (value: string) => void;
+  selectContainerMaxHeight?: number;
   disabled?: boolean;
 }
 
@@ -18,9 +19,10 @@ const Dropdown = ({
   children,
   label,
   value,
+  onSelectValueChange,
+  selectContainerMaxHeight,
   name,
   placeHolder = "Select an option",
-  onSelectValueChange,
   disabled = false,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +76,11 @@ const Dropdown = ({
   }, [children, selectedOptionValue, onSelectValueChange, value]);
 
   return (
-    <EmotionWrapper isOpen={isOpen} isCompleted={selectedOptionValue ? true : false}>
+    <EmotionWrapper
+      isOpen={isOpen}
+      isCompleted={!!selectedOptionValue}
+      selectContainerMaxHeight={selectContainerMaxHeight}
+    >
       {label && <span className="label">{label}</span>}
       <div className="selected-option" onClick={toggleDropdown}>
         {selectedOptionValue ? (
@@ -114,7 +120,11 @@ const Dropdown = ({
 Dropdown.Option = DropdownOption;
 export default Dropdown;
 
-const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
+const EmotionWrapper = styled.div<{
+  isOpen: boolean;
+  isCompleted: boolean;
+  selectContainerMaxHeight?: number;
+}>`
   position: relative;
   font-size: 14px;
   width: 100%;
@@ -155,7 +165,7 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
     top: 120%;
     left: 0;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: ${({ selectContainerMaxHeight }) => (selectContainerMaxHeight ? "scroll" : "auto")};
     border: 0.5px solid ${({ theme }) => theme.color.gray500};
     border-radius: 6px;
     background-color: white;
@@ -167,6 +177,9 @@ const EmotionWrapper = styled.div<{ isOpen: boolean; isCompleted: boolean }>`
       opacity 0.3s ease-in-out,
       height 0.3s ease-in-out;
 
+    ${({ selectContainerMaxHeight }) =>
+      selectContainerMaxHeight && `max-height: ${selectContainerMaxHeight}px`};
+    z-index: 10;
     max-height: 15vh;
     overflow: auto;
   }

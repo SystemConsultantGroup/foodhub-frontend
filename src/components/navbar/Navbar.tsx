@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import { LAYOUT_MARGIN } from "constant/layoutMargin";
 import { NAVBAR_HEIGHT } from "constant/navbarHeight";
 
-interface Props {}
-
-const Navbar = ({}: Props) => {
+const Navbar = () => {
   return <EmotionWrapper>Navbar</EmotionWrapper>;
 };
 
