@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { TNavbarMenu } from "components/navbar/types/TNavbarMenu";
 import { isNavbarMenuActive } from "components/navbar/functions/isNavbarMenuActive";
+import { useEffect } from "react";
 
 type NavbarMenuItemComponentProps = {
   onClick: (menuIndex: TNavbarMenu["menuIndex"]) => void;
@@ -17,6 +18,10 @@ const NavbarMenuItem = ({ path, label, icon, menuIndex, onClick }: Props) => {
     currentPathname: pathname,
     navbarPathname: path,
   });
+
+  useEffect(() => {
+    if (active) onClick(menuIndex);
+  }, [active, onClick, menuIndex, pathname]);
 
   return (
     <EmotionWrapper
