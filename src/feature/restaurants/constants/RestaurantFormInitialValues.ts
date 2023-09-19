@@ -6,7 +6,7 @@ export const RESTAURANT_FORM_INITIAL_VALUES: TRestaurantFormValues = {
     value: "",
     isValid: false,
   },
-  categoryId: 0,
+  categoryId: "1",
   tagIds: [0],
   address: {
     value: "",

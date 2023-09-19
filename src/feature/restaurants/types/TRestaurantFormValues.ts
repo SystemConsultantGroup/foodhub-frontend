@@ -3,7 +3,7 @@ import { TFormValue } from "feature/restaurants/types/TFormValue";
 export type TRestaurantFormValues = {
   userId: number; // 맛집 생성자의 id
   name: TFormValue<string>; // 맛집 이름
-  categoryId: number; // 맛집 카테고리 id
+  categoryId: string; // 맛집 카테고리 id
   tagIds: number[]; // 맛집 태그 id 배열
   address?: TFormValue<string>; // 맛집 주소
   link?: TFormValue<string>; // 맛집 링크
