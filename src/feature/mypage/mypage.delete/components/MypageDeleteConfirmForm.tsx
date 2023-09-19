@@ -40,7 +40,7 @@ const MypageDeleteConfirmForm = () => {
         onTextChange={handleChangeConfirmValue}
         conditionCheckList={[validateDeleteConfirmMessage]}
       />
-      <Button fullWidth onClick={handleSubmitDeleteAccount}>
+      <Button danger fullWidth onClick={handleSubmitDeleteAccount}>
         탈퇴하기
       </Button>
     </EmotionWrapper>
@@ -54,13 +54,5 @@ const EmotionWrapper = styled.div`
 
   button {
     margin-top: 32px;
-    // TODO: danger Button  머지되면 버튼에 danger prop 부여
-    background-color: ${({ theme }) => theme.color.danger500};
-
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: ${({ theme }) => theme.color.danger600};
-    }
   }
 `;
