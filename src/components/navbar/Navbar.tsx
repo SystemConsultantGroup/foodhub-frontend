@@ -8,7 +8,8 @@ import { NAVBAR_HEIGHT } from "constant/navbarHeight";
 import { useState } from "react";
 
 const Navbar = () => {
-  const [activeMenuIndex, setActiveMenuIndex] = useState(0);
+  const [activeMenuIndex, setActiveMenuIndex] = useState(-1);
+  const hasNavbarMenuInitialized = activeMenuIndex > -1; // 직접 메인 페이지 이외 접근 시 슬라이더가 홈에 왔다가 가는 것을 방지
 
   const handleClickNavbarMenuItem = (menuIndex: TNavbarMenu["menuIndex"]) => {
     setActiveMenuIndex(menuIndex);
@@ -17,7 +18,7 @@ const Navbar = () => {
   return (
     <EmotionWrapper>
       <nav>
-        <NavbarSliderIndicator activeMenuIndex={activeMenuIndex} />
+        {hasNavbarMenuInitialized && <NavbarSliderIndicator activeMenuIndex={activeMenuIndex} />}
         {NAVBAR_MENU_LIST.map((navbarMenu) => {
           const { label, icon, path, menuIndex } = navbarMenu;
 
