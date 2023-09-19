@@ -1,11 +1,41 @@
 import styled from "@emotion/styled";
+import NavbarMenuItem from "components/navbar/components/NavbarMenuItem";
+import NavbarSliderIndicator from "components/navbar/components/NavbarSliderIndicator";
+import { NAVBAR_MENU_LIST } from "components/navbar/constants/navbarMenuList";
+import { TNavbarMenu } from "components/navbar/types/TNavbarMenu";
 import { LAYOUT_MARGIN } from "constant/layoutMargin";
 import { NAVBAR_HEIGHT } from "constant/navbarHeight";
+import { useState } from "react";
 
-interface Props {}
+const Navbar = () => {
+  const [activeMenuIndex, setActiveMenuIndex] = useState(-1);
+  const hasNavbarMenuInitialized = activeMenuIndex > -1; // 직접 메인 페이지 이외 접근 시 슬라이더가 홈에 왔다가 가는 것을 방지
 
-const Navbar = ({}: Props) => {
-  return <EmotionWrapper>Navbar</EmotionWrapper>;
+  const handleClickNavbarMenuItem = (menuIndex: TNavbarMenu["menuIndex"]) => {
+    setActiveMenuIndex(menuIndex);
+  };
+
+  return (
+    <EmotionWrapper>
+      <nav>
+        {hasNavbarMenuInitialized && <NavbarSliderIndicator activeMenuIndex={activeMenuIndex} />}
+        {NAVBAR_MENU_LIST.map((navbarMenu) => {
+          const { label, icon, path, menuIndex } = navbarMenu;
+
+          return (
+            <NavbarMenuItem
+              key={label}
+              label={label}
+              icon={icon}
+              path={path}
+              menuIndex={menuIndex}
+              onClick={handleClickNavbarMenuItem}
+            />
+          );
+        })}
+      </nav>
+    </EmotionWrapper>
+  );
 };
 
 export default Navbar;
@@ -14,13 +44,16 @@ const EmotionWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.color.gray100};
   width: 100%;
+  background-color: ${({ theme }) => theme.color.gray100};
   height: ${NAVBAR_HEIGHT}px;
   padding: ${LAYOUT_MARGIN};
-  padding-bottom: 20px; // iOS 하단바 대응
+  padding-bottom: 0px; // iOS 하단바 대응
+  display: flex;
+  justify-content: center;
+
+  nav {
+    position: relative;
+    display: flex;
+  }
 `;

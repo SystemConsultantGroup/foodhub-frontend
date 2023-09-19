@@ -1,11 +1,13 @@
 import { DeviceMediaTheme, DeviceTheme, Theme } from "@emotion/react";
 
 const size: DeviceTheme = {
+  fold: 350, // 갤럭시 폴드 최하 280px ~ 350px 소형 스마트폰 대응
   mobile: 768 + 80,
 };
 
 // 미디어 쿼리의 중복 코드를 줄이기위해 정의된 변수입니다
 const device: DeviceMediaTheme = {
+  fold: `@media only screen and (max-width: ${size.fold}px)`,
   mobile: `@media only screen and (max-width: ${size.mobile}px)`,
   pc: `@media only screen and (min-width: ${size.mobile}px)`,
 };

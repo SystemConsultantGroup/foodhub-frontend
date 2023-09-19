@@ -1,1 +1,1 @@
-export const LAYOUT_MARGIN = "0 40px";
+export const LAYOUT_MARGIN = "0 20px";
