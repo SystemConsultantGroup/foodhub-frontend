@@ -17,6 +17,7 @@ const FormItemRestaurantRecommendedMenu: React.FC<Props> = ({ formValues, setFor
     <EmotionWrapper>
       <FormItemLabel>추천 메뉴</FormItemLabel>
       <HashtagInput
+        placeholder="쉼표로 구분하여 메뉴를 추가하세요!"
         setHashTagList={setHashtagList}
         hashtagList={JSON.parse(formValues.recommendedMenu ?? "[]")}
       />

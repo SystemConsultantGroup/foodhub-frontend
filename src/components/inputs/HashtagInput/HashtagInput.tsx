@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 interface Props {
   hashtagList: string[];
   setHashTagList: (hashtagList: string[]) => void;
+  placeholder?: string;
 }
 
 type TTextInput = {
@@ -13,7 +14,7 @@ type TTextInput = {
   isValid: boolean;
 };
 
-const HashtagInput: React.FC<Props> = ({ hashtagList, setHashTagList }) => {
+const HashtagInput: React.FC<Props> = ({ hashtagList, setHashTagList, placeholder }) => {
   const [currentInput, setCurrentInput] = useState<TTextInput>({
     value: "",
     isValid: false,
@@ -42,6 +43,7 @@ const HashtagInput: React.FC<Props> = ({ hashtagList, setHashTagList }) => {
   return (
     <EmotionWrapper>
       <TextInput
+        placeholder={placeholder}
         conditionList={["쉼표로 구분하여 메뉴를 추가하세요!"]}
         value={currentInput.value}
         onTextChange={handleChangeCurrentInput}
