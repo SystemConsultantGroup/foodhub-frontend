@@ -68,7 +68,7 @@ const OrganizationFormSection: React.FC<Props> = ({ organizationId }) => {
         <AreaInput />
       </div>
       <ImageInput maxImageCount={1} existingImageUrlList={[imageSrc]}></ImageInput>
-      <Button fullWidth={true} onClick={handleSubmit}>
+      <Button fullWidth onClick={handleSubmit}>
         수정 완료
       </Button>
     </EmotionWrapper>

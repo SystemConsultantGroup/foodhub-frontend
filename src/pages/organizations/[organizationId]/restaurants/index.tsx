@@ -1,18 +1,11 @@
-import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import ViewOrganizationRestaurantPage from "feature/organization/organizationRestaurant/views/ViewOrganizationRestaurantPage";
+import ViewOrganizationRestaurantPage from "feature/organization/organizationRestaurants/views/ViewOrganizationRestaurantsPage";
 
 const PageOrganizationRestaurant = () => {
   const { query } = useRouter();
   const organizationId = query.organizationId ?? 0;
 
-  return (
-    <EmotionWrapper>
-      <ViewOrganizationRestaurantPage organizationId={organizationId} />
-    </EmotionWrapper>
-  );
+  return <ViewOrganizationRestaurantPage organizationId={organizationId} />;
 };
 
 export default PageOrganizationRestaurant;
-
-const EmotionWrapper = styled.div``;

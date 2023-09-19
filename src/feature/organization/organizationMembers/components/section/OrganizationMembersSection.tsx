@@ -4,7 +4,7 @@ import Button from "components/button/Button";
 import Member from "components/dataDisplay/Member";
 import Modal from "components/modal/Modal";
 import { useState, useEffect } from "react";
-import { TMember } from "feature/organization/organizationMember/types/TMember";
+import { TMember } from "feature/organization/organizationMembers/types/TMember";
 
 interface Props {
   organizationId: string | number | string[];
@@ -12,8 +12,8 @@ interface Props {
 }
 
 const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }) => {
-  const [isSuccession, setIsSuccession] = useState(false);
-  const [isSelectButtonVIsible, setButtonVisible] = useState(false);
+  const [isSuccessorSelectMode, setisSuccessorSelectMode] = useState(false);
+  const [isSelectButtonVisible, setIsSelectButtonVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TMember | null>(null);
   const isManager = userAuth === 0;
@@ -35,21 +35,20 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
   ];
 
   useEffect(() => {
-    if (isSuccession) {
+    if (isSuccessorSelectMode) {
       const transitionEndHandler = () => {
-        setButtonVisible(true);
+        setIsSelectButtonVisible(true);
         document.removeEventListener("transitionend", transitionEndHandler);
       };
 
       document.addEventListener("transitionend", transitionEndHandler);
     } else {
-      setButtonVisible(false);
+      setIsSelectButtonVisible(false);
     }
-  }, [isSuccession]);
+  }, [isSuccessorSelectMode]);
 
   const handleSuccessionButton = () => {
-    setIsSuccession((isSuccession) => !isSuccession);
-    console.log(isSuccession);
+    setisSuccessorSelectMode((isSuccessorSelectMode) => !isSuccessorSelectMode);
   };
 
   const handleSelectMember = (member: TMember) => {
@@ -58,7 +57,7 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
   };
 
   return (
-    <EmotionWrapper isSuccession={isSuccession}>
+    <EmotionWrapper isSuccessorSelectMode={isSuccessorSelectMode}>
       <div className="head">
         <span className="orgName">{name}</span>
         <span className="title">{isManager ? "멤버 관리" : "멤버 조회"}</span>
@@ -66,11 +65,13 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
       <div className="body">
         <div className="bodyTitle">
           <span className="subtitle">이 단체의 멤버</span>
-          {isManager && (
-            <Button variant="text" onClick={handleSuccessionButton}>
-              {isSuccession ? "취소" : "관리자 승계"}
-            </Button>
-          )}
+          <div>
+            {isManager && (
+              <Button variant="text" onClick={handleSuccessionButton}>
+                {isSuccessorSelectMode ? "취소" : "관리자 승계"}
+              </Button>
+            )}
+          </div>
         </div>
         <div className="members">
           {memberList.map((member) => (
@@ -83,20 +84,23 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
                   showManagementButton={isManager}
                 />
               </div>
-              {isSuccession && isSelectButtonVIsible && member.auth !== "관리자" && (
-                <Button
-                  variant="primary"
-                  onClick={() =>
-                    handleSelectMember({
-                      memberId: member.id,
-                      memberName: member.memberName,
-                      memberDescription: member.memberDescription,
-                      imgSrc: member.imgSrc,
-                    })
-                  }
-                >
-                  선택
-                </Button>
+              {isSuccessorSelectMode && isSelectButtonVisible && (
+                <div>
+                  <Button
+                    variant="primary"
+                    onClick={() =>
+                      handleSelectMember({
+                        memberId: member.id,
+                        memberName: member.memberName,
+                        memberDescription: member.memberDescription,
+                        imgSrc: member.imgSrc,
+                      })
+                    }
+                    disabled={member.auth === "관리자"}
+                  >
+                    선택
+                  </Button>
+                </div>
               )}
             </div>
           ))}
@@ -136,7 +140,7 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
 
 export default OrganizationMemberSection;
 
-const EmotionWrapper = styled.div<{ isSuccession: boolean }>`
+const EmotionWrapper = styled.div<{ isSuccessorSelectMode: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -172,8 +176,8 @@ const EmotionWrapper = styled.div<{ isSuccession: boolean }>`
 
       div.member {
         transition: width 0.3s ease;
-        width: ${({ isSuccession }) => (isSuccession ? "80%" : "100%")};
-        margin-right: ${({ isSuccession }) => (isSuccession ? "6%" : "0px")};
+        width: ${({ isSuccessorSelectMode }) => (isSuccessorSelectMode ? "80%" : "100%")};
+        margin-right: ${({ isSuccessorSelectMode }) => (isSuccessorSelectMode ? "6%" : "0px")};
       }
     }
   }
