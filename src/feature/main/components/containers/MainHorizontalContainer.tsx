@@ -47,8 +47,11 @@ const EmotionWrapper = styled.div`
     overflow-x: auto;
     padding: 32px 40px;
     margin-top: 16px;
-    margin-left: -40px;
-    margin-right: -40px;
+
+    ${({ theme }) => theme.device.mobile} {
+      margin-left: -40px;
+      margin-right: -40px;
+    }
 
     &::-webkit-scrollbar {
       display: none;
