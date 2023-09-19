@@ -26,6 +26,11 @@ type TTagId = {
   };
 };
 
+type TImageInput = {
+  imageInput: { files: FileList };
+  imageUrlInput: { value: string };
+};
+
 interface Props {
   isEditMode?: boolean;
 }
@@ -46,7 +51,7 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
     console.log(formValues);
 
     // TODO: 더 나은 방식 생각해내기
-    const target = event.target as typeof event.target & TTagId;
+    const target = event.target as typeof event.target & TTagId & TImageInput;
 
     const mood = target.mood.checked;
     const value = target.value.checked;
@@ -57,6 +62,10 @@ const RestaurantForm = ({ isEditMode = false }: Props) => {
     console.log("value", value);
     console.log("kind", kind);
     console.log("liquor", liquor);
+
+    // images
+    console.log("newly added images: ", target.imageInput.files);
+    console.log("exising Images: ", target.imageUrlInput.value);
   };
 
   return (
