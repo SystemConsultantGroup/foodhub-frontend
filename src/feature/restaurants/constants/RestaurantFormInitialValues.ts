@@ -29,7 +29,7 @@ export const RESTAURANT_FORM_INITIAL_VALUES: TRestaurantFormValues = {
     value: "",
     isValid: false,
   },
-  recommendedMenu: "",
+  recommendedMenu: "[]",
   orderTip: {
     value: "",
     isValid: false,

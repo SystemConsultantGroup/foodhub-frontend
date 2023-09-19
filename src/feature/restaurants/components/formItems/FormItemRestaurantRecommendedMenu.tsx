@@ -1,7 +1,27 @@
 import styled from "@emotion/styled";
+import HashtagInput from "components/inputs/HashtagInput/HashtagInput";
+import FormItemLabel from "feature/restaurants/components/formItems/typography/FormItemLabel";
+import { TRestaurantFormCommonProps } from "feature/restaurants/types/TRestaurantFormCommonProps";
 
-const FormItemRestaurantRecommendedMenu = () => {
-  return <EmotionWrapper>FormItemRestaurantRecommendedMenu</EmotionWrapper>;
+interface Props extends TRestaurantFormCommonProps {}
+
+const FormItemRestaurantRecommendedMenu: React.FC<Props> = ({ formValues, setFormValues }) => {
+  const setHashtagList = (hashtagList: string[]) => {
+    setFormValues({
+      ...formValues,
+      recommendedMenu: JSON.stringify(hashtagList),
+    });
+  };
+
+  return (
+    <EmotionWrapper>
+      <FormItemLabel>추천 메뉴</FormItemLabel>
+      <HashtagInput
+        setHashTagList={setHashtagList}
+        hashtagList={JSON.parse(formValues.recommendedMenu ?? "[]")}
+      />
+    </EmotionWrapper>
+  );
 };
 
 export default FormItemRestaurantRecommendedMenu;
