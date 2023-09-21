@@ -1,6 +1,5 @@
 import Head from "next/head";
 import PageMarker from "components/pageMarker/PageMarker";
-import AreaInput from "components/inputs/AreaInput/AreaInput";
 
 function Home() {
   return (
@@ -15,7 +14,6 @@ function Home() {
         title="푸드허브 메인 페이지"
         description="최근 추가된 맛집, 평점이 높은 맛집, 데일리 맛잘알 BEST 단체"
       />
-      <AreaInput></AreaInput>
     </>
   );
 }

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, InputHTMLAttributes } from "react";
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
 import CheckIcon from "components/inputs/TextInput/CheckIcon";
 import { TConditionCheck } from "./types/TConditionCheck";
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   name?: string;
   label?: string;
   value?: string;
@@ -24,6 +24,7 @@ const TextInput: React.FC<Props> = ({
   conditionCheckList,
   multiline = false,
   onTextChange,
+  ...props
 }) => {
   const [status, setStatus] = useState(value === "" ? "default" : "success"); // default / success / invalid / focus
   const [enteredValue, setEnteredValue] = useState(value);
@@ -75,6 +76,11 @@ const TextInput: React.FC<Props> = ({
     }
   }, [enteredValue, status, onTextChange]);
 
+  useEffect(() => {
+    // 비동기 API 호출로 인한 value 변경 시에만 실행
+    setEnteredValue(value);
+  }, [value]);
+
   return (
     <EmotionWrapper>
       {label && <span className="label">{label}</span>}
@@ -97,6 +103,7 @@ const TextInput: React.FC<Props> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             data-status={status}
+            {...props}
           />
         ) : (
           <input
@@ -107,6 +114,7 @@ const TextInput: React.FC<Props> = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             data-status={status}
+            {...props}
           />
         )}
         {status == "success" && (

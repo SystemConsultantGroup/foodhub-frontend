@@ -8,9 +8,17 @@ interface Props {
   children: ReactNode;
   disabled?: boolean;
   initialValue?: boolean; // 첫 렌더링 시 체크 여부, 이후의 state 변화는 감지하지 않음
+  className?: string;
 }
 
-const Radio = ({ name, value, children, disabled = false, initialValue = false }: Props) => {
+const Radio = ({
+  name,
+  value,
+  children,
+  disabled = false,
+  initialValue = false,
+  className,
+}: Props) => {
   const [checked, setChecked] = useState(initialValue);
 
   const onChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +27,7 @@ const Radio = ({ name, value, children, disabled = false, initialValue = false }
 
   return (
     <EmotionWrapper>
-      <label data-checked={checked} data-disabled={disabled}>
+      <label data-checked={checked} data-disabled={disabled} className={className}>
         <input
           hidden
           type="checkbox"
@@ -41,7 +49,7 @@ export default Radio;
 
 const EmotionWrapper = styled.div`
   label {
-    width: 80px;
+    min-width: 80px;
     padding: 3px 15px;
     height: 100%;
 
