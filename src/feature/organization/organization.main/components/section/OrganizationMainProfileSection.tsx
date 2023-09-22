@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import LocationIcon from "feature/organization/organizationMain/components/icons/LocationIcon";
+import LocationIcon from "feature/organization/organization.main/components/icons/LocationIcon";
 
 interface Props {
   organizationId: number;

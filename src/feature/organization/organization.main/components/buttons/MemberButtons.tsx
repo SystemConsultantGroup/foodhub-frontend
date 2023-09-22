@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import router from "next/router";
 import Button from "components/button/Button";
-import { MembersIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
+import { MembersIcon } from "feature/organization/organization.main/components/icons/ButtonIcons";
 
 interface Props {
   organizationId: number;

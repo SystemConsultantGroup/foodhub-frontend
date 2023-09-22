@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import ManagementButtons from "feature/organization/organizationMain/components/buttons/ManagementButtons";
-import MemberButtons from "feature/organization/organizationMain/components/buttons/MemberButtons";
-import VisitorButtons from "feature/organization/organizationMain/components/buttons/VisitorButtons";
-import ActionButtons from "feature/organization/organizationMain/components/buttons/ActionButtons";
+import ManagementButtons from "feature/organization/organization.main/components/buttons/ManagementButtons";
+import MemberButtons from "feature/organization/organization.main/components/buttons/MemberButtons";
+import VisitorButtons from "feature/organization/organization.main/components/buttons/VisitorButtons";
+import ActionButtons from "feature/organization/organization.main/components/buttons/ActionButtons";
 
 interface Props {
   organizationId: number;

@@ -5,7 +5,7 @@ import {
   ManagementMemberIcon,
   ManagementInfoIcon,
   ManagementRestaurantIcon,
-} from "feature/organization/organizationMain/components/icons/ButtonIcons";
+} from "feature/organization/organization.main/components/icons/ButtonIcons";
 
 interface Props {
   organizationId: number;
@@ -13,7 +13,7 @@ interface Props {
 
 const ManagementButtons: React.FC<Props> = ({ organizationId }) => {
   const handleManagementClick = () => {
-    router.push(`/organizations/${organizationId}/management`);
+    router.push(`/organizations/${organizationId}/edit`);
   };
 
   const handleRestaurantClick = () => {

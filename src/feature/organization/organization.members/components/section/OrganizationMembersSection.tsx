@@ -4,7 +4,7 @@ import Button from "components/button/Button";
 import Member from "components/dataDisplay/Member";
 import Modal from "components/modal/Modal";
 import { useState, useEffect } from "react";
-import { TMember } from "feature/organization/organizationMembers/types/TMember";
+import { TMember } from "feature/organization/organization.members/types/TMember";
 
 interface Props {
   organizationId: number;

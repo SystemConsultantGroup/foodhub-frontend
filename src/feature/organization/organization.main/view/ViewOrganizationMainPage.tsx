@@ -1,6 +1,6 @@
-import OrganizationMainProfileSection from "feature/organization/organizationMain/components/section/OrganizationMainProfileSection";
-import OrganizationMainButtonsSection from "feature/organization/organizationMain/components/section/OrganizationMainButtonsSection";
-import OrganizationMainRestaurantsSection from "feature/organization/organizationMain/components/section/OrganizationMainRestaurantsSection";
+import OrganizationMainProfileSection from "feature/organization/organization.main/components/section/OrganizationMainProfileSection";
+import OrganizationMainButtonsSection from "feature/organization/organization.main/components/section/OrganizationMainButtonsSection";
+import OrganizationMainRestaurantsSection from "feature/organization/organization.main/components/section/OrganizationMainRestaurantsSection";
 import Divider from "components/divider/Divider";
 
 interface Props {

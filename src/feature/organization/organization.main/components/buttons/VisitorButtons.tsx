@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
-import { RegisterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
+import { RegisterIcon } from "feature/organization/organization.main/components/icons/ButtonIcons";
 
 interface Props {
   organizationId: number;
