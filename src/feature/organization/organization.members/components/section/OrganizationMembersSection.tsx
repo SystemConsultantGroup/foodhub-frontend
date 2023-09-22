@@ -3,7 +3,7 @@ import Button from "components/button/Button";
 import Member from "components/dataDisplay/Member";
 import { useState, useEffect } from "react";
 import { TMember } from "feature/organization/organization.members/types/TMember";
-import SuccessionModal from "../modals/SuccessionModal";
+import SuccessionModal from "feature/organization/organization.members/components/modals/SuccessionModal";
 
 interface Props {
   organizationId: number;
