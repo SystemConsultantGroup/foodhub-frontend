@@ -9,9 +9,10 @@ interface Props {
   open: boolean;
   setOpen: (open: boolean) => void;
   selectedMember: TMember | null;
+  setSelectedMember: (selectedMember: TMember | null) => void;
 }
 
-const SuccessionModal: React.FC<Props> = ({ open, setOpen, selectedMember }) => {
+const SuccessionModal: React.FC<Props> = ({ open, setOpen, selectedMember, setSelectedMember }) => {
   const { query } = useRouter();
   const organizationId = (query.organizationId ?? 0) as number;
 
@@ -28,6 +29,7 @@ const SuccessionModal: React.FC<Props> = ({ open, setOpen, selectedMember }) => 
            */
         }}
         onClose={() => {
+          setSelectedMember(null);
           setOpen(false);
         }}
       >

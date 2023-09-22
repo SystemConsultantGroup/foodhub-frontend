@@ -111,7 +111,12 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
           ))}
         </div>
       </div>
-      <SuccessionModal open={open} setOpen={setOpen} selectedMember={selectedMember} />
+      <SuccessionModal
+        open={open}
+        setOpen={setOpen}
+        selectedMember={selectedMember}
+        setSelectedMember={setSelectedMember}
+      />
     </EmotionWrapper>
   );
 };
