@@ -35,13 +35,19 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
   ];
 
   useEffect(() => {
+    const memberContainers = document.querySelectorAll(".memberContainer");
+
     if (isSuccessorSelectMode) {
       const transitionEndHandler = () => {
         setIsSelectButtonVisible(true);
-        document.removeEventListener("transitionend", transitionEndHandler);
+        memberContainers.forEach((container) => {
+          container.removeEventListener("transitionend", transitionEndHandler);
+        });
       };
 
-      document.addEventListener("transitionend", transitionEndHandler);
+      memberContainers.forEach((container) => {
+        container.addEventListener("transitionend", transitionEndHandler);
+      });
     } else {
       setIsSelectButtonVisible(false);
     }
@@ -57,7 +63,10 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
   };
 
   return (
-    <EmotionWrapper isSuccessorSelectMode={isSuccessorSelectMode}>
+    <EmotionWrapper
+      isSuccessorSelectMode={isSuccessorSelectMode}
+      isSelectButtonVisible={isSelectButtonVisible}
+    >
       <div className="head">
         <span className="orgName">{name}</span>
         <span className="title">{isManager ? "멤버 관리" : "멤버 조회"}</span>
@@ -140,7 +149,10 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
 
 export default OrganizationMemberSection;
 
-const EmotionWrapper = styled.div<{ isSuccessorSelectMode: boolean }>`
+const EmotionWrapper = styled.div<{
+  isSuccessorSelectMode: boolean;
+  isSelectButtonVisible: boolean;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -172,12 +184,12 @@ const EmotionWrapper = styled.div<{ isSuccessorSelectMode: boolean }>`
 
     .memberContainer {
       display: flex;
+      justify-content: space-between;
       align-items: center;
 
       div.member {
-        transition: width 0.3s ease;
+        transition: width 0.1s ease;
         width: ${({ isSuccessorSelectMode }) => (isSuccessorSelectMode ? "80%" : "100%")};
-        margin-right: ${({ isSuccessorSelectMode }) => (isSuccessorSelectMode ? "6%" : "0px")};
       }
     }
   }
