@@ -3,7 +3,7 @@ import ViewOrganizationRestaurantPage from "feature/organization/organizationRes
 
 const PageOrganizationRestaurant = () => {
   const { query } = useRouter();
-  const organizationId = (query.organizationId ?? 0) as string | number;
+  const organizationId = (query.organizationId ?? 0) as number;
 
   return <ViewOrganizationRestaurantPage organizationId={organizationId} />;
 };

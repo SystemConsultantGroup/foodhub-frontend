@@ -4,7 +4,7 @@ import OrganizationMainRestaurantsSection from "feature/organization/organizatio
 import Divider from "components/divider/Divider";
 
 interface Props {
-  organizationId: string | number;
+  organizationId: number;
 }
 
 const ViewOrganizationMainPage: React.FC<Props> = ({ organizationId }) => {

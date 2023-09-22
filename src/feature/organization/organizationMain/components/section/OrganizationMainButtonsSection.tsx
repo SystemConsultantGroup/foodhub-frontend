@@ -5,7 +5,7 @@ import VisitorButtons from "feature/organization/organizationMain/components/but
 import ActionButtons from "feature/organization/organizationMain/components/buttons/ActionButtons";
 
 interface Props {
-  organizationId: string | number;
+  organizationId: number;
   userAuth: number;
 }
 

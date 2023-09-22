@@ -8,7 +8,7 @@ import {
 } from "feature/organization/organizationMain/components/icons/EmptyIcons";
 
 interface Props {
-  organizationId: string | number;
+  organizationId: number;
   userAuth: number;
 }
 
