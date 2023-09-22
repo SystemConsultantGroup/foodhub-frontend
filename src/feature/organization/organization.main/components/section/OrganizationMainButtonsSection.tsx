@@ -1,35 +1,29 @@
-import styled from "@emotion/styled";
 import ManagementButtons from "feature/organization/organization.main/components/buttons/ManagementButtons";
 import MemberButtons from "feature/organization/organization.main/components/buttons/MemberButtons";
 import VisitorButtons from "feature/organization/organization.main/components/buttons/VisitorButtons";
 import ActionButtons from "feature/organization/organization.main/components/buttons/ActionButtons";
+import { TAuthButtonsComponent } from "feature/organization/organization.main/types/TAuthButtonsComponent";
 
 interface Props {
   organizationId: number;
   userAuth: number;
 }
 
-const OrganizationMainButtonsSection: React.FC<Props> = ({ userAuth, organizationId }) => {
-  let AuthButtonsComponent;
+const AUTH_BUTTONS_COMPONENT: TAuthButtonsComponent = {
+  0: ManagementButtons,
+  1: MemberButtons,
+  2: VisitorButtons,
+};
 
-  if (userAuth === 0) {
-    AuthButtonsComponent = ManagementButtons;
-  } else if (userAuth === 1) {
-    AuthButtonsComponent = MemberButtons;
-  } else {
-    AuthButtonsComponent = VisitorButtons;
-  }
+const OrganizationMainButtonsSection: React.FC<Props> = ({ userAuth, organizationId }) => {
+  const AuthButtonsComponent = AUTH_BUTTONS_COMPONENT[userAuth as keyof TAuthButtonsComponent];
 
   return (
-    <EmotionWrapper>
+    <>
       <AuthButtonsComponent organizationId={organizationId} />
-      {(userAuth === 0 || userAuth === 1) && (
-        <ActionButtons organizationId={organizationId}></ActionButtons>
-      )}
-    </EmotionWrapper>
+      {(userAuth === 0 || userAuth === 1) && <ActionButtons organizationId={organizationId} />}
+    </>
   );
 };
 
 export default OrganizationMainButtonsSection;
-
-const EmotionWrapper = styled.div``;
