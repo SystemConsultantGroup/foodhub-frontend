@@ -3,7 +3,7 @@ import Image from "next/image";
 import LocationIcon from "feature/organization/organizationMain/components/icons/LocationIcon";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: string | number;
 }
 
 const OrganizationMainProfileSection: React.FC<Props> = ({ organizationId }) => {

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import OrganizationFormSection from "../components/section/OrganizationFormSection";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: string | number;
 }
 
 const ViewOrganizationManagementPage: React.FC<Props> = ({ organizationId }) => {

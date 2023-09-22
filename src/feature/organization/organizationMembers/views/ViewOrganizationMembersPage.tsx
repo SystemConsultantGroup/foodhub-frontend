@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import OrganizationMemberSection from "feature/organization/organizationMembers/components/section/OrganizationMembersSection";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: string | number;
   userAuth: number;
 }
 

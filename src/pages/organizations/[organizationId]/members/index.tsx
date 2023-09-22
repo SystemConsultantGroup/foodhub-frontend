@@ -3,7 +3,7 @@ import ViewOrganizationMemberPage from "feature/organization/organizationMembers
 
 const PageOrganizationMember = () => {
   const { query } = useRouter();
-  const organizationId = query.organizationId ?? 0;
+  const organizationId = (query.organizationId ?? 0) as string | number;
   /**
    * TODO: userAuth 받아오기
    */

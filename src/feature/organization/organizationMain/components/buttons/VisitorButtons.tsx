@@ -3,7 +3,7 @@ import Button from "components/button/Button";
 import { RegisterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: string | number;
 }
 
 const VisitorButtons: React.FC<Props> = ({ organizationId }) => {

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { TMember } from "feature/organization/organizationMembers/types/TMember";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: string | number;
   userAuth: number;
 }
 

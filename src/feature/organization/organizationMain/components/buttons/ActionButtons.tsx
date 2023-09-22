@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Button from "components/button/Button";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: string | number;
 }
 
 const ActionButtons: React.FC<Props> = ({ organizationId }) => {
