@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Restaurant from "components/dataDisplay/Restaurant";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: number;
 }
 
 const OrganizationRestaurantsSection: React.FC<Props> = ({ organizationId }) => {

@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
 import Button from "components/button/Button";
-import { FilterIcon } from "feature/organization/organizationMain/components/icons/ButtonIcons";
+import { FilterIcon } from "feature/organization/organization.main/components/icons/ButtonIcons";
 import Restaurant from "components/dataDisplay/Restaurant";
 import {
   EmptyRestaurantMemberIcon,
   EmptyRestaurantVisitorIcon,
-} from "feature/organization/organizationMain/components/icons/EmptyIcons";
+} from "feature/organization/organization.main/components/icons/EmptyIcons";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: number;
   userAuth: number;
 }
 

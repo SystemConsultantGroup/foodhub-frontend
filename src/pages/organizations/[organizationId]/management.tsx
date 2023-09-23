@@ -3,7 +3,7 @@ import OrganizationManagement from "feature/organization/organizationManagement/
 
 const PageOrganizationManagement = () => {
   const { query } = useRouter();
-  const organizationId = query.organizationId ?? 0;
+  const organizationId = (query.organizationId ?? 0) as number;
 
   return <OrganizationManagement organizationId={organizationId} />;
 };

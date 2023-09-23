@@ -7,7 +7,7 @@ import Dropdown from "components/dropdown/Dropdown";
 import AreaInput from "components/inputs/AreaInput/AreaInput";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: number;
 }
 
 const OrganizationFormSection: React.FC<Props> = ({ organizationId }) => {

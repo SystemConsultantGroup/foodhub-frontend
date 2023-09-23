@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
-import router from "next/router";
 import Button from "components/button/Button";
 import Member from "components/dataDisplay/Member";
-import Modal from "components/modal/Modal";
 import { useState, useEffect } from "react";
-import { TMember } from "feature/organization/organizationMembers/types/TMember";
+import { TMember } from "feature/organization/organization.members/types/TMember";
+import SuccessionModal from "feature/organization/organization.members/components/modals/SuccessionModal";
 
 interface Props {
-  organizationId: string | number | string[];
+  organizationId: number;
   userAuth: number;
 }
 
@@ -35,13 +34,19 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
   ];
 
   useEffect(() => {
+    const memberContainers = document.querySelectorAll(".memberContainer");
+
     if (isSuccessorSelectMode) {
       const transitionEndHandler = () => {
         setIsSelectButtonVisible(true);
-        document.removeEventListener("transitionend", transitionEndHandler);
+        memberContainers.forEach((container) => {
+          container.removeEventListener("transitionend", transitionEndHandler);
+        });
       };
 
-      document.addEventListener("transitionend", transitionEndHandler);
+      memberContainers.forEach((container) => {
+        container.addEventListener("transitionend", transitionEndHandler);
+      });
     } else {
       setIsSelectButtonVisible(false);
     }
@@ -106,41 +111,21 @@ const OrganizationMemberSection: React.FC<Props> = ({ organizationId, userAuth }
           ))}
         </div>
       </div>
-      <Modal
+      <SuccessionModal
         open={open}
-        title="관리자 승계"
-        onConfirm={() => {
-          setOpen(false);
-          router.push(`/organizations/${organizationId}`);
-          /**
-           * TODO: 관리자 권한 승계
-           */
-        }}
-        onClose={() => {
-          setOpen(false);
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <p style={{ lineHeight: 1.5 }}>
-            관리자를 아래 멤버에게 위임하시겠습니까? 권한을 승계하면, 나는 멤버로 변경됩니다.
-          </p>
-          {selectedMember && (
-            <Member
-              showManagementButton={false}
-              memberId={selectedMember?.memberId}
-              memberName={selectedMember?.memberName}
-              memberDescription={selectedMember?.memberDescription}
-            />
-          )}
-        </div>
-      </Modal>
+        setOpen={setOpen}
+        selectedMember={selectedMember}
+        setSelectedMember={setSelectedMember}
+      />
     </EmotionWrapper>
   );
 };
 
 export default OrganizationMemberSection;
 
-const EmotionWrapper = styled.div<{ isSuccessorSelectMode: boolean }>`
+const EmotionWrapper = styled.div<{
+  isSuccessorSelectMode: boolean;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -172,12 +157,12 @@ const EmotionWrapper = styled.div<{ isSuccessorSelectMode: boolean }>`
 
     .memberContainer {
       display: flex;
+      justify-content: space-between;
       align-items: center;
 
       div.member {
-        transition: width 0.3s ease;
+        transition: width 0.1s ease;
         width: ${({ isSuccessorSelectMode }) => (isSuccessorSelectMode ? "80%" : "100%")};
-        margin-right: ${({ isSuccessorSelectMode }) => (isSuccessorSelectMode ? "6%" : "0px")};
       }
     }
   }
@@ -199,19 +184,5 @@ const EmotionWrapper = styled.div<{ isSuccessorSelectMode: boolean }>`
     font-size: 18px;
     font-weight: 600;
     color: ${({ theme }) => theme.color.gray700};
-  }
-
-  div.modalContent {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    background-color: red;
-    height: 100px;
-
-    p {
-      font-size: 14px;
-      color: ${({ theme }) => theme.color.gray500};
-      line-height: 1.5;
-    }
   }
 `;
