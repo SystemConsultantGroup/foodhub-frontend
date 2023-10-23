@@ -21,7 +21,7 @@ const RestaurantDetailImgSection: React.FC<Props> = ({ imgSrcList }) => {
           className="restaurantImg"
           alt="맛집 기본 이미지"
           src={"/images/defaults/default-restaurant-image.png"}
-          fill={true}
+          fill
         />
       ) : (
         <Image alt="맛집 이미지" src={imgSrcList[currentImgIndex]} />

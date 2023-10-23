@@ -26,7 +26,7 @@ const ViewRestaurantReviewEdit: React.FC<Props> = ({ restaurantId, reviewId }) =
         reviewId={review.id}
         score={review.score}
         content={review.content}
-        isEditMode={true}
+        isEditMode
       />
     </EmotionWrapper>
   );

@@ -4,6 +4,7 @@ import RestaurantDetailHeaderSection from "feature/restaurants/restaurantsDetail
 import Button from "components/button/Button";
 import TextInput from "components/inputs/TextInput/TextInput";
 import { useState } from "react";
+import Radio from "components/radio/Radio";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -57,17 +58,29 @@ const RestaurantsReviewForm: React.FC<Props> = ({ restaurantId, score = 0, conte
         organizationName="시스템 컨설턴트 그룹"
         isMain={false}
       />
-      <Rating value={score} isInput={true} onSelectedValueChange={handleScoreChange} />
+      <Rating value={score} isInput onSelectedValueChange={handleScoreChange} />
       <TextInput
         label="리뷰 내용"
         placeholder="맛집에 대한 솔직한 평을 작성해주세요!"
-        multiline={true}
+        multiline
         value={content}
         onTextChange={handleContentChagne}
         conditionCheckList={[contentMaxLengthCheck, contentMinLengthCheck]}
         height="150px"
       />
-      <Button onClick={handleOnSubmit}>작성 완료</Button>
+      <div className="radioDiv">
+        <Radio.Group>
+          <Radio name="공개" value="public" initialValue>
+            공개
+          </Radio>
+          <Radio name="비공개" value="private">
+            비공개
+          </Radio>
+        </Radio.Group>
+      </div>
+      <Button onClick={handleOnSubmit} fullWidth>
+        작성 완료
+      </Button>
     </EmotionWrapper>
   );
 };
@@ -86,5 +99,12 @@ const EmotionWrapper = styled.div`
   }
   button {
     font-size: 16px;
+  }
+
+  .radioDiv {
+    margin-top: -15px;
+    width: 100%;
+    display: flex;
+    justify-content: right;
   }
 `;

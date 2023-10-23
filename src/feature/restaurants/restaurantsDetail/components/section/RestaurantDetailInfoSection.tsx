@@ -42,7 +42,7 @@ const RestaurantDetailInfoSection: React.FC<Props> = ({
       <Tags>
         {delivery && <Tags.Item>배달 가능</Tags.Item>}
         {tags.map((data, index) => (
-          <Tags.Item key={index} outLined={true} textColor="primary600" backColor="white">
+          <Tags.Item key={index} outLined textColor="primary600" backColor="white">
             {data}
           </Tags.Item>
         ))}
