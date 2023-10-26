@@ -18,7 +18,7 @@ const RestaurantDetailImgSection: React.FC<Props> = ({ imgSrcList }) => {
     <EmotionWrapper>
       {imgSrcList.length === 0 ? (
         <Image
-          className="restaurantImg"
+          className="restaurant-img"
           alt="맛집 기본 이미지"
           src={"/images/defaults/default-restaurant-image.png"}
           fill
@@ -42,7 +42,7 @@ const EmotionWrapper = styled.div`
   justify-content: center;
   margin-bottom: 10px;
 
-  .restaurantImg {
+  .restaurant-img {
     object-fit: cover;
   }
 `;

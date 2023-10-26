@@ -4,6 +4,7 @@ import { useState } from "react";
 import Rating from "components/rating/Rating";
 import IconEditFilledWhite from "components/icons/IconEditFilledWhite";
 import Link from "next/link";
+import dayjs from "dayjs";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -43,21 +44,13 @@ const ReviewItem: React.FC<Props> = ({
    */
   const currentUserId = 1;
 
-  const formatDate = (date: Date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return `${year}/${month}/${day}`;
-  };
-
   return (
     <EmotionWrapper>
-      <div className="userInfoScoreDiv">
-        <div className="userInfoDiv">
+      <div className="user-info-score-div">
+        <div className="user-info-div">
           <Image src={ImgSrc} alt={"유저 프로필 이미지"} width={30} height={30} />
-          <span className="userName">{userName}</span>
-          <span className="date">{formatDate(createdAt)}</span>
+          <span className="user-name">{userName}</span>
+          <span className="date">{dayjs(createdAt).format("YY/MM/DD")}</span>
           {currentUserId === userId && (
             <Link href={editLink}>
               <IconEditFilledWhite />
@@ -66,7 +59,7 @@ const ReviewItem: React.FC<Props> = ({
         </div>
         <Rating value={score} />
       </div>
-      <div className="contentDiv">
+      <div className="content-div">
         <span>{displayContent}</span>
         {content.length > 100 && (
           <button onClick={toggleExpansion}>{isExpanded ? "접기" : "더 보기"}</button>
@@ -88,18 +81,18 @@ const EmotionWrapper = styled.div`
 
   padding: 10px;
 
-  .userInfoScoreDiv {
+  .user-info-score-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .userInfoDiv {
+    .user-info-div {
       display: flex;
       gap: 8px;
       justify-content: center;
       align-items: center;
 
-      span.userName {
+      span.user-name {
         font-size: 16px;
         font-weight: 600;
         color: ${({ theme }) => theme.color.gray700};
@@ -112,7 +105,7 @@ const EmotionWrapper = styled.div`
     }
   }
 
-  .contentDiv {
+  .content-div {
     span {
       line-height: 1.5;
       color: ${({ theme }) => theme.color.gray400};

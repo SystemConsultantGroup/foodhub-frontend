@@ -47,23 +47,23 @@ const RestaurantDetailInfoSection: React.FC<Props> = ({
           </Tags.Item>
         ))}
       </Tags>
-      <div className="infoBlockGrid">
+      <div className="info-block-grid">
         <div className="item">
           <span className="label">최대 수용 인원</span>
           <div className="info">
-            <span className="infoData">{capacity}</span>
+            <span className="info-data">{capacity}</span>
             <span className="measure">명</span>
           </div>
         </div>
         <div className="item">
           <span className="label">카테고리</span>
           <div className="info">
-            <span className="infoData">{category}</span>
+            <span className="info-data">{category}</span>
           </div>
         </div>
         <div className="item">
           <span className="label">추천 메뉴</span>
-          <div className="recommendMenus">
+          <div className="recommend-menus">
             <Tags>
               {recommendedMenus.map((data, index) => (
                 <Tags.Item key={index} textColor="primary600" backColor="primary200">
@@ -75,30 +75,30 @@ const RestaurantDetailInfoSection: React.FC<Props> = ({
         </div>
         <div className="item">
           <span className="label">평점</span>
-          <div className="info scoreInfo">
+          <div className="info score-info">
             <div>
-              <span className="infoData">{totalScore}</span>
+              <span className="info-data">{totalScore}</span>
               <span className="measure">/ 5</span>
             </div>
 
-            <span className="reviewCount" ref={moveToReviewRef} onClick={scrollToBottom}>
+            <span className="review-count" ref={moveToReviewRef} onClick={scrollToBottom}>
               리뷰 {totalCount}개 &gt;
             </span>
           </div>
         </div>
       </div>
-      <div className="infoTextContainer">
-        <div className="infoTextGrid">
+      <div className="info-text-container">
+        <div className="info-text-grid">
           <span className="item label">매장 운영시간</span>
-          <span className="item infoData">{openingHour}</span>
+          <span className="item info-data">{openingHour}</span>
         </div>
-        <div className="infoTextGrid">
+        <div className="info-text-grid">
           <span className="item label">한줄평</span>
-          <span className="item infoData">{comment}</span>
+          <span className="item info-data">{comment}</span>
         </div>
-        <div className="infoTextGrid">
+        <div className="info-text-grid">
           <span className="item label">주문팁</span>
-          <span className="item infoData">{orderTip}</span>
+          <span className="item info-data">{orderTip}</span>
         </div>
       </div>
     </EmotionWrapper>
@@ -118,7 +118,7 @@ const EmotionWrapper = styled.div`
 
   margin-bottom: 30px;
 
-  .infoBlockGrid {
+  .info-block-grid {
     display: grid;
     grid-template-rows: 100px 100px;
     grid-template-columns: repeat(6, 1fr);
@@ -149,7 +149,7 @@ const EmotionWrapper = styled.div`
         color: ${({ theme }) => theme.color.gray700};
       }
 
-      span.infoData {
+      span.info-data {
         font-size: 32px;
         font-weight: 500;
       }
@@ -159,13 +159,13 @@ const EmotionWrapper = styled.div`
         font-weight: 300;
       }
 
-      span.reviewCount {
+      span.review-count {
         font-size: 12px;
         font-weight: 300;
         color: ${({ theme }) => theme.color.gray700};
       }
 
-      div.scoreInfo {
+      div.score-info {
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
@@ -194,14 +194,14 @@ const EmotionWrapper = styled.div`
     }
   }
 
-  .infoTextContainer {
+  .info-text-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
 
     margin: 0 10px;
 
-    div.infoTextGrid {
+    div.info-text-grid {
       display: grid;
       grid-template-columns: 1fr 2.25fr;
 
@@ -215,7 +215,7 @@ const EmotionWrapper = styled.div`
         color: ${({ theme }) => theme.color.gray400};
       }
 
-      span.infoData {
+      span.info-data {
         font-size: 14px;
         font-weight: 600;
         color: ${({ theme }) => theme.color.gray700};

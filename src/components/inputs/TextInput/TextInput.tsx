@@ -181,7 +181,7 @@ const EmotionWrapper = styled.div<Props>`
     ${({ theme }) => commonStyles(theme)};
     position: relative;
     resize: none;
-    height: ${({ height }) => (height ? height : "auto")};
+    height: ${({ height }) => height ?? "auto"};
   }
 `;
 

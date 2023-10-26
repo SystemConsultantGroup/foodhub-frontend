@@ -69,32 +69,32 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
 
   return (
     <EmotionWrapper>
-      <div className="titleDiv">
+      <div className="title-div">
         <span>우리 멤버들이 남긴 리뷰</span>
         {(userAuth === 0 || userAuth === 1) && (
-          <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/review/create"}>
+          <Link className="link-div" href={"/restaurants/" + restaurantId + "/review/create"}>
             리뷰 작성하기 &gt;
           </Link>
         )}
       </div>
-      <div className="reviewOverviewDiv">
-        <div className="totalInfo">
+      <div className="review-overview-div">
+        <div className="total-info-div">
           <div>
-            <span className="totalScoreInfo">{totalCount ? totalScore : "-"}</span>
+            <span className="total-score-info">{totalCount ? totalScore : "-"}</span>
             <span className="measure"> / 5</span>
           </div>
-          <span className="totalReviewInfo">총 {totalCount}개의 리뷰</span>
+          <span className="total-review-info">총 {totalCount}개의 리뷰</span>
         </div>
-        <div className="scoreStatisticsDiv">
+        <div className="score-statistics-div">
           {scoreStatistics.map((count, index) => (
-            <div key={index} className="scoreStatisticsItem">
+            <div key={index} className="score-statistics-item">
               <span>{count}개</span>
               <Rating value={5 - index} />
             </div>
           ))}
         </div>
       </div>
-      <div className="reviewDiv">
+      <div className="review-div">
         {reviewPage?.contents.map((review) => (
           <ReviewItem
             key={review.id}
@@ -107,7 +107,7 @@ const RestaurantDetailReviewSection: React.FC<Props> = ({
           />
         ))}
       </div>
-      <div className="togglePageDiv">
+      <div className="toggle-page-div">
         <Button
           icon={<IconTogglePageLeft />}
           variant="text"
@@ -134,7 +134,7 @@ const EmotionWrapper = styled.div`
   margin: 60px 10px;
   gap: 20px;
 
-  .titleDiv {
+  .title-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -146,7 +146,7 @@ const EmotionWrapper = styled.div`
     }
   }
 
-  .linkDiv {
+  .link-div {
     display: flex;
     justify-content: right;
     align-items: center;
@@ -157,7 +157,7 @@ const EmotionWrapper = styled.div`
     color: ${({ theme }) => theme.color.gray700};
   }
 
-  .reviewOverviewDiv {
+  .review-overview-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -167,14 +167,14 @@ const EmotionWrapper = styled.div`
     padding: 5px 30px;
     border-radius: 6px;
 
-    div.totalInfo {
+    div.total-info-div {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 6px;
 
-      span.totalScoreInfo {
+      span.total-score-info {
         font-size: 36px;
         font-weight: 500;
         color: ${({ theme }) => theme.color.gray700};
@@ -186,14 +186,14 @@ const EmotionWrapper = styled.div`
         color: ${({ theme }) => theme.color.gray700};
       }
 
-      span.totalReviewInfo {
+      span.total-review-info {
         font-size: 12px;
         font-weight: 300;
         color: ${({ theme }) => theme.color.gray400};
       }
     }
 
-    div.scoreStatisticsDiv {
+    div.score-statistics-div {
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -203,7 +203,7 @@ const EmotionWrapper = styled.div`
       font-weight: 300;
       color: ${({ theme }) => theme.color.gray400};
 
-      div.scoreStatisticsItem {
+      div.score-statistics-item {
         display: flex;
         justify-content: right;
         align-items: center;
@@ -212,13 +212,13 @@ const EmotionWrapper = styled.div`
     }
   }
 
-  .reviewDiv {
+  .review-div {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  .togglePageDiv {
+  .toggle-page-div {
     display: flex;
     justify-content: center;
     align-items: center;

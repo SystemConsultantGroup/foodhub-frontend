@@ -23,26 +23,26 @@ const RestaurantDetailHeaderSection: React.FC<Props> = ({
 }) => {
   return (
     <EmotionWrapper>
-      <div className="overTitleDiv">
+      <div className="over-title-div">
         <span className="subtitle">{organizationName}</span>
         {isMain &&
           (userAuth === 0 || userAuth === 1 ? (
-            <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/edit"}>
+            <Link className="link-div" href={"/restaurants/" + restaurantId + "/edit"}>
               맛집 수정
             </Link>
           ) : (
-            <Link className="linkDiv" href={"/restaurants/" + restaurantId + "/copy"}>
+            <Link className="link-div" href={"/restaurants/" + restaurantId + "/copy"}>
               맛집 수정
             </Link>
           ))}
       </div>
       <span className="title">{restaurantName}</span>
-      <div className="underTitleDiv">
+      <div className="under-title-div">
         <span className="subtitle">{restaurantAddress}</span>
         {link && (
-          <Link className="linkDiv" href={link}>
+          <Link className="link-div" href={link}>
             <RestaurantExternalLinkIcon />
-            <span className="linkSpan">맛집 상세 정보 &gt;</span>
+            <span className="link-span">맛집 상세 정보 &gt;</span>
           </Link>
         )}
       </div>
@@ -79,14 +79,14 @@ const EmotionWrapper = styled.div`
     color: ${({ theme }) => theme.color.gray700};
   }
 
-  .underTitleDiv,
-  .overTitleDiv {
+  .under-title-div,
+  .over-title-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .linkDiv {
+  .link-div {
     display: flex;
     justify-content: right;
     align-items: center;
@@ -97,7 +97,7 @@ const EmotionWrapper = styled.div`
     color: ${({ theme }) => theme.color.gray700};
   }
 
-  .linkSpan {
+  .link-span {
     font-size: 12px;
     font-weight: 300;
     color: ${({ theme }) => theme.color.gray500};
