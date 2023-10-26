@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import IconStarFilled from "components/rating/icons/IconStarFilled";
 import IconStarHalf from "components/rating/icons/IconStarHalf";
 import IconStarOutlined from "components/rating/icons/IconStarOutlined";
-import { HTMLAttributes, useEffect, useState } from "react";
+import { HTMLAttributes, useEffect, useState, useRef, useCallback } from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   value: number; // 0 ~ 5 사이의 숫자, 별 개수는 가장 가까운 0.5 단위로 반올림
@@ -12,6 +12,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 const Rating = ({ value, isInput = false, onSelectedValueChange, ...props }: Props) => {
   const [selectedValue, setSelectedValue] = useState<number>(value);
+  const isMouseDown = useRef<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // round value to the nearest 0.5
   const startCount = Math.round(selectedValue * 2) / 2;
@@ -40,9 +42,57 @@ const Rating = ({ value, isInput = false, onSelectedValueChange, ...props }: Pro
     }
   };
 
+  const calculateScore = useCallback((currentX: number) => {
+    const container = containerRef.current;
+    if (container) {
+      const unitSize = container.getBoundingClientRect().width / 10;
+      const relativeX = currentX - container.getBoundingClientRect().x;
+      if (relativeX <= 0) setSelectedValue(0.5);
+      else {
+        const score = (Math.floor(relativeX / unitSize) + 1) * 0.5;
+        score > 5 ? setSelectedValue(5) : setSelectedValue(score);
+      }
+    }
+  }, []);
+
+  const handleOnMouseDown = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    isMouseDown.current = true;
+  }, []);
+
+  const handleOnMouseLeave = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    isMouseDown.current = false;
+  }, []);
+
+  const handleOnMouseMove = useCallback(
+    (event: React.MouseEvent) => {
+      if (isMouseDown.current) calculateScore(event.clientX);
+    },
+    [calculateScore]
+  );
+
+  const handleOnMouseUp = useCallback((event: React.MouseEvent) => {
+    isMouseDown.current = false;
+  }, []);
+
+  // For mobile view
+  const handleOnTouchMove = useCallback(
+    (event: React.TouchEvent) => {
+      calculateScore(event.changedTouches[0].clientX);
+    },
+    [calculateScore]
+  );
+
   return (
     <EmotionWrapper isInput={isInput} {...props}>
-      <div className="star-container">
+      <div
+        className="star-container"
+        onMouseDown={handleOnMouseDown}
+        onMouseUp={handleOnMouseUp}
+        onMouseMove={handleOnMouseMove}
+        onMouseLeave={handleOnMouseLeave}
+        onTouchMove={handleOnTouchMove}
+        ref={containerRef}
+      >
         {Array.from({ length: filledStarCount }, (_, index) =>
           isInput ? (
             <IconStarFilled

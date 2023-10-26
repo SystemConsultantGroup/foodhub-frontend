@@ -41,7 +41,7 @@ const RestaurantsReviewForm: React.FC<Props> = ({ restaurantId, score = 0, conte
     setSelectedScore(value);
   }, []);
 
-  const handleContentChagne = useCallback((value: string) => {
+  const handleContentChange = useCallback((value: string) => {
     setEnteredContent(value);
   }, []);
 
@@ -71,7 +71,7 @@ const RestaurantsReviewForm: React.FC<Props> = ({ restaurantId, score = 0, conte
         placeholder="맛집에 대한 솔직한 평을 작성해주세요!"
         multiline
         value={content}
-        onTextChange={handleContentChagne}
+        onTextChange={handleContentChange}
         conditionCheckList={[contentMaxLengthCheck, contentMinLengthCheck]}
         height="150px"
       />

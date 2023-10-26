@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
+import { HTMLAttributes } from "react";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   size?: number;
-  onClick?: (event: React.MouseEvent) => void;
 }
 
 const IconStarOutlined = ({ size = 15, onClick, ...props }: Props) => {
   return (
-    <EmotionWrapper onClick={onClick}>
+    <EmotionWrapper {...props}>
       <svg
         width={size}
         height={size}
