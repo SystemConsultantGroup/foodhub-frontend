@@ -1,0 +1,23 @@
+export const restaurant = {
+  id: 1,
+  userId: 1,
+  groupId: 1,
+  name: "봉수육",
+  address: "경기도 수원시 율전동",
+  link: "http://naver.me/FJFkPs94",
+  delivery: true,
+  comment: "수육나베 맛있어요",
+  category: "한식",
+  capacity: 15,
+  openingHour: "월요일 ~ 토요일 : 오후 4시 ~ 오후 10시",
+  recommnededMenus: ["수육나베", "고추말이"],
+  orderTip: "수육 2인분 이상 주문시 수육나베 변경 가능",
+  isActivated: true,
+  organizationName: "시스템 컨설턴트 그룹",
+  tags: ["가성비", "술 마시기 좋은"],
+  imgSrcList: [
+    "/images/defaults/default-restaurant-image.png",
+    "/images/defaults/default-restaurant-image.png",
+    "/images/defaults/default-restaurant-image.png",
+  ],
+};

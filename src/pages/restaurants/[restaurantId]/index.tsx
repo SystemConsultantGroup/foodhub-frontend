@@ -1,17 +1,14 @@
 import styled from "@emotion/styled";
-import PageMarker from "components/pageMarker/PageMarker";
 import { useRouter } from "next/router";
+import ViewRestaurantDetail from "feature/restaurants/restaurantsDetail/views/ViewRestaurantDetail";
 
 const PageRestaurantDetail = () => {
   const { query } = useRouter();
-  const restaurantId = query.restaurantId ?? 0;
+  const restaurantId = (query.restaurantId ?? 0) as string;
 
   return (
     <EmotionWrapper>
-      <PageMarker
-        title={`${restaurantId} 번 맛집 상세 페이지`}
-        description="맛집에 대한 상세 정보를 볼 수 있는 페이지 "
-      />
+      <ViewRestaurantDetail restaurantId={restaurantId} />
     </EmotionWrapper>
   );
 };
