@@ -5,6 +5,7 @@ import Button from "components/button/Button";
 import TextInput from "components/inputs/TextInput/TextInput";
 import { useState, useCallback } from "react";
 import Checkbox from "components/checkbox/Checkbox";
+import { REVIEW_CONTENT_MAX_VALUE, REVIEW_CONTENT_MIN_VALUE } from "constant/limit";
 
 interface Props {
   restaurantId: string | number | string[];
@@ -25,14 +26,14 @@ const RestaurantsReviewForm: React.FC<Props> = ({ restaurantId, score = 0, conte
 
   const contentMaxLengthCheck = {
     condition: (content: string) => {
-      return content.length <= 500;
+      return content.length <= REVIEW_CONTENT_MAX_VALUE;
     },
     messageOnError: "500자 이내로 작성해주세요.",
   };
 
   const contentMinLengthCheck = {
     condition: (content: string) => {
-      return content.length >= 20;
+      return content.length >= REVIEW_CONTENT_MIN_VALUE;
     },
     messageOnError: "20자 이상 작성해주세요.",
   };
