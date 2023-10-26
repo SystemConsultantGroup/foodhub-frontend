@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import RestaurantsReviewForm from "feature/restaurants/restaurantsReview/components/form/RestaurantsReviewForm";
 
 interface Props {
-  restaurantId: string | number | string[];
+  restaurantId: string;
 }
 
 const ViewRestaurantReviewCreate: React.FC<Props> = ({ restaurantId }) => {

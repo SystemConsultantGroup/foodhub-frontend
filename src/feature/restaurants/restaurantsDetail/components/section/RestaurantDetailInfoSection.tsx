@@ -3,7 +3,7 @@ import Tags from "components/tag/Tags";
 import { useRef } from "react";
 
 interface Props {
-  restaurantId: string | number | string[];
+  restaurantId: string;
   comment: string;
   orderTip: string;
   capacity: number;

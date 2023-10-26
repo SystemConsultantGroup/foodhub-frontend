@@ -3,7 +3,7 @@ import ViewRestaurantReviewCreate from "feature/restaurants/restaurantsReview/vi
 
 const PageReviewCreate = () => {
   const { query } = useRouter();
-  const restaurantId = query.restaurantId ?? 0;
+  const restaurantId = (query.restaurantId ?? 0) as string;
   return <ViewRestaurantReviewCreate restaurantId={restaurantId} />;
 };
 

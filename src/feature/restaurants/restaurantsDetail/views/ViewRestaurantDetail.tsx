@@ -8,7 +8,7 @@ import { restaurant } from "feature/restaurants/restaurantsDetail/mockups/restau
 import { reviewPage1 } from "feature/restaurants/restaurantsDetail/mockups/reviews";
 
 interface Props {
-  restaurantId: string | number | string[];
+  restaurantId: string;
 }
 
 const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {

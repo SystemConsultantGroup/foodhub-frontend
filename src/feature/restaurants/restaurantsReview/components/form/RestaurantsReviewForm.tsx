@@ -8,7 +8,7 @@ import Checkbox from "components/checkbox/Checkbox";
 import { REVIEW_CONTENT_MAX_VALUE, REVIEW_CONTENT_MIN_VALUE } from "constant/limit";
 
 interface Props {
-  restaurantId: string | number | string[];
+  restaurantId: string;
   isEditMode: boolean;
   reviewId?: string | number | string[];
   score?: number;

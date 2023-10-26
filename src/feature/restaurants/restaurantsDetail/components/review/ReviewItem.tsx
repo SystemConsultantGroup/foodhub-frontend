@@ -7,7 +7,7 @@ import Link from "next/link";
 import dayjs from "dayjs";
 
 interface Props {
-  restaurantId: string | number | string[];
+  restaurantId: string;
   reviewId: number;
   userId: number;
   score: number;

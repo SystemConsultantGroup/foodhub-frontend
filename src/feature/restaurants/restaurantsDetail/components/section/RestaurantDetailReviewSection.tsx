@@ -14,7 +14,7 @@ import IconTogglePageRight from "components/icons/IconTogglePageRight";
 import Rating from "components/rating/Rating";
 
 interface Props {
-  restaurantId: string | number | string[];
+  restaurantId: string;
   userAuth: number;
   totalScore: number;
   totalCount: number;

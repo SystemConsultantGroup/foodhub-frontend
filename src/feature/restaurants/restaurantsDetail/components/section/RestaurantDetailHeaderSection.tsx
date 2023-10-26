@@ -3,7 +3,7 @@ import RestaurantExternalLinkIcon from "feature/restaurants/restaurantsDetail/co
 import Link from "next/link";
 
 interface Props {
-  restaurantId: string | number | string[];
+  restaurantId: string;
   userAuth?: number;
   restaurantName: string;
   restaurantAddress: string;

@@ -4,7 +4,7 @@ import ViewRestaurantDetail from "feature/restaurants/restaurantsDetail/views/Vi
 
 const PageRestaurantDetail = () => {
   const { query } = useRouter();
-  const restaurantId = query.restaurantId ?? 0;
+  const restaurantId = (query.restaurantId ?? 0) as string;
 
   return (
     <EmotionWrapper>

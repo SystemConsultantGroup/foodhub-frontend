@@ -3,7 +3,7 @@ import ViewRestaurantReviewEdit from "feature/restaurants/restaurantsReview/view
 
 const PageReviewEdit = () => {
   const { query } = useRouter();
-  const restaurantId = query.restaurantId ?? 0;
+  const restaurantId = (query.restaurantId ?? 0) as string;
   const reviewId = query.reviewId ?? 0;
   return <ViewRestaurantReviewEdit restaurantId={restaurantId} reviewId={reviewId} />;
 };
