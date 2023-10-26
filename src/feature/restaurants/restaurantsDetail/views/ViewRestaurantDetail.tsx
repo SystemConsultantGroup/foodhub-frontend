@@ -26,10 +26,7 @@ const ViewRestaurantDetail: React.FC<Props> = ({ restaurantId }) => {
    * - totalScore, totalPages 확인하기 위한 Read Reviews API 호출
    * - 리뷰가 없는 경우 404 에러 반환?
    */
-  const totalScore = reviewPage1.totalScore;
-  const totalCount = reviewPage1.totalCount;
-  const totalPages = reviewPage1.totalPages;
-  const scoreStatistics = reviewPage1.scoreStatistics;
+  const { totalScore, totalCount, totalPages, scoreStatistics } = reviewPage1;
 
   return (
     <EmotionWrapper>

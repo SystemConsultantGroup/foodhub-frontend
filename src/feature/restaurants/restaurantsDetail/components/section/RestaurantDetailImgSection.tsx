@@ -10,8 +10,16 @@ interface Props {
 const RestaurantDetailImgSection: React.FC<Props> = ({ imgSrcList }) => {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
-  const handleOnClick = () => {
-    setCurrentImgIndex((currentImgIndex) => currentImgIndex + 1);
+  const handleOnClickRight = () => {
+    setCurrentImgIndex((currentImgIndex) =>
+      currentImgIndex == imgSrcList.length - 1 ? 0 : currentImgIndex + 1
+    );
+  };
+
+  const handleOnClickLeft = () => {
+    setCurrentImgIndex((currentImgIndex) =>
+      currentImgIndex == 0 ? imgSrcList.length - 1 : currentImgIndex - 1
+    );
   };
 
   return (
@@ -24,9 +32,38 @@ const RestaurantDetailImgSection: React.FC<Props> = ({ imgSrcList }) => {
           fill
         />
       ) : (
-        <Image alt="맛집 이미지" src={imgSrcList[currentImgIndex]} />
+        <Image
+          className="restaurant-img"
+          alt="맛집 이미지"
+          src={imgSrcList[currentImgIndex]}
+          fill
+        />
       )}
-      <Button onClick={handleOnClick}>{currentImgIndex}</Button>
+      <Button
+        onClick={handleOnClickLeft}
+        variant="text"
+        style={{
+          backgroundColor: "transparent",
+          zIndex: "10",
+          position: "absolute",
+          left: "0px",
+        }}
+      >
+        &lt;
+      </Button>
+      <Button
+        onClick={handleOnClickRight}
+        variant="text"
+        className="right-button"
+        style={{
+          backgroundColor: "transparent",
+          zIndex: "10",
+          position: "absolute",
+          right: "0px",
+        }}
+      >
+        &gt;
+      </Button>
     </EmotionWrapper>
   );
 };
@@ -38,11 +75,11 @@ const EmotionWrapper = styled.div`
   width: 100%;
   height: 120px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
   margin-bottom: 10px;
 
   .restaurant-img {
+    z-index: 1;
     object-fit: cover;
+    position: absolute;
   }
 `;

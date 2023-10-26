@@ -36,7 +36,7 @@ const RestaurantDetailHeaderSection: React.FC<Props> = ({
             </Link>
           ))}
       </div>
-      <span className="title">{restaurantName}</span>
+      <h1 className="title">{restaurantName}</h1>
       <div className="under-title-div">
         <span className="subtitle">{restaurantAddress}</span>
         {link && (
@@ -73,7 +73,7 @@ const EmotionWrapper = styled.div`
     color: ${({ theme }) => theme.color.gray300};
   }
 
-  span.title {
+  .title {
     font-size: 30px;
     font-weight: 600;
     color: ${({ theme }) => theme.color.gray700};
